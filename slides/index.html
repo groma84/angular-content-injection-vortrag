@@ -2,13 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-    <title>Title</title>
+    <title>DRY in Angular Templates: Content Projection im Praxiseinsatz</title>
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/theme/night.css" />
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
@@ -25,11 +28,145 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <h2>{{title}}</h2>
+          <h2>DRY in Angular Templates: Content Projection im Praxiseinsatz</h2>
           <aside class="notes"></aside>
         </section>
 
-        <section data-markdown="index.md"></section>
+        <section style="display: flex">
+          <div style="">
+            <h3>Einschränkungen</h3>
+            <ul>
+              <li>Angular 4 bis Angular 9</li>
+              <li>Strukturen vom Beginn</li>
+              <li>Keine Angular-Formulare</li>
+              <li>Performance wichtiger als schöner Code</li>
+            </ul>
+          </div>
+          <div class="placeholder" style="">
+            <!-- TODO: Logos von: Mathema, e.solutions, Porsche -->
+            <img src="img/100px_placeholder.png" style="" />
+          </div>
+        </section>
+
+        <section>
+          <div class="placeholder">
+            <!-- TODO: Logo von Angular -->
+            <img src="img/100px_placeholder.png" style="" />
+          </div>
+          <div>
+            <h3>Angular</h3>
+            <ul>
+              <li>Framework</li>
+              <li>Webtechnologien</li>
+              <li>Komponentenorientiert</li>
+              <li>Dependency Injection</li>
+              <li>Automatische Change Detection</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Einfaches Angular Beispiel</h3>
+          <h4 class="placeholder">Bild vom Code</h4>
+        </section>
+
+        <section>
+          <h3>ng-content</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            ng-content einfaches Beispiel: Modaler Dialog mit Text drin
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Selektoren zur Auswahl, was wohin projiziert wird
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Problem: 2x projizieren nicht möglich, weil ausgeschnitten
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">ContentChildren, static</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Lifecycle Reihenfolge innen/außen</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Verschachtelte Komponenten</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Problem: Direktive oben soll Style innen beeinflussen -> style
+            encapsulation funkt dazwischen, :host-content
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Problem: Injector Tree - Zugriff in projizierter Komponente auf
+            Wrapper nicht möglich
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">ng-template</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            ng-template einfaches Beispiel: Liste mit Array als Input und n
+            Einträgen
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">ViewChildren, QueryList Probleme</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Lifecycle Reihenfolge innen/außen</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Verschiedene Templates mit Direktive/anhand Property
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Problem: Style-Encapsulation</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Problem: Injector Tree - Zugriff in projizierter Komponente auf
+            Wrapper nicht möglich
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">
+            Performance: trackBy, Komponenten-Recycling, Aufbau/Abbau teuer
+          </h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Erfahrungen aus dem Nähkästchen</h3>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Fragen/Danke</h3>
+        </section>
       </div>
     </div>
 
@@ -40,10 +177,13 @@
       // - https://github.com/hakimel/reveal.js#configuration
       // - https://github.com/hakimel/reveal.js#dependencies
       Reveal.configure({
-        transition: 'none',
-        history: 'true',
+        transition: "none",
+        history: "true",
       });
       Reveal.initialize({
+        hashOneBasedIndex: false,
+        controls: false,
+        slideNumber: 'c/t',
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
     </script>
