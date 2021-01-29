@@ -1,13 +1,11 @@
-$primary-color: #eb811b;
-
 .highlight {
-  color: $primary-color;
+  color: #eb811b;
 }
 
 .reveal blockquote {
   border-left-style: solid;
   border-left-width: 4px;
-  border-left-color: $primary-color;
+  border-left-color: #eb811b;
   padding-left: 1rem !important;
   text-align: left;
 }
