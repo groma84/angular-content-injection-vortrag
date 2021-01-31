@@ -11,23 +11,26 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     </style>
     <h1>Content Projection Demo</h1>
     <nav>
+      <span>ng-content</span>
       <ul>
-      
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-content simple</a></li>
-        <li><a routerLink="/ng-content-selectors" routerLinkActive="active" >ng-content selectors and lifecycle</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-content multiple layers</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-content projecting twice</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-content host-context</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-content injector tree</a></li>
+        <li><a routerLink="/ng-content-simple" routerLinkActive="active">simple</a></li>
+        <li><a routerLink="/ng-content-selectors" routerLinkActive="active">selectors and lifecycle</a></li>
+        <li><a routerLink="/ng-content-two-layers" routerLinkActive="active">multiple layers/checkifsomethingexists/contentchildren</a></li>
+        <li><a routerLink="/ng-content-projecting-twice" routerLinkActive="active">projecting twice</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">host-context</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">injector tree/contentchildren</a></li>
+      </ul>
 
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template simple</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template context</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template lifecycle</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template viewchildren/querylist</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template multiple templates</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template host-context</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template injector tree</a></li>
-        <li><a routerLink="/ng-content-simple" routerLinkActive="active">ng-template performance</a></li>
+      <span>ng-template</span>
+      <ul>
+        <li><a routerLink="/todo" routerLinkActive="active">simple</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">context</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">lifecycle</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">viewchildren/querylist</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">multiple templates</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">host-context</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">injector tree</a></li>
+        <li><a routerLink="/todo" routerLinkActive="active">performance</a></li>
       </ul>
     </nav>
     <router-outlet></router-outlet>
