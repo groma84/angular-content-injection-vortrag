@@ -6,6 +6,7 @@ import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice
 import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
+import { NgTemplateSimpleComponent } from './ng-template-simple.component';
 
 const routes: Routes = [
   { path: 'ng-content-simple', component: NgContentSimpleComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'ng-content-host-context', component: NgContentHostContextComponent },
   { path: 'ng-content-injector-tree', component: NgContentInjectorTreeComponent },
   
+  { path: 'ng-template-simple', component: NgTemplateSimpleComponent },
   
 ];
 

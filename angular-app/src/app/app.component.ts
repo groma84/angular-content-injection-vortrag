@@ -23,7 +23,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 
       <span>ng-template</span>
       <ul>
-        <li><a routerLink="/todo" routerLinkActive="active">simple</a></li>
+        <li><a routerLink="/ng-template-simple" routerLinkActive="active">simple</a></li>
         <li><a routerLink="/todo" routerLinkActive="active">context</a></li>
         <li><a routerLink="/todo" routerLinkActive="active">lifecycle</a></li>
         <li><a routerLink="/todo" routerLinkActive="active">viewchildren/querylist</a></li>
@@ -33,6 +33,9 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
         <li><a routerLink="/todo" routerLinkActive="active">performance</a></li>
       </ul>
     </nav>
+
+    <hr />
+
     <router-outlet></router-outlet>
   `,
   styles: [],
