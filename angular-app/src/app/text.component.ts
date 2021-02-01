@@ -4,8 +4,11 @@ import {
   AfterViewChecked,
   AfterViewInit,
   OnInit,
+  Optional,
 } from "@angular/core";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ModalSimpleComponent } from "./modal-simple.component";
+import { TagDirective } from "./tag.directive";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +17,9 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     <style>
       p {
         border: 1px solid limegreen;
+      }
+      :host-context(.bold) {
+        font-weight: bold;
       }
     </style>
     <p>
@@ -43,5 +49,10 @@ export class TextComponent
   }
   ngAfterViewChecked(): void {
     console.log("📜 ngAfterViewChecked");
+  }
+
+  constructor(@Optional() modalSimpleComponent: ModalSimpleComponent, @Optional() tagDirective: TagDirective) {
+    console.log("TextComponent modalSimpleComponent", modalSimpleComponent);
+    console.log("TextComponent tagDirective", tagDirective);
   }
 }

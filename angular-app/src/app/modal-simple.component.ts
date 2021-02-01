@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,4 +36,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     </div>
   `,
 })
-export class ModalSimpleComponent {}
+export class ModalSimpleComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ModalSimpleComponent ngOnChanges");
+  }
+
+  public name = "ModalSimpleComponent";
+}

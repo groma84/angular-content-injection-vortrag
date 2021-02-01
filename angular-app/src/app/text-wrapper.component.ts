@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnInit,
 } from "@angular/core";
 
@@ -17,7 +18,7 @@ import {
         border: 1px solid hotpink;
       }
     </style>
-    <div>
+    <div [ngClass]="{bold: makeBold}">
       <h5>Wrapping text</h5>
       <app-text></app-text>
     </div>
@@ -45,4 +46,6 @@ export class TextWrapperComponent
   ngAfterViewChecked(): void {
     console.log("📦 ngAfterViewChecked");
   }
+
+  @Input() makeBold = false;
 }

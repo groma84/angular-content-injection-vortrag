@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ElementRef } from "@angular/core";
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, QueryList } from "@angular/core";
 import { TagDirective } from "./tag.directive";
 
 @Component({
@@ -16,10 +16,14 @@ import { TagDirective } from "./tag.directive";
   `,
 })
 export class Layer2Component implements AfterContentInit {
-  @ContentChild(TagDirective) projectedContent: any;
+  @ContentChild(TagDirective) projectedContent: TagDirective | undefined;
+  @ContentChildren(TagDirective, {descendants: true}) projectedContentList!: QueryList<TagDirective>;
 
   ngAfterContentInit() {
     // this does not work, it's always undefined
     console.log('Layer2Component, ngAfterContentInit, projectedContent', this.projectedContent);
+
+    // this does not work either
+    console.log('Layer2Component, ngAfterContentInit, projectedContentList.length', this.projectedContentList.length);
   }
 }

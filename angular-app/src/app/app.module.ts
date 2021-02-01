@@ -9,6 +9,8 @@ import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
 import { ModalSelectorsComponent } from './modal-selectors.component';
 import { ModalSimpleComponent } from './modal-simple.component';
+import { NgContentHostContextComponent } from './ng-content-host-context.component';
+import { NgContentInjectorTreeComponent } from './ng-content-injector-tree.component';
 import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice.component';
 import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
@@ -36,7 +38,9 @@ import { TextComponent } from './text.component';
     NgContentSimpleComponent,
     NgContentSelectorsComponent,
     NgContentTwoLayersComponent,
-    NgContentProjectingTwiceComponent
+    NgContentProjectingTwiceComponent,
+    NgContentHostContextComponent,
+    NgContentInjectorTreeComponent
   ],
   imports: [
     BrowserModule,
