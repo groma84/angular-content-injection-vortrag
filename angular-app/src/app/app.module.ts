@@ -9,6 +9,8 @@ import { HeaderComponent } from './header.component';
 import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
 import { ListContextComponent } from './list-context.component';
+import { ListInjectorComponent } from './list-injector.component';
+import { ListItemInjectorComponent } from './list-item-injector.component';
 import { ListItemComponent } from './list-item.component';
 import { ListMultipleTemplatesComponent } from './list-multiple-templates.component';
 import { ListSimpleComponent } from './list-simple.component';
@@ -21,6 +23,7 @@ import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
 import { NgTemplateContextComponent } from './ng-template-context.component';
+import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
 import { SweetsListItemComponent } from './sweets-list-item.component';
@@ -50,7 +53,9 @@ import { TextComponent } from './text.component';
     ListItemComponent,
     FruitListItemComponent,
     SweetsListItemComponent,
+    ListItemInjectorComponent,
     ListMultipleTemplatesComponent,
+    ListInjectorComponent,
 
     NgContentSimpleComponent,
     NgContentSelectorsComponent,
@@ -61,7 +66,9 @@ import { TextComponent } from './text.component';
 
     NgTemplateSimpleComponent,
     NgTemplateContextComponent,
-    NgTemplateMultipleTemplatesComponent
+    NgTemplateMultipleTemplatesComponent,
+    NgTemplateInjectorComponent,
+    
   ],
   imports: [
     BrowserModule,
