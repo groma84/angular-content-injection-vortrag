@@ -26,6 +26,7 @@ import { TagDirective } from "./tag.directive";
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla
       pulvinar neque at convallis. Donec a imperdiet nunc, nec molestie metus.
     </p>
+    <app-list-item></app-list-item>
   `,
 })
 export class TextComponent

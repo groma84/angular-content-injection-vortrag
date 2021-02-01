@@ -33,6 +33,8 @@
       <div class="slides">
         <section>
           <h2>DRY in Angular Templates: Content Projection im Praxiseinsatz</h2>
+          <h3>Martin Grotz</h3>
+          <div>TODO: MATHEMA Logo, Code Days Logo</div>
           <aside class="notes"></aside>
         </section>
 
@@ -43,6 +45,7 @@
               <li>Angular 4 bis Angular 9</li>
               <li>Strukturen vom Beginn</li>
               <li>Keine Angular-Formulare</li>
+              <li>Feste Browser-Version</li>
               <li>Performance wichtiger als schöner Code</li>
             </ul>
           </div>
@@ -50,6 +53,13 @@
             <!-- TODO: Logos von: Mathema, e.solutions, Porsche -->
             <img src="img/100px_placeholder.png" style="" />
           </div>
+          <aside class="notes">
+            <ul>
+              <li>Projekt im Car-Infotainment, angepasster Browser</li>
+              <li>Keine Erfahrungen mit Ivy</li>
+              <li>Neue Erkenntnisse und Features fließen nur langsam ein</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
@@ -67,33 +77,89 @@
               <li>Automatische Change Detection</li>
             </ul>
           </div>
-        </section>
+          <aside class="notes">
+            <ul>
+              <li>Von Google angetrieben</li>
+              <li>Open Source</li>
+            </ul>
+          </aside>
 
-        <section>
-          <h3 class="placeholder">Einfaches Angular Beispiel</h3>
-          <h4 class="placeholder">Bild vom Code</h4>
         </section>
 
         <section>
           <h3>ng-content</h3>
+          <aside class="notes">
+            <ul>
+              <li>Statische Projektion</li>
+              <li>Zu projizierender Inhalt wird einfach zwischen die Tags des Wrapper-Elements geschrieben</li>
+              <li>Element wird an einer Stelle ausgeschnitten und an anderer wieder eingefügt</li>
+              <li>Beispiel: Wrapper-Komponente mit Funktionalität, wechselnder Inhalt</li>
+            </ul>
+          </aside>
+
         </section>
 
         <section>
-          <h3 class="placeholder">
-            ng-content einfaches Beispiel: Modaler Dialog mit Text drin
-          </h3>
+          <img src="img/app-modal-simple_01.png" />
+          <img src="img/app-ng-content-simple_01.png" />
+          <img src="img/screenshot-simple-modal.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Inhalt zwischen den Tags wird ausgeschnitten und an der Stelle mit ng-content im Modalen Dialog eingefügt</li>
+              <li>Der eingefügte Inhalt kann beliebig sein</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Selektoren zur Auswahl, was wohin projiziert wird
+          <h3>
+            <ng-content select="..."></ng-content>
           </h3>
+
+          <img src="img/app-ng-content-selectors_01.png" />
+          <img src="img/app-modal-selectors_01.png" />
+          <img src="img/screenshot-modal-selectors_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Verschiedene Komponenten, die jeweils wieder irgendwas enthalten</li>
+              <li>app-text-wrapper enthält nochmal eine Unterkompomente app-text mit einem Paragraph drin</li>
+              <li>In ng-content kann mit select ein CSS-Selektor angegeben werden, der dann nur passende Inhalte in diesem ng-content anzeigt</li>
+              <li>Wenn man keinen "Lumpensammler" ohne select hat, werden ggf. nirgends passende Inhalte dann auch nirgends angezeigt</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Problem: 2x projizieren nicht möglich, weil ausgeschnitten
-          </h3>
+          <h3>Lifecycle Reihenfolge</h3>
+
+          <img src="img/ng-content-lifecycle-elements_01.png" />
+          <img src="img/ng-content-lifecycle_01.png" />
+
+          <aside class="notes">
+            <ul><li>
+              Angular Lifecycle Hooks:
+                <ol>
+                  <li>ngOnInit: Inputs</li>
+                  <li>ngAfterContentInit: statischer Content</li>
+                  <li>ngAfterContentChecked: Change Detection im statischen Content</li>
+                  <li>ngAfterViewInit: dynamischer Content</li>
+                  <li>ngAfterViewChecked: Change Detection im dynamischen Content</li>
+                </ol>
+            </li>
+          <li>
+            Mit ng-content muss beachtet werden, dass jede Lifecycle-Phase "depth first" initialisiert wird
+          </li>
+          <li>Bei mehrfacher Verschachtelung wird es unübersichtlich (siehe text in text-wrapper, und list-item in text)</li>
+        <li>
+          Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges erzwingen: Elternkomponenten sind noch nicht fertig initialisiert, ggf. unerwartete undefined Werte bei Inputs, ViewChild, ContentChild
+        </li></ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3 class="placeholder">Verschachtelte Komponenten</h3>
         </section>
 
         <section>
@@ -101,11 +167,9 @@
         </section>
 
         <section>
-          <h3 class="placeholder">Lifecycle & Reihenfolge innen/außen</h3>
-        </section>
-
-        <section>
-          <h3 class="placeholder">Verschachtelte Komponenten</h3>
+          <h3 class="placeholder">
+            Problem: 2x projizieren nicht möglich, weil ausgeschnitten
+          </h3>
         </section>
 
         <section>
@@ -166,10 +230,11 @@
           <h3 class="placeholder">
             Performance: trackBy, Komponenten-Recycling, Aufbau/Abbau teuer
           </h3>
+          <div>TODO: Screenshot flamechart aus echtem Projekt</div>
         </section>
 
         <section>
-          <h3 class="placeholder">Erfahrungen aus dem Nähkästchen</h3>
+          <h3 class="placeholder">Doku-Links</h3>
         </section>
 
         <section>

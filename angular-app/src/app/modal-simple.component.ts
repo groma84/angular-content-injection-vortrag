@@ -36,10 +36,4 @@ import {
     </div>
   `,
 })
-export class ModalSimpleComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("ModalSimpleComponent ngOnChanges");
-  }
-
-  public name = "ModalSimpleComponent";
-}
+export class ModalSimpleComponent {}
