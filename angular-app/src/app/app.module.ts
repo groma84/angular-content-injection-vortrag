@@ -7,6 +7,7 @@ import { ContentTwiceComponent } from './content-twice.component';
 import { HeaderComponent } from './header.component';
 import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
+import { ListContextComponent } from './list-context.component';
 import { ListSimpleComponent } from './list-simple.component';
 import { ModalSelectorsComponent } from './modal-selectors.component';
 import { ModalSimpleComponent } from './modal-simple.component';
@@ -16,6 +17,7 @@ import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice
 import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
+import { NgTemplateContextComponent } from './ng-template-context.component';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
 import { TagDirective } from './tag.directive';
 import { TextWrapperComponent } from './text-wrapper.component';
@@ -37,6 +39,7 @@ import { TextComponent } from './text.component';
     Layer1Component,
     Layer2Component,
     ListSimpleComponent,
+    ListContextComponent,
 
     NgContentSimpleComponent,
     NgContentSelectorsComponent,
@@ -45,7 +48,8 @@ import { TextComponent } from './text.component';
     NgContentHostContextComponent,
     NgContentInjectorTreeComponent,
 
-    NgTemplateSimpleComponent
+    NgTemplateSimpleComponent,
+    NgTemplateContextComponent
   ],
   imports: [
     BrowserModule,
