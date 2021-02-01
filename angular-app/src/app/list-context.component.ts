@@ -1,11 +1,14 @@
 import {
+  AfterContentChecked,
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
   Input,
+  OnInit,
   TemplateRef,
   ViewChild,
 } from "@angular/core";
@@ -45,9 +48,28 @@ import {
     </ul>
   `,
 })
-export class ListContextComponent implements AfterContentInit {
+export class ListContextComponent
+  implements
+    OnInit,
+    AfterContentInit,
+    AfterContentChecked,
+    AfterViewInit,
+    AfterViewChecked {
+  ngOnInit(): void {
+    console.log("📄 ngOnInit");
+  }
+  ngAfterContentChecked(): void {
+    console.log("📄 ngAfterContentChecked");
+  }
+  ngAfterViewInit(): void {
+    console.log("📄 ngAfterViewInit");
+  }
+  ngAfterViewChecked(): void {
+    console.log("📄 ngAfterViewChecked");
+  }
   ngAfterContentInit(): void {
-    console.log("template", this.template);
+    console.log("📄 ngAfterContentInit");
+    console.log("📄 template", this.template);
   }
 
   @Input()

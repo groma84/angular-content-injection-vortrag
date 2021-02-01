@@ -24,11 +24,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
       <span>ng-template</span>
       <ul>
         <li><a routerLink="/ng-template-simple" routerLinkActive="active">simple</a></li>
-        <li><a routerLink="/ng-template-context" routerLinkActive="active">context</a></li>
-        <li><a routerLink="/todo" routerLinkActive="active">lifecycle</a></li>
-        <li><a routerLink="/todo" routerLinkActive="active">multiple templates</a></li>
-        <li><a routerLink="/todo" routerLinkActive="active">viewchildren/querylist</a></li>
-        <li><a routerLink="/todo" routerLinkActive="active">host-context</a></li>
+        <li><a routerLink="/ng-template-context" routerLinkActive="active">context and lifecycle</a></li>
+        <li><a routerLink="/ng-template-multiple-templates" routerLinkActive="active">multiple templates and QueryList</a></li>
         <li><a routerLink="/todo" routerLinkActive="active">injector tree/change detection</a></li>
         <li><a routerLink="/todo" routerLinkActive="active">performance</a></li>
       </ul>

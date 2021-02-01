@@ -4,10 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContentTwiceComponent } from './content-twice.component';
+import { FruitListItemComponent } from './fruit-list-item.component';
 import { HeaderComponent } from './header.component';
 import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
 import { ListContextComponent } from './list-context.component';
+import { ListItemComponent } from './list-item.component';
+import { ListMultipleTemplatesComponent } from './list-multiple-templates.component';
 import { ListSimpleComponent } from './list-simple.component';
 import { ModalSelectorsComponent } from './modal-selectors.component';
 import { ModalSimpleComponent } from './modal-simple.component';
@@ -18,14 +21,18 @@ import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
 import { NgTemplateContextComponent } from './ng-template-context.component';
+import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { SweetsListItemComponent } from './sweets-list-item.component';
 import { TagDirective } from './tag.directive';
+import { TemplateTypeDirective } from './template-type.directive';
 import { TextWrapperComponent } from './text-wrapper.component';
 import { TextComponent } from './text.component';
 
 @NgModule({
   declarations: [
     TagDirective,
+    TemplateTypeDirective,
     
     AppComponent,
     
@@ -40,6 +47,10 @@ import { TextComponent } from './text.component';
     Layer2Component,
     ListSimpleComponent,
     ListContextComponent,
+    ListItemComponent,
+    FruitListItemComponent,
+    SweetsListItemComponent,
+    ListMultipleTemplatesComponent,
 
     NgContentSimpleComponent,
     NgContentSelectorsComponent,
@@ -49,7 +60,8 @@ import { TextComponent } from './text.component';
     NgContentInjectorTreeComponent,
 
     NgTemplateSimpleComponent,
-    NgTemplateContextComponent
+    NgTemplateContextComponent,
+    NgTemplateMultipleTemplatesComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
 import { NgTemplateContextComponent } from './ng-template-context.component';
+import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   
   { path: 'ng-template-simple', component: NgTemplateSimpleComponent },
   { path: 'ng-template-context', component: NgTemplateContextComponent },
+  { path: 'ng-template-multiple-templates', component: NgTemplateMultipleTemplatesComponent },
   
   
 ];
