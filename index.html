@@ -403,7 +403,10 @@
 
           <div class="flex-column">
             <div class="flex">
-              <img class="fragment" src="img/screenshot-ng-content-injector_01.png" />
+              <img
+                class="fragment"
+                src="img/screenshot-ng-content-injector_01.png"
+              />
 
               <blockquote class="fragment" style="font-size: 0.9rem">
                 This is working as expected: <br />
@@ -422,7 +425,7 @@
 
         <section>
           <h3>ng-template</h3>
-          <aside class="class">
+          <aside class="notes">
             <ul>
               <li>
                 Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus
@@ -437,33 +440,77 @@
           </aside>
         </section>
 
+        <!--
         <section>
-          <img src="img/ng-template-simple_01.png" />
-          <img src="img/ng-template-simple-list_01.png" />
-          <img src="img/screenshot-ng-template-simple-list_01.png" />
+          <div class="flex">
+          <div><img src="img/ng-template-simple_01.png" /></div>
+          <div><img src="img/ng-template-simple-list_01.png" /></div>
+          <div><img src="img/screenshot-ng-template-simple-list_01.png" /></div>
+        </div>
         </section>
+-->
 
         <section>
           <h3>ngTemplateOutlet</h3>
 
-          <img src="img/screenshot-list-different-ng-template_01.png" />
-          <img src="img/ng-template-context_01.png" />
-          <img src="img/list-different-ng-template_01.png" />
+          <div class="flex">
+            <div class="flex-column" style="align-items: center">
+              <div class="fragment" data-fragment-index="1">
+                <img src="img/ng-template-context_01.png" />
+              </div>
+              <div class="fragment" data-fragment-index="3" style="width: 50%">
+                <img src="img/screenshot-list-different-ng-template_01.png" />
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="2">
+              <img src="img/list-different-ng-template_01.png" />
+            </div>
+          </div>
         </section>
 
         <section>
           <h3>Lifecycle</h3>
 
-          <img src="img/list-different-ng-template_01.png" />
-          <img src="img/list-different-ng-template-lifecycle_01.png" />
+          <div class="flex">
+            <div class="fragment" style="width: 80%">
+              <img src="img/list-different-ng-template_01.png" />
+            </div>
+            <div class="fragment">
+              <img src="img/list-different-ng-template-lifecycle_01.png" />
+            </div>
+          </div>
+
+          <aside class="notes">
+            <ul>
+              <li>Gleiche Komponente wie gerade eben</li>
+              <li>
+                Nur der dynamische Teil mit reingegebenem Template interessant
+              </li>
+              <li>
+                Direkt vor "ngAfterViewInit" wird der dynamische Teil komplett
+                erzeugt und initialisiert
+              </li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3>Verschiedene Templates mit Auswahl</h3>
+          <h3 style="font-size: 2rem">Verschiedene Templates mit Auswahl</h3>
 
-          <img src="img/ng-template-multiple-types_01.png" />
-          <img src="img/template-type-directive_01.png" />
-          <img src="img/list-multiple-templates_01.png" />
+          <div class="flex">
+            <div class="flex-column">
+              <div class="fragment">
+                <img src="img/ng-template-multiple-types_01.png" />
+              </div>
+              <div class="fragment">
+                <img src="img/template-type-directive_01.png" />
+              </div>
+            </div>
+            <div class="fragment">
+              <img src="img/list-multiple-templates_01.png" />
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -489,12 +536,26 @@
         </section>
 
         <section>
-          <h3>Injector Tree</h3>
+          <h3 style="font-size: 2rem">Injector Tree</h3>
 
-          <img src="img/ng-template-injector_01.png" />
-          <img src="img/list-injector_01.png" />
-          <img src="img/list-item-injector_01.png" />
-          <img src="img/screenshot-list-item-injector_01.png" />
+          <div class="flex" style="margin-top: -40px">
+            <div class="flex-column">
+              <div class="fragment">
+                <img src="img/ng-template-injector_01.png" />
+              </div>
+              <div class="fragment" style="margin-top: -40px">
+                <img src="img/list-injector_01.png" />
+              </div>
+            </div>
+            <div class="flex-column">
+              <div class="fragment">
+                <img src="img/list-item-injector_01.png" />
+              </div>
+              <div class="fragment">
+                <img src="img/screenshot-list-item-injector_01.png" />
+              </div>
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -507,8 +568,14 @@
         <section>
           <h3>Change Detection</h3>
 
-          <img src="img/ng-template-change-detection-components_01.png" />
-          <img src="img/list-item-injector-manual-cd_01.png" />
+          <div class="flex">
+            <div class="fragment">
+              <img src="img/ng-template-change-detection-components_01.png" />
+            </div>
+            <div class="fragment">
+              <img src="img/list-item-injector-manual-cd_01.png" />
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -539,10 +606,18 @@
 
         <section>
           <h3>trackBy</h3>
+          <span style="font-size: 0.5rem;" class="placeholder">TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es hinkommt</span>
 
-          <img src="img/ng-template-wrapper-trackBy_01.png" />
-          <img src="img/app-list-injector-default-trackBy_01.png" />
-          <img src="img/no-trackBy-items-get-recreated_01.gif" />
+          <div class="flex">
+            <div class="fragment"><img src="img/ng-template-wrapper-trackBy_01.png" /></div>
+
+            <div class="flex-column fragment">
+              <div >
+                <img src="img/app-list-injector-default-trackBy_01.png" />
+              </div>
+              <div><img src="img/no-trackBy-items-get-recreated_01_endless.gif" /></div>
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -554,8 +629,12 @@
         <section>
           <h3>trackBy</h3>
 
-          <img src="img/app-list-injector-custom-trackBy_01.png" />
-          <img src="img/custom-trackBy-items-kept_01.gif" />
+          <div class="flex-column">
+            <div class="fragment"><img src="img/app-list-injector-custom-trackBy_01.png" /></div>
+            <div class="fragment"><img src="img/custom-trackBy-items-kept_01_endless.gif" /></div>
+          </div>
+          
+          
 
           <aside class="notes">
             <ul>
