@@ -335,23 +335,85 @@
         </section>
 
         <section>
-          <h3 class="placeholder">Change Detection</h3>
-          <div></div>
+          <h3>Change Detection</h3>
+
+          <img src="img/ng-template-change-detection-components_01.png" />
+          <img src="img/list-item-injector-manual-cd_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>items als Array wird durchgegeben, Strategy: OnPush</li>
+              <li>Änderung in einem item-Objekt, z.B. durch Klick -> obere Komponente bekommt es nicht mit</li>
+              <li>Keine Change Detection -> keine Aktualisierung der Darstellung</li>
+              <li>Entweder "Bescheid sagen" nach oben, oder Eintrag markiert sich als "dirty"</li>
+              <li>Ggf. manuelle Auslösung mit detectChanges erforderlich</li>
+              <li>markForCheck -> "bitte prüfe alles bis zu mir beim nächsten Durchgang"</li>
+              <li>detectChanges -> "bitte prüfe alles von mir startend nach unten sofort"</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Performance: trackBy, Komponenten-Recycling, Aufbau/Abbau teuer
-          </h3>
-          <div>TODO: Screenshot flamechart aus echtem Projekt</div>
+          <h3>trackBy</h3>
+
+          <img src="img/ng-template-wrapper-trackBy_01.png" />
+          <img src="img/app-list-injector-default-trackBy_01.png" />
+          <img src="img/no-trackBy-items-get-recreated_01.gif" />
+
+          <aside class="notes">
+            <ul>
+              <li>Angepasstes trackBy, z.B. auf eine id</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">Doku-Links</h3>
+          <h3>trackBy</h3>
+
+          <img src="img/app-list-injector-custom-trackBy_01.png" />
+          <img src="img/custom-trackBy-items-kept_01.gif" />
+
+          <aside class="notes">
+            <ul>
+              <li>Angepasstes trackBy, z.B. auf eine id</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Performance</h3>
+
+          <img src="img/performance-creating-items_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Niemals ohne OnPush arbeiten</li>
+              <li>Zerstören/Aufbauen teuer: custom trackBy</li>
+              <li>Komponenten/Direktiven möglichst schlank halten</li>
+              <li>Jede Direktive, jeder Input, jedes ngIf kostet</li>
+              <li>rx-angular</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Doku-Links</h3>
+
+          <a href="https://angular.io/guide/structural-directives#the-ng-template">Offizielle Doku zu ng-template</a>
+          <br />
+          <br />
+          <a href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b">ng-content: The hidden docs</a>
+          <br />
+          <br />
+          <a href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/">Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates</a>
+          <br />
+          <br />
+          <a href="https://github.com/groma84/angular-content-injection-vortrag">Dieser Vortrag auf github</a>
         </section>
 
         <section>
           <h3 class="placeholder">Fragen/Danke</h3>
+          TODO: Kontaktdaten & Bild
         </section>
       </div>
     </div>
