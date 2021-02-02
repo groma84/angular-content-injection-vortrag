@@ -26,9 +26,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class='footer'>
-        FOOTER Use left and right arrows to navigate
-      </div>
+      <div class="footer">FOOTER Use left and right arrows to navigate</div>
 
       <div class="slides">
         <section>
@@ -79,17 +77,34 @@
           </div>
           <aside class="notes">
             <ul>
-              <li>Multi-target: Webapps, Server-side rendering, Mobile Apps via Ionic</li>
-              <li>Angular-Anwendung besteht aus drei Sachen:
+              <li>
+                Multi-target: Webapps, Server-side rendering, Mobile Apps via
+                Ionic
+              </li>
+              <li>
+                Angular-Anwendung besteht aus drei Sachen:
                 <ul>
-                  <li>Komponenten, die als View für die Darstellung zuständig sind</li>
-                  <li>Direktiven, die das Verhalten von Komponenten beeinflussen</li>
-                  <li>Services, die für Datenhaltung und -austausch zuständig sind</li>
+                  <li>
+                    Komponenten, die als View für die Darstellung zuständig sind
+                  </li>
+                  <li>
+                    Direktiven, die das Verhalten von Komponenten beeinflussen
+                  </li>
+                  <li>
+                    Services, die für Datenhaltung und -austausch zuständig sind
+                  </li>
                 </ul>
               </li>
-              <li>Angular macht viel über Decorators: Aspektorientierte Programmierung</li>
-              <li>Dependency injection: Provider und automatische Injection in den Konstruktor</li>
-              <li>Change Detection erklären:
+              <li>
+                Angular macht viel über Decorators: Aspektorientierte
+                Programmierung
+              </li>
+              <li>
+                Dependency injection: Provider und automatische Injection in den
+                Konstruktor
+              </li>
+              <li>
+                Change Detection erklären:
                 <ul>
                   <li>Default vs OnPush</li>
                   <li>Probleme mit Default</li>
@@ -100,7 +115,6 @@
               </li>
             </ul>
           </aside>
-
         </section>
 
         <section>
@@ -108,22 +122,38 @@
           <aside class="notes">
             <ul>
               <li>Statische Projektion</li>
-              <li>Zu projizierender Inhalt wird einfach zwischen die Tags des Wrapper-Elements geschrieben</li>
-              <li>Element wird an einer Stelle ausgeschnitten und an anderer wieder eingefügt</li>
-              <li>Beispiel: Wrapper-Komponente mit Funktionalität, wechselnder Inhalt</li>
+              <li>
+                Zu projizierender Inhalt wird einfach zwischen die Tags des
+                Wrapper-Elements geschrieben
+              </li>
+              <li>
+                Element wird an einer Stelle ausgeschnitten und an anderer
+                wieder eingefügt
+              </li>
+              <li>
+                Beispiel: Wrapper-Komponente mit Funktionalität, wechselnder
+                Inhalt
+              </li>
             </ul>
           </aside>
-
         </section>
 
         <section>
-          <img src="img/app-modal-simple_01.png" />
-          <img src="img/app-ng-content-simple_01.png" />
-          <img src="img/screenshot-simple-modal.png" />
-
+          <div class="flex">
+            <div>
+              <img src="img/app-modal-simple_01.png" />
+            </div>
+            <div class="flex-column">
+              <img class="fragment" src="img/app-ng-content-simple_01.png" />
+              <img class="fragment" src="img/screenshot-simple-modal.png" />
+            </div>
+          </div>
           <aside class="notes">
             <ul>
-              <li>Inhalt zwischen den Tags wird ausgeschnitten und an der Stelle mit ng-content im Modalen Dialog eingefügt</li>
+              <li>
+                Inhalt zwischen den Tags wird ausgeschnitten und an der Stelle
+                mit ng-content im Modalen Dialog eingefügt
+              </li>
               <li>Der eingefügte Inhalt kann beliebig sein</li>
             </ul>
           </aside>
@@ -140,10 +170,21 @@
 
           <aside class="notes">
             <ul>
-              <li>Verschiedene Komponenten, die jeweils wieder irgendwas enthalten</li>
-              <li>app-text-wrapper enthält nochmal eine Unterkompomente app-text mit einem Paragraph drin</li>
-              <li>In ng-content kann mit select ein CSS-Selektor angegeben werden, der dann nur passende Inhalte in diesem ng-content anzeigt</li>
-              <li>Wenn man keinen "Lumpensammler" ohne select hat, werden ggf. nirgends passende Inhalte dann auch nirgends angezeigt</li>
+              <li>
+                Verschiedene Komponenten, die jeweils wieder irgendwas enthalten
+              </li>
+              <li>
+                app-text-wrapper enthält nochmal eine Unterkompomente app-text
+                mit einem Paragraph drin
+              </li>
+              <li>
+                In ng-content kann mit select ein CSS-Selektor angegeben werden,
+                der dann nur passende Inhalte in diesem ng-content anzeigt
+              </li>
+              <li>
+                Wenn man keinen "Lumpensammler" ohne select hat, werden ggf.
+                nirgends passende Inhalte dann auch nirgends angezeigt
+              </li>
             </ul>
           </aside>
         </section>
@@ -155,23 +196,37 @@
           <img src="img/ng-content-lifecycle_01.png" />
 
           <aside class="notes">
-            <ul><li>
-              Angular Lifecycle Hooks:
+            <ul>
+              <li>
+                Angular Lifecycle Hooks:
                 <ol>
                   <li>ngOnInit: Inputs</li>
                   <li>ngAfterContentInit: statischer Content</li>
-                  <li>ngAfterContentChecked: Change Detection im statischen Content</li>
+                  <li>
+                    ngAfterContentChecked: Change Detection im statischen
+                    Content
+                  </li>
                   <li>ngAfterViewInit: dynamischer Content</li>
-                  <li>ngAfterViewChecked: Change Detection im dynamischen Content</li>
+                  <li>
+                    ngAfterViewChecked: Change Detection im dynamischen Content
+                  </li>
                 </ol>
-            </li>
-          <li>
-            Mit ng-content muss beachtet werden, dass jede Lifecycle-Phase "depth first" initialisiert wird
-          </li>
-          <li>Bei mehrfacher Verschachtelung wird es unübersichtlich (siehe text in text-wrapper, und list-item in text)</li>
-        <li>
-          Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges erzwingen: Elternkomponenten sind noch nicht fertig initialisiert, ggf. unerwartete undefined Werte bei Inputs, ViewChild, ContentChild
-        </li></ul>
+              </li>
+              <li>
+                Mit ng-content muss beachtet werden, dass jede Lifecycle-Phase
+                "depth first" initialisiert wird
+              </li>
+              <li>
+                Bei mehrfacher Verschachtelung wird es unübersichtlich (siehe
+                text in text-wrapper, und list-item in text)
+              </li>
+              <li>
+                Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges
+                erzwingen: Elternkomponenten sind noch nicht fertig
+                initialisiert, ggf. unerwartete undefined Werte bei Inputs,
+                ViewChild, ContentChild
+              </li>
+            </ul>
           </aside>
         </section>
 
@@ -185,16 +240,32 @@
 
           <aside class="notes">
             <ul>
-              <li>'Tag' als Direktive, die Funktionalität beeinflussen könnte oder Konfiguration der Komponente beinhaltet, ...</li>
-              <li>'content' als Attribut, das wir anschließend selecten können</li>
-              <li>'content' als Selektor und gleichzeitig als Attribut in Layer1 kein Problem</li>
-              <li>ContentChild ist erst nach AfterContentInit befüllt, falls vorhanden</li>
+              <li>
+                'Tag' als Direktive, die Funktionalität beeinflussen könnte oder
+                Konfiguration der Komponente beinhaltet, ...
+              </li>
+              <li>
+                'content' als Attribut, das wir anschließend selecten können
+              </li>
+              <li>
+                'content' als Selektor und gleichzeitig als Attribut in Layer1
+                kein Problem
+              </li>
+              <li>
+                ContentChild ist erst nach AfterContentInit befüllt, falls
+                vorhanden
+              </li>
               <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
-              <li>'descendants' soll alle Elemente durchsuchen, konnte es aber noch nie erfolgreich anwenden. Standard: Nur direkte Kinder</li>
-              <li>Weitere Mögliche Option bei ContentChild: 'static' - falls true, muss Element ohne Change Detection da sein. Gegenbeispiel: *ngIf</li>
+              <li>
+                'descendants' soll alle Elemente durchsuchen, konnte es aber
+                noch nie erfolgreich anwenden. Standard: Nur direkte Kinder
+              </li>
+              <li>
+                Weitere Mögliche Option bei ContentChild: 'static' - falls true,
+                muss Element ohne Change Detection da sein. Gegenbeispiel: *ngIf
+              </li>
             </ul>
           </aside>
-
         </section>
 
         <section>
@@ -210,7 +281,10 @@
             <ul>
               <li>Ausschneiden aus dem DOM, nur 1x möglich</li>
               <li>Letztes ng-content gewinnt</li>
-              <li>Egal, ob das ng-content zur Laufzeit überhaupt da ist oder nicht!</li>
+              <li>
+                Egal, ob das ng-content zur Laufzeit überhaupt da ist oder
+                nicht!
+              </li>
             </ul>
           </aside>
         </section>
@@ -226,8 +300,14 @@
             <ul>
               <li>Style-Änderungen abhängig von äußerem Einfluss</li>
               <li>Angular: Style Encapsulation</li>
-              <li>Angular parsed HTML-Templates für Spezialsyntax und compiled auch CSS, um die Encapsulation Tags ranzuklatschen</li>
-              <li>Achtung: Mehrere Selektoren in :host-context() führt zu unerwarteten generierten Selektoren</li>
+              <li>
+                Angular parsed HTML-Templates für Spezialsyntax und compiled
+                auch CSS, um die Encapsulation Tags ranzuklatschen
+              </li>
+              <li>
+                Achtung: Mehrere Selektoren in :host-context() führt zu
+                unerwarteten generierten Selektoren
+              </li>
             </ul>
           </aside>
         </section>
@@ -239,10 +319,12 @@
           <img src="img/ng-content-injector-layer1_01.png" />
           <img src="img/ng-content-injector-layer2_01.png" />
           <img src="img/ng-content-injector-text_01.png" />
-          
+
           <aside class="notes">
             <ul>
-              <li>DOM mit ng-content ist nicht gleich Angular Injector/CD Tree</li>
+              <li>
+                DOM mit ng-content ist nicht gleich Angular Injector/CD Tree
+              </li>
             </ul>
           </aside>
         </section>
@@ -252,21 +334,30 @@
 
           <img src="img/screenshot-ng-content-injector_01.png" />
 
-          <blockquote>This is working as expected: <br />
-            nodes are only "projected" (moved to a different location) but everything else works relative to their source (= before projection) location.</blockquote>
-          
-            <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+          <blockquote>
+            This is working as expected: <br />
+            nodes are only "projected" (moved to a different location) but
+            everything else works relative to their source (= before projection)
+            location.
+          </blockquote>
 
-          <aside class="notes">
-          </aside>
+          <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+
+          <aside class="notes"></aside>
         </section>
 
         <section>
           <h3>ng-template</h3>
           <aside class="class">
             <ul>
-              <li>Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus Vorlagen</li>
-              <li>Alles, was mit ng-content geht, geht auch mit ng-template, aber ggf. mehr Code</li>
+              <li>
+                Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus
+                Vorlagen
+              </li>
+              <li>
+                Alles, was mit ng-content geht, geht auch mit ng-template, aber
+                ggf. mehr Code
+              </li>
               <li>Mehr Möglichkeiten als ng-content</li>
             </ul>
           </aside>
@@ -299,13 +390,19 @@
           <img src="img/ng-template-multiple-types_01.png" />
           <img src="img/template-type-directive_01.png" />
           <img src="img/list-multiple-templates_01.png" />
-          
+
           <aside class="notes">
             <ul>
-              <li>Gibt es kein passendes Template, wird stillschweigend einfach nichts angezeigt</li>
-              <li>If you are listening to QueryList's observable updates things are not as clear cut:
-                 updates are often late, and already removed things are still showing up - and the order is never guaranteed!
-                </li>
+              <li>
+                Gibt es kein passendes Template, wird stillschweigend einfach
+                nichts angezeigt
+              </li>
+              <li>
+                If you are listening to QueryList's observable updates things
+                are not as clear cut: updates are often late, and already
+                removed things are still showing up - and the order is never
+                guaranteed!
+              </li>
             </ul>
           </aside>
         </section>
@@ -314,8 +411,7 @@
           <h3>:host-context</h3>
           <h4>Analog zu ng-content</h4>
 
-          <aside class="notes">
-          </aside>
+          <aside class="notes"></aside>
         </section>
 
         <section>
@@ -325,7 +421,7 @@
           <img src="img/list-injector_01.png" />
           <img src="img/list-item-injector_01.png" />
           <img src="img/screenshot-list-item-injector_01.png" />
-          
+
           <aside class="notes">
             <ul>
               <li>Hier wird nichts ausgeschnitten und verschoben</li>
@@ -343,12 +439,26 @@
           <aside class="notes">
             <ul>
               <li>items als Array wird durchgegeben, Strategy: OnPush</li>
-              <li>Änderung in einem item-Objekt, z.B. durch Klick -> obere Komponente bekommt es nicht mit</li>
-              <li>Keine Change Detection -> keine Aktualisierung der Darstellung</li>
-              <li>Entweder "Bescheid sagen" nach oben, oder Eintrag markiert sich als "dirty"</li>
+              <li>
+                Änderung in einem item-Objekt, z.B. durch Klick -> obere
+                Komponente bekommt es nicht mit
+              </li>
+              <li>
+                Keine Change Detection -> keine Aktualisierung der Darstellung
+              </li>
+              <li>
+                Entweder "Bescheid sagen" nach oben, oder Eintrag markiert sich
+                als "dirty"
+              </li>
               <li>Ggf. manuelle Auslösung mit detectChanges erforderlich</li>
-              <li>markForCheck -> "bitte prüfe alles bis zu mir beim nächsten Durchgang"</li>
-              <li>detectChanges -> "bitte prüfe alles von mir startend nach unten sofort"</li>
+              <li>
+                markForCheck -> "bitte prüfe alles bis zu mir beim nächsten
+                Durchgang"
+              </li>
+              <li>
+                detectChanges -> "bitte prüfe alles von mir startend nach unten
+                sofort"
+              </li>
             </ul>
           </aside>
         </section>
@@ -399,16 +509,28 @@
         <section>
           <h3>Doku-Links</h3>
 
-          <a href="https://angular.io/guide/structural-directives#the-ng-template">Offizielle Doku zu ng-template</a>
+          <a
+            href="https://angular.io/guide/structural-directives#the-ng-template"
+            >Offizielle Doku zu ng-template</a
+          >
           <br />
           <br />
-          <a href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b">ng-content: The hidden docs</a>
+          <a
+            href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b"
+            >ng-content: The hidden docs</a
+          >
           <br />
           <br />
-          <a href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/">Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates</a>
+          <a
+            href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/"
+            >Angular ng-template, ng-container and ngTemplateOutlet - The
+            Complete Guide To Angular Templates</a
+          >
           <br />
           <br />
-          <a href="https://github.com/groma84/angular-content-injection-vortrag">Dieser Vortrag auf github</a>
+          <a href="https://github.com/groma84/angular-content-injection-vortrag"
+            >Dieser Vortrag auf github</a
+          >
         </section>
 
         <section>
@@ -431,7 +553,7 @@
       Reveal.initialize({
         hashOneBasedIndex: false,
         controls: false,
-        slideNumber: 'c/t',
+        slideNumber: "c/t",
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
     </script>
