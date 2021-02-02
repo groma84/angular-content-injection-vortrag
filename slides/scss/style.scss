@@ -22,3 +22,12 @@ $primary-color: #eb811b;
 .placeholder {
   border: 1px solid red;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}

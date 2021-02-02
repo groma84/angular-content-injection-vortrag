@@ -20,3 +20,12 @@
 .placeholder {
   border: 1px solid red;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
