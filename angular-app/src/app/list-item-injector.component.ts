@@ -6,6 +6,8 @@ import {
   Optional,
 } from "@angular/core";
 import { ListInjectorComponent } from "./list-injector.component";
+import { OneService } from "./one.service";
+import { TwoService } from "./two.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,10 +28,12 @@ export class ListItemInjectorComponent<
   item: T | undefined;
 
   constructor(
-    @Optional() listInjectorComponent: ListInjectorComponent,
+    @Optional() oneService: OneService,
+    @Optional() twoService: TwoService,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
-    console.log("💣 listInjectorComponent", listInjectorComponent);
+    console.log("oneService", oneService);
+    console.log("twoService", twoService);
 
     this.localCounter = ListItemInjectorComponent.counter++;
 

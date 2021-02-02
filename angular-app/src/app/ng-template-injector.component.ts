@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
+import { OneService } from "./one.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-ng-template-injector",
+  providers: [OneService],
   template: `
-    <style></style>
     <app-list-injector
       [items]="items"
     >

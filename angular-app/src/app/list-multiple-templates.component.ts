@@ -13,8 +13,6 @@ import { TemplateTypeDirective } from "./template-type.directive";
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-multiple-templates",
   template: `
-    <style></style>
-
     <ul>
       <div *ngFor="let item of items">
         <ng-template
@@ -29,8 +27,7 @@ import { TemplateTypeDirective } from "./template-type.directive";
 export class ListMultipleTemplatesComponent implements AfterContentInit {
   public itemTemplates = new Map<string, TemplateRef<any>>();
   
-  @Input()
-  items: any[] = [];
+  @Input() items: any[] = [];
 
   /* 
   / If you are listening to QueryList's observable updates things are not as clear cut:

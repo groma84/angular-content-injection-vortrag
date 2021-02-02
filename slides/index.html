@@ -262,43 +262,81 @@
         </section>
 
         <section>
-          <h3 class="placeholder">ng-template</h3>
+          <h3>ng-template</h3>
+          <aside class="class">
+            <ul>
+              <li>Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus Vorlagen</li>
+              <li>Alles, was mit ng-content geht, geht auch mit ng-template, aber ggf. mehr Code</li>
+              <li>Mehr Möglichkeiten als ng-content</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            ng-template einfaches Beispiel: Liste mit Array als Input und n
-            Einträgen
-          </h3>
+          <img src="img/ng-template-simple_01.png" />
+          <img src="img/ng-template-simple-list_01.png" />
+          <img src="img/screenshot-ng-template-simple-list_01.png" />
         </section>
 
         <section>
-          <h3 class="placeholder">ngTemplateOutlet context implicit/explicit</h3>
+          <h3>ngTemplateOutlet</h3>
+
+          <img src="img/screenshot-list-different-ng-template_01.png" />
+          <img src="img/ng-template-context_01.png" />
+          <img src="img/list-different-ng-template_01.png" />
         </section>
 
         <section>
-          <h3 class="placeholder">Lifecycle & Reihenfolge innen/außen</h3>
+          <h3>Lifecycle</h3>
+
+          <img src="img/list-different-ng-template_01.png" />
+          <img src="img/list-different-ng-template-lifecycle_01.png" />
         </section>
 
         <section>
-          <h3 class="placeholder">ViewChildren, QueryList Probleme</h3>
+          <h3>Verschiedene Templates mit Auswahl</h3>
+
+          <img src="img/ng-template-multiple-types_01.png" />
+          <img src="img/template-type-directive_01.png" />
+          <img src="img/list-multiple-templates_01.png" />
+          
+          <aside class="notes">
+            <ul>
+              <li>Gibt es kein passendes Template, wird stillschweigend einfach nichts angezeigt</li>
+              <li>If you are listening to QueryList's observable updates things are not as clear cut:
+                 updates are often late, and already removed things are still showing up - and the order is never guaranteed!
+                </li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Verschiedene Templates mit Direktive/anhand Property
-          </h3>
+          <h3>:host-context</h3>
+          <h4>Analog zu ng-content</h4>
+
+          <aside class="notes">
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">Problem: Style-Encapsulation</h3>
+          <h3>Injector Tree</h3>
+
+          <img src="img/ng-template-injector_01.png" />
+          <img src="img/list-injector_01.png" />
+          <img src="img/list-item-injector_01.png" />
+          <img src="img/screenshot-list-item-injector_01.png" />
+          
+          <aside class="notes">
+            <ul>
+              <li>Hier wird nichts ausgeschnitten und verschoben</li>
+              <li>Injector verhält sich so, wie erwartet</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Problem: Injector Tree - Zugriff in projizierter Komponente auf
-            Wrapper nicht möglich
-          </h3>
+          <h3 class="placeholder">Change Detection</h3>
+          <div></div>
         </section>
 
         <section>

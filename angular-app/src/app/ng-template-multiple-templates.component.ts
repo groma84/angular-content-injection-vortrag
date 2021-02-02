@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-ng-template-multiple-templates",
   template: `
-    <style></style>
     <app-list-multiple-templates
       [items]="[
         { name: 'Apple', type: 'fruit' },

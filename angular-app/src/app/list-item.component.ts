@@ -4,13 +4,12 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-item",
   template: `
-    <style></style>
-    <li [ngStyle]="{ 'font-weight': first ? 'bold' : 'normal' }">
+    <li [tag]="index?.toString()" [ngStyle]="{ 'font-weight': first ? 'bold' : 'normal' }">
       {{ index }} {{ item }}
     </li>
   `,
 })
-export class ListItemComponent<T> implements
+export class ListItemComponent implements
 OnInit,
 AfterContentInit,
 AfterContentChecked,
@@ -33,7 +32,7 @@ AfterViewChecked {
   }
 
   @Input()
-  item: T | undefined;
+  item: any | undefined;
 
   @Input()
   first: boolean | undefined;

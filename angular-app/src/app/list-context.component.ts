@@ -4,21 +4,21 @@ import {
   AfterViewChecked,
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   Input,
   OnInit,
+  QueryList,
   TemplateRef,
-  ViewChild,
+  ViewChildren,
 } from "@angular/core";
+import { ListItemComponent } from "./list-item.component";
+import { TagDirective } from "./tag.directive";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-context",
   template: `
-    <style></style>
-
     <h3>Template in same component</h3>
     <ng-template #listItemInSameComponent let-item="item">
       <li style="color: hotpink;">{{ item }}</li>
@@ -63,17 +63,19 @@ export class ListContextComponent
   }
   ngAfterViewInit(): void {
     console.log("📄 ngAfterViewInit");
+    console.log('listItems', this.listItems.toArray());
   }
   ngAfterViewChecked(): void {
     console.log("📄 ngAfterViewChecked");
   }
   ngAfterContentInit(): void {
     console.log("📄 ngAfterContentInit");
-    console.log("📄 template", this.template);
+    // console.log("📄 template", this.template);
   }
 
   @Input()
   items: any[] = [];
 
   @ContentChild(TemplateRef, { read: TemplateRef }) template!: TemplateRef<any>;
+  @ViewChildren(TagDirective) listItems!: QueryList<TagDirective>;
 }

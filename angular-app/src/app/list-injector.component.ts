@@ -6,13 +6,13 @@ import {
   Input,
   TemplateRef,
 } from "@angular/core";
+import { TwoService } from "./two.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-injector",
+  providers: [TwoService],
   template: `
-    <style></style>
-
     <ul>
     <!-- don't use ngFor without a reasonable trackBy in lists! -->
       <div *ngFor="let item of items; trackBy: trackBy">
@@ -29,7 +29,7 @@ export class ListInjectorComponent {
   @Input()
   items: any[] = [];
 
-  @ContentChild(TemplateRef, { read: TemplateRef }) template!: TemplateRef<any>;
+  @ContentChild(TemplateRef) template!: TemplateRef<any>;
 
   constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
     this.scheduleChangeDetection();

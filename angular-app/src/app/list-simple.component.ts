@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from "@a
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-simple",
   template: `
-    <style></style>
     <div *ngIf="isLoading; else listitems">Loading...</div>
     <ng-template #listitems>
       <ul>
