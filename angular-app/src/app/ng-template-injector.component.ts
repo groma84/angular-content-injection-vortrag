@@ -6,9 +6,7 @@ import { OneService } from "./one.service";
   selector: "app-ng-template-injector",
   providers: [OneService],
   template: `
-    <app-list-injector
-      [items]="items"
-    >
+    <app-list-injector [items]="items">
       <ng-template let-item>
         <app-list-item-injector [item]="item"></app-list-item-injector>
       </ng-template>
@@ -23,12 +21,17 @@ export class NgTemplateInjectorComponent {
     { name: 'fourth item', num: '36' },
   ];
 
-  constructor(changeDetectorRef: ChangeDetectorRef) {
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
+    this.schedule();
+  }
+
+  private schedule(): void {
     setTimeout(() => {
       // with default trackBy the items get recreated in the DOM
       // with a trackBy that tracks a "static" value this is not the case
       this.items = this.items.map(x => Object.assign({}, x));
-      changeDetectorRef.markForCheck();
+      this.changeDetectorRef.markForCheck();
+      this.schedule();
     }, 5000);
   }
 }

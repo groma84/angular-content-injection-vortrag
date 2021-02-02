@@ -31,18 +31,7 @@ export class ListInjectorComponent {
 
   @ContentChild(TemplateRef) template!: TemplateRef<any>;
 
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
-    this.scheduleChangeDetection();
-  }
-
   // this would be the default trackBy if none is given
-  public readonly trackBy = (index: number, item: any): any => item;
-  // public readonly trackBy = (index: number, item: any): string => item.name;
-
-  private scheduleChangeDetection(): void {
-    setTimeout(() => {
-      this.changeDetectorRef.markForCheck();
-      this.changeDetectorRef.detectChanges();
-    }, 2100);
-  }
+  // public readonly trackBy = (index: number, item: any): any => item;
+  public readonly trackBy = (index: number, item: any): string => item.name;
 }

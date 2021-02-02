@@ -37,10 +37,10 @@ export class ListItemInjectorComponent<
 
     this.localCounter = ListItemInjectorComponent.counter++;
 
-    this.inc();
+    this.scheduleIncrementNum();
   }
 
-  private inc(): void {
+  private scheduleIncrementNum(): void {
     setTimeout(() => {
       if (this.item) {
         this.item.num = +this.item.num + 1;
@@ -49,7 +49,7 @@ export class ListItemInjectorComponent<
       // or have to use ChangeDetectionStrategy.Default
       // this.changeDetectorRef.markForCheck();
 
-      this.inc();
+      this.scheduleIncrementNum();
     }, 2000);
   }
 }
