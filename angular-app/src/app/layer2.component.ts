@@ -1,9 +1,11 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, QueryList } from "@angular/core";
 import { TagDirective } from "./tag.directive";
+import { TwoService } from "./two.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-layer2",
+  providers: [TwoService],
   template: `
     <style>
       :host {

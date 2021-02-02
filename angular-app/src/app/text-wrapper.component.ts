@@ -17,8 +17,11 @@ import {
       div {
         border: 1px solid hotpink;
       }
+      .bold {
+        font-weight: bold;
+      }
     </style>
-    <div [ngClass]="{bold: makeBold}">
+    <div class="bold">
       <h5>Wrapping text</h5>
       <app-text></app-text>
     </div>

@@ -4,17 +4,12 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-content-twice",
   template: `
-    <style></style>
     <div *ngIf="true">
       <h3>First ng-content</h3>
       <ng-content></ng-content>
     </div>
-    <div *ngIf="true">
+    <div *ngIf="false">
       <h3>Second ng-content</h3>
-      <ng-content></ng-content>
-    </div>
-    <div *ngIf="true">
-      <h3>Third ng-content</h3>
       <ng-content></ng-content>
     </div>
   `,

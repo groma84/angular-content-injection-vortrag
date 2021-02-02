@@ -8,7 +8,9 @@ import {
 } from "@angular/core";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ModalSimpleComponent } from "./modal-simple.component";
+import { OneService } from "./one.service";
 import { TagDirective } from "./tag.directive";
+import { TwoService } from "./two.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,8 +20,13 @@ import { TagDirective } from "./tag.directive";
       p {
         border: 1px solid limegreen;
       }
-      :host-context(.bold) {
-        font-weight: bold;
+
+      :host-context(app-text-wrapper) {
+        color: red;
+      }
+
+      :host-context(app-list-item) {
+        color: lightblue;
       }
     </style>
     <p>
@@ -52,8 +59,11 @@ export class TextComponent
     console.log("📜 ngAfterViewChecked");
   }
 
-  constructor(@Optional() modalSimpleComponent: ModalSimpleComponent, @Optional() tagDirective: TagDirective) {
-    console.log("TextComponent modalSimpleComponent", modalSimpleComponent);
-    console.log("TextComponent tagDirective", tagDirective);
+  constructor(
+    @Optional() oneService: OneService,
+    @Optional() twoService: TwoService
+  ) {
+    console.log("oneService", oneService);
+    console.log("twoService", twoService);
   }
 }

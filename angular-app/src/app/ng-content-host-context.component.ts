@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-ng-content-simple",
   template: `
-    <style></style>
     <app-text-wrapper [makeBold]="true"></app-text-wrapper>
   `,
 })

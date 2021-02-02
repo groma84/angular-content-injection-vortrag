@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, ElementRef } from "@angular/core";
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ElementRef } from "@angular/core";
+import { OneService } from "./one.service";
 import { TagDirective } from "./tag.directive";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-layer1",
+  providers: [OneService],
   template: `
     <style>
       :host {
@@ -12,6 +14,7 @@ import { TagDirective } from "./tag.directive";
         padding: 5px;
       }
     </style>
+    
     <app-layer2>
       <ng-container content>
         <ng-content select="[content]"></ng-content>
@@ -19,7 +22,7 @@ import { TagDirective } from "./tag.directive";
     </app-layer2>
   `,
 })
-export class Layer1Component {
+export class Layer1Component implements AfterContentInit {
   @ContentChild(TagDirective) projectedContent: any;
 
   ngAfterContentInit() {

@@ -71,7 +71,7 @@
             <h3>Angular</h3>
             <ul>
               <li>Framework</li>
-              <li>Webtechnologien</li>
+              <li>Webtechnologien & TypeScript</li>
               <li>Komponentenorientiert</li>
               <li>Dependency Injection</li>
               <li>Automatische Change Detection</li>
@@ -79,8 +79,25 @@
           </div>
           <aside class="notes">
             <ul>
-              <li>Von Google angetrieben</li>
-              <li>Open Source</li>
+              <li>Multi-target: Webapps, Server-side rendering, Mobile Apps via Ionic</li>
+              <li>Angular-Anwendung besteht aus drei Sachen:
+                <ul>
+                  <li>Komponenten, die als View für die Darstellung zuständig sind</li>
+                  <li>Direktiven, die das Verhalten von Komponenten beeinflussen</li>
+                  <li>Services, die für Datenhaltung und -austausch zuständig sind</li>
+                </ul>
+              </li>
+              <li>Angular macht viel über Decorators: Aspektorientierte Programmierung</li>
+              <li>Dependency injection: Provider und automatische Injection in den Konstruktor</li>
+              <li>Change Detection erklären:
+                <ul>
+                  <li>Default vs OnPush</li>
+                  <li>Probleme mit Default</li>
+                  <li>Vergleich von Objektreferenzen</li>
+                  <li>ngZone</li>
+                  <li>Angular (ngZone) patched viele Funktionen</li>
+                </ul>
+              </li>
             </ul>
           </aside>
 
@@ -159,31 +176,89 @@
         </section>
 
         <section>
-          <h3 class="placeholder">Verschachtelte Komponenten</h3>
+          <h3>Projektion über mehrere Ebenen</h3>
+
+          <img src="img/screenshot-two-layers_01.png" />
+          <img src="img/ng-content-two-layers_01.png" />
+          <img src="img/app-layer1_01.png" />
+          <img src="img/app-layer2_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>'Tag' als Direktive, die Funktionalität beeinflussen könnte oder Konfiguration der Komponente beinhaltet, ...</li>
+              <li>'content' als Attribut, das wir anschließend selecten können</li>
+              <li>'content' als Selektor und gleichzeitig als Attribut in Layer1 kein Problem</li>
+              <li>ContentChild ist erst nach AfterContentInit befüllt, falls vorhanden</li>
+              <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
+              <li>'descendants' soll alle Elemente durchsuchen, konnte es aber noch nie erfolgreich anwenden. Standard: Nur direkte Kinder</li>
+              <li>Weitere Mögliche Option bei ContentChild: 'static' - falls true, muss Element ohne Change Detection da sein. Gegenbeispiel: *ngIf</li>
+            </ul>
+          </aside>
+
         </section>
 
         <section>
-          <h3 class="placeholder">ContentChildren, static</h3>
+          <h3>2x ng-content mit gleichem Selektor = 💥</h3>
+
+          <img src="img/ng-content-projecting-twice_01.png" />
+          <img src="img/app-content-twice-both-true_01.png" />
+          <img src="img/screenshot-projecting-twice-both-true_01.png" />
+          <img src="img/app-content-twice-second-false_01.png" />
+          <img src="img/screenshot-projecting-twice-second-false_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Ausschneiden aus dem DOM, nur 1x möglich</li>
+              <li>Letztes ng-content gewinnt</li>
+              <li>Egal, ob das ng-content zur Laufzeit überhaupt da ist oder nicht!</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Problem: 2x projizieren nicht möglich, weil ausgeschnitten
-          </h3>
+          <h3>:host-context()</h3>
+
+          <img src="img/screenshot-host-context_01.png" />
+          <img src="img/app-host-context-host_01.png" />
+          <img src="img/app-host-context-inner_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Style-Änderungen abhängig von äußerem Einfluss</li>
+              <li>Angular: Style Encapsulation</li>
+              <li>Angular parsed HTML-Templates für Spezialsyntax und compiled auch CSS, um die Encapsulation Tags ranzuklatschen</li>
+              <li>Achtung: Mehrere Selektoren in :host-context() führt zu unerwarteten generierten Selektoren</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Problem: Direktive oben soll Style innen beeinflussen -> style
-            encapsulation funkt dazwischen, :host-content
-          </h3>
+          <h3>Injector & Change Detection Tree</h3>
+
+          <img src="img/ng-content-injector_01.png" />
+          <img src="img/ng-content-injector-layer1_01.png" />
+          <img src="img/ng-content-injector-layer2_01.png" />
+          <img src="img/ng-content-injector-text_01.png" />
+          
+          <aside class="notes">
+            <ul>
+              <li>DOM mit ng-content ist nicht gleich Angular Injector/CD Tree</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
-          <h3 class="placeholder">
-            Problem: Injector Tree - Zugriff in projizierter Komponente auf
-            Wrapper nicht möglich
-          </h3>
+          <h3>Injector & Change Detection Tree</h3>
+
+          <img src="img/screenshot-ng-content-injector_01.png" />
+
+          <blockquote>This is working as expected: <br />
+            nodes are only "projected" (moved to a different location) but everything else works relative to their source (= before projection) location.</blockquote>
+          
+            <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+
+          <aside class="notes">
+          </aside>
         </section>
 
         <section>

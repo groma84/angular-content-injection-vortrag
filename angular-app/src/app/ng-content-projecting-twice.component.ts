@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-ng-content-projecting-twice",
   template: `
-    <style></style>
     <app-content-twice>
       <p>This content only appears once!</p>
     </app-content-twice>
