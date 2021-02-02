@@ -160,13 +160,24 @@
         </section>
 
         <section>
-          <h3>
-            <ng-content select="..."></ng-content>
+          <h3 style="font-size: 2rem">
+            &lt;ng-content select="..."&gt;&lt;/ng-content&gt;
           </h3>
 
-          <img src="img/app-ng-content-selectors_01.png" />
-          <img src="img/app-modal-selectors_01.png" />
-          <img src="img/screenshot-modal-selectors_01.png" />
+          <div class="flex-column">
+            <div class="flex">
+              <div class="fragment" style="width: 60%">
+                <img src="img/app-ng-content-selectors_01.png" />
+              </div>
+              <div class="fragment" style="width: 50%">
+                <img src="img/app-modal-selectors_01.png" />
+              </div>
+            </div>
+
+            <div class="fragment" style="width: 65%">
+              <img src="img/screenshot-modal-selectors_01.png" />
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -192,8 +203,14 @@
         <section>
           <h3>Lifecycle Reihenfolge</h3>
 
-          <img src="img/ng-content-lifecycle-elements_01.png" />
-          <img src="img/ng-content-lifecycle_01.png" />
+          <div class="flex">
+            <div class="fragment">
+              <img src="img/ng-content-lifecycle-elements_01.png" />
+            </div>
+            <div class="fragment">
+              <img src="img/ng-content-lifecycle_01.png" />
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -231,12 +248,23 @@
         </section>
 
         <section>
-          <h3>Projektion über mehrere Ebenen</h3>
+          <h3 style="font-size: 2rem">Projektion über mehrere Ebenen</h3>
 
-          <img src="img/screenshot-two-layers_01.png" />
-          <img src="img/ng-content-two-layers_01.png" />
-          <img src="img/app-layer1_01.png" />
-          <img src="img/app-layer2_01.png" />
+          <div class="flex" style="margin-top: -40px">
+            <div class="flex-column">
+              <div><img src="img/screenshot-two-layers_01.png" /></div>
+              <div class="fragment">
+                <img src="img/ng-content-two-layers_01.png" />
+              </div>
+            </div>
+            <div>
+              <div class="fragment"><img src="img/app-layer1_01.png" /></div>
+            </div>
+          </div>
+
+          <div class="fragment" style="width: 65%; margin-top: -40px">
+            <img src="img/app-layer2_01.png" />
+          </div>
 
           <aside class="notes">
             <ul>
@@ -269,13 +297,33 @@
         </section>
 
         <section>
-          <h3>2x ng-content mit gleichem Selektor = 💥</h3>
+          <h3 style="font-size: 2rem">
+            2x ng-content mit gleichem Selektor = 💥
+          </h3>
 
-          <img src="img/ng-content-projecting-twice_01.png" />
-          <img src="img/app-content-twice-both-true_01.png" />
-          <img src="img/screenshot-projecting-twice-both-true_01.png" />
-          <img src="img/app-content-twice-second-false_01.png" />
-          <img src="img/screenshot-projecting-twice-second-false_01.png" />
+          <div class="flex">
+            <div><img src="img/ng-content-projecting-twice_01.png" /></div>
+
+            <div class="flex-column">
+              <div class="fragment">
+                <img src="img/app-content-twice-both-true_01.png" />
+              </div>
+              <div class="fragment">
+                <img src="img/screenshot-projecting-twice-both-true_01.png" />
+              </div>
+            </div>
+
+            <div class="flex-column">
+              <div class="fragment">
+                <img src="img/app-content-twice-second-false_01.png" />
+              </div>
+              <div class="fragment">
+                <img
+                  src="img/screenshot-projecting-twice-second-false_01.png"
+                />
+              </div>
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -292,9 +340,16 @@
         <section>
           <h3>:host-context()</h3>
 
-          <img src="img/screenshot-host-context_01.png" />
-          <img src="img/app-host-context-host_01.png" />
-          <img src="img/app-host-context-inner_01.png" />
+          <div class="flex-column">
+            <div class="fragment">
+              <img src="img/screenshot-host-context_01.png" />
+            </div>
+
+            <div class="flex fragment">
+              <div><img src="img/app-host-context-host_01.png" /></div>
+              <div><img src="img/app-host-context-inner_01.png" /></div>
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -313,12 +368,26 @@
         </section>
 
         <section>
-          <h3>Injector & Change Detection Tree</h3>
+          <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
-          <img src="img/ng-content-injector_01.png" />
-          <img src="img/ng-content-injector-layer1_01.png" />
-          <img src="img/ng-content-injector-layer2_01.png" />
-          <img src="img/ng-content-injector-text_01.png" />
+          <div class="flex-column">
+            <div class="flex">
+              <div class="fragment">
+                <img src="img/ng-content-injector_01.png" />
+              </div>
+              <div class="fragment">
+                <img src="img/ng-content-injector-layer1_01.png" />
+              </div>
+            </div>
+            <div class="flex">
+              <div class="fragment">
+                <img src="img/ng-content-injector-layer2_01.png" />
+              </div>
+              <div class="fragment">
+                <img src="img/ng-content-injector-text_01.png" />
+              </div>
+            </div>
+          </div>
 
           <aside class="notes">
             <ul>
@@ -330,18 +399,23 @@
         </section>
 
         <section>
-          <h3>Injector & Change Detection Tree</h3>
+          <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
-          <img src="img/screenshot-ng-content-injector_01.png" />
+          <div class="flex-column">
+            <div class="flex">
+              <img class="fragment" src="img/screenshot-ng-content-injector_01.png" />
 
-          <blockquote>
-            This is working as expected: <br />
-            nodes are only "projected" (moved to a different location) but
-            everything else works relative to their source (= before projection)
-            location.
-          </blockquote>
-
-          <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+              <blockquote class="fragment" style="font-size: 0.9rem">
+                This is working as expected: <br />
+                nodes are only "projected" (moved to a different location) but
+                everything else works relative to their source (= before
+                projection) location.
+              </blockquote>
+            </div>
+            <div class="fragment" style="width: 80%">
+              <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+            </div>
+          </div>
 
           <aside class="notes"></aside>
         </section>
