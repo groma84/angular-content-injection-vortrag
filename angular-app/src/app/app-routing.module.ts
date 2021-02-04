@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MyComponent } from './angular-examples';
 import { NgContentHostContextComponent } from './ng-content-host-context.component';
 import { NgContentInjectorTreeComponent } from './ng-content-injector-tree.component';
 import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice.component';
@@ -23,6 +24,9 @@ const routes: Routes = [
   { path: 'ng-template-context', component: NgTemplateContextComponent },
   { path: 'ng-template-multiple-templates', component: NgTemplateMultipleTemplatesComponent },
   { path: 'ng-template-injector', component: NgTemplateInjectorComponent },
+
+  { path: 'angular-example', component: MyComponent },
+
 ];
 
 @NgModule({

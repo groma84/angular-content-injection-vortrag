@@ -11,6 +11,11 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     </style>
     <h1>Content Projection Demo</h1>
     <nav>
+      <span>Angular examples</span>
+      <ul>
+        <li><a routerLink="/angular-example" routerLinkActive="active">Angular Example</a></li>
+      </ul>
+
       <span>ng-content</span>
       <ul>
         <li><a routerLink="/ng-content-simple" routerLinkActive="active">simple</a></li>

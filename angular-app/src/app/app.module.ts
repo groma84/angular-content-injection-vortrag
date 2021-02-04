@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { SomeDirective, SimpleService, MyComponent } from './angular-examples';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,9 @@ import { TextComponent } from './text.component';
     TemplateTypeDirective,
     
     AppComponent,
+
+    SomeDirective,
+    MyComponent,
     
     ModalSimpleComponent,
     ModalSelectorsComponent,
