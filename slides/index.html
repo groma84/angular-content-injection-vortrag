@@ -208,6 +208,8 @@ export class MyComponent {
         </section>
 
         <section>
+<!-- Neuer Inhalt: Vereinfachte Komponenten mit ng-content + Bilder mit Vorher Nachher Ausgeschnitten (oder sogar animiert?) -->
+
           <div class="flex">
             <div>
               <img src="img/app-modal-simple_01.png" />
@@ -232,6 +234,8 @@ export class MyComponent {
           <h3 style="font-size: 2rem">
             &lt;ng-content select="..."&gt;&lt;/ng-content&gt;
           </h3>
+
+          <!-- Neuer Inhalt: Auflistung Selektoren ohne Code-Beispiele -->
 
           <div class="flex-column">
             <div class="flex">
@@ -271,6 +275,9 @@ export class MyComponent {
 
         <section>
           <h3>Lifecycle Reihenfolge</h3>
+
+          <!-- Neuer Inhalt: Hooks erklären und relevante auflisten -->
+          <!-- Zusätzliche Folie: Einfache Verschachtelung Komponenten, console.log, und vielleicht Diagramm? -->
 
           <div class="flex">
             <div class="fragment">
@@ -316,7 +323,11 @@ export class MyComponent {
           </aside>
         </section>
 
+<!-- Neue Folie: ContentChild/ContentChildren/QueryList erklären -->
+
+
         <section>
+          <!-- Neuer Inhalt: Vereinfachter Code, zeigen dass mit ng-content nur eine Ebene tief was gefunden wird (descendants von ebene1 auf 2 möglich?) -->
           <h3 style="font-size: 2rem">Projektion über mehrere Ebenen</h3>
 
           <div class="flex" style="margin-top: -40px">
@@ -366,6 +377,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Neuer Inhalt: Screenshots gegen echten Code austauschen, Beispiel an sich kann bleiben -->
           <h3 style="font-size: 2rem">
             2x ng-content mit gleichem Selektor = 💥
           </h3>
@@ -407,6 +419,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Neuer Inhalt: Vereinfachte Code-Beispiele als Code, Rückverweis auf Dependency Injection -->
           <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
           <div class="flex-column">
@@ -438,6 +451,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Neuer Inhalt: Bild mit "Zusammenfassung" von vorheriger Folie + bestehendes Diagramm -->
           <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
           <div class="flex-column">
@@ -479,17 +493,10 @@ export class MyComponent {
           </aside>
         </section>
 
-        <!--
-        <section>
-          <div class="flex">
-          <div><img src="img/ng-template-simple_01.png" /></div>
-          <div><img src="img/ng-template-simple-list_01.png" /></div>
-          <div><img src="img/screenshot-ng-template-simple-list_01.png" /></div>
-        </div>
-        </section>
--->
+          <!-- Beispiel mit *ngIf und template als else -->
 
         <section>
+          <!-- Neuer Inhalt: Vereinfachtes Codebeispiel, ngTemplateOutlet ohne first und index, nur mit $implicit, und nicht alles item nennen? -->
           <h3>ngTemplateOutlet</h3>
 
           <div class="flex">
@@ -510,6 +517,8 @@ export class MyComponent {
 
         <section>
           <h3>Lifecycle</h3>
+
+          <!-- Die Folie kann glaub ich so bleiben? Vielleicht Code im neuen Stil -->
 
           <div class="flex">
             <div class="fragment" style="width: 80%">
@@ -535,8 +544,11 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Eigene Folie für TemplateTypeDirective und Beispiel-Templates mit Screenshots der beiden! -->
           <h3 style="font-size: 2rem">Verschiedene Templates mit Auswahl</h3>
 
+          <!-- Zweite Folie: Selektion via QueryList und Templates in Map speichern -->
+          <!-- Dritte Folie: Template und Endergebnis -->
           <div class="flex">
             <div class="flex-column">
               <div class="fragment">
@@ -568,6 +580,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Neuer Code-Stil, zweite Folie: Bild DOM-Tree&Angular-Tree: Alles wie es sein soll -->
           <h3 style="font-size: 2rem">Injector Tree</h3>
 
           <div class="flex" style="margin-top: -40px">
@@ -598,45 +611,7 @@ export class MyComponent {
         </section>
 
         <section>
-          <h3>Change Detection</h3>
-
-          <div class="flex">
-            <div class="fragment">
-              <img src="img/ng-template-change-detection-components_01.png" />
-            </div>
-            <div class="fragment">
-              <img src="img/list-item-injector-manual-cd_01.png" />
-            </div>
-          </div>
-
-          <aside class="notes">
-            <ul>
-              <li>items als Array wird durchgegeben, Strategy: OnPush</li>
-              <li>
-                Änderung in einem item-Objekt, z.B. durch Klick -> obere
-                Komponente bekommt es nicht mit
-              </li>
-              <li>
-                Keine Change Detection -> keine Aktualisierung der Darstellung
-              </li>
-              <li>
-                Entweder "Bescheid sagen" nach oben, oder Eintrag markiert sich
-                als "dirty"
-              </li>
-              <li>Ggf. manuelle Auslösung mit detectChanges erforderlich</li>
-              <li>
-                markForCheck -> "bitte prüfe alles bis zu mir beim nächsten
-                Durchgang"
-              </li>
-              <li>
-                detectChanges -> "bitte prüfe alles von mir startend nach unten
-                sofort"
-              </li>
-            </ul>
-          </aside>
-        </section>
-
-        <section>
+          <!-- *ngFor zeigen/erklären und default trackBy mit GIF -->
           <h3>trackBy</h3>
           <span style="font-size: 0.5rem" class="placeholder"
             >TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es
@@ -666,6 +641,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- angepasstes trackBy zeigen, GIF mit Jetzt funktioniert's -->
           <h3>trackBy</h3>
 
           <div class="flex-column">
@@ -685,6 +661,8 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Neue Folie: Kurze Einführung Google Performance Tab, Screenshot wo zu finden, Flamecharts Makroansicht zeigen -->
+          <!-- Dann erst Beispiel aus Projekt rangezoomed -->
           <h3>Performance</h3>
 
           <img src="img/performance-creating-items_01.png" />
@@ -722,9 +700,6 @@ export class MyComponent {
           >
           <br />
           <br />
-          <a href="https://github.com/groma84/angular-content-injection-vortrag"
-            >Dieser Vortrag auf github</a
-          >
         </section>
 
         <section>
