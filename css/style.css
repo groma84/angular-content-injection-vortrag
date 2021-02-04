@@ -17,6 +17,24 @@
   font-size: 0.5em;
 }
 
+.reveal pre {
+  line-height: 1.1;
+}
+
+mark {
+  background-color: white;
+  color: darkblue;
+}
+
+mark > .hljs-string {
+  background-color: white;
+  color: darkblue;
+}
+
+.reveal code {
+  font-size: 0.7rem;
+}
+
 .placeholder {
   border: 1px solid red;
 }

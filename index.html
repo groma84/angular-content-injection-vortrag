@@ -36,30 +36,6 @@
           <aside class="notes"></aside>
         </section>
 
-        <section style="display: flex">
-          <div style="">
-            <h3>Einschränkungen</h3>
-            <ul>
-              <li>Angular 4 bis Angular 9</li>
-              <li>Strukturen vom Beginn</li>
-              <li>Keine Angular-Formulare</li>
-              <li>Feste Browser-Version</li>
-              <li>Performance wichtiger als schöner Code</li>
-            </ul>
-          </div>
-          <div class="placeholder" style="">
-            <!-- TODO: Logos von: Mathema, e.solutions, Porsche -->
-            <img src="img/100px_placeholder.png" style="" />
-          </div>
-          <aside class="notes">
-            <ul>
-              <li>Projekt im Car-Infotainment, angepasster Browser</li>
-              <li>Keine Erfahrungen mit Ivy</li>
-              <li>Neue Erkenntnisse und Features fließen nur langsam ein</li>
-            </ul>
-          </aside>
-        </section>
-
         <section>
           <div class="placeholder">
             <!-- TODO: Logo von Angular -->
@@ -81,6 +57,40 @@
                 Multi-target: Webapps, Server-side rendering, Mobile Apps via
                 Ionic
               </li>
+
+              
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Angular Bausteine</h3>
+          <pre><code class="typescript" data-trim data-noescape>@Directive({selector: '[bold]'})
+export class SomeDirective {
+    @Input() 
+    @HostBinding('class.bold')
+    bold: boolean = false;
+}
+
+@Injectable()
+export class SimpleService {
+    public shouldBeBold = true;
+}
+
+@Component(
+    {
+        selector: 'app-my-component',
+        template: `
+        &lt;h1&gt;My Component&lt;/h1&gt;
+        &lt;p [bold]=&quot;true&quot;&gt;This text can be bold (or not)?&lt;/p&gt;
+        `
+    }
+)
+export class MyComponent {}
+          </code></pre>
+
+          <aside class="notes">
+            <ul>
               <li>
                 Angular-Anwendung besteht aus drei Sachen:
                 <ul>
@@ -99,21 +109,80 @@
                 Angular macht viel über Decorators: Aspektorientierte
                 Programmierung
               </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Dependency Injection</h3>
+          <pre><code class="typescript" data-trim data-noescape>@Directive({selector: '[bold]'})
+export class SomeDirective {
+    @Input() 
+    @HostBinding('class.bold')
+    bold: boolean = false;
+}
+
+@Injectable()
+export class SimpleService {
+    public shouldBeBold = true;
+}
+
+@Component(
+    {
+        selector: 'app-my-component',
+        <mark>providers: [SimpleService]</mark>,
+        template: `
+        &lt;style&gt;.bold { font-weight: bold}&lt;/style&gt;
+        &lt;h1&gt;My Component&lt;/h1&gt;
+        &lt;p <mark>[bold]=&quot;simpleService.shouldBeBold&quot;</mark>&gt;This text can be bold (or not)?&lt;/p&gt;`
+    }
+)
+export class MyComponent {
+    <mark>constructor(public readonly simpleService: SimpleService)</mark> {}
+  }</code></pre>
+
+          <aside class="notes">
+            <ul>
               <li>
                 Dependency injection: Provider und automatische Injection in den
                 Konstruktor
               </li>
-              <li>
-                Change Detection erklären:
-                <ul>
-                  <li>Default vs OnPush</li>
-                  <li>Probleme mit Default</li>
-                  <li>Vergleich von Objektreferenzen</li>
-                  <li>ngZone</li>
-                  <li>Angular (ngZone) patched viele Funktionen</li>
-                </ul>
-              </li>
             </ul>
+          </aside>
+        </section>
+
+        <section><h3>Change Detection - Default</h3>
+          
+          <div class="fragment"><img src="img/Angular_ChangeDetection_default.gif"></div>
+
+          <aside class="notes">
+            <ul><li>
+              <ul>
+                <li>Probleme und Vorteile mit Default</li>
+              </ul>
+            </li></ul>
+          </aside>
+        </section>
+
+        <section><h3>Change Detection - OnPush</h3>
+          <div class="fragment"><img src="img/Angular_ChangeDetection_OnPush.gif"></div>
+          
+          <aside class="notes">
+            <ul><li>
+              <ul>
+                <li>Probleme</li>
+                <li>Default vs OnPush</li>
+                <li>OnPush: </li>
+                <li>Mit OnPush:
+                  <ul>
+                    <li>Änderung an Input: Nur wo sich Objektreferenzen geändert haben, wird der Baum geprüft</li>
+                    <li>Vergleich von Objektreferenzen, z.B. Änderung von Daten IM Array oder Objekt fällt nicht auf -> ggf. sowas wie Immutable.js oder Object.assign verwenden</li></li>
+                    <li>Input ändert sich: Teilbaum wird geprüft</li>
+                    <li>Event: Alles wird geprüft -> manchmal wird was nicht aktualisiert, bis man klickt -> OnPush Problem</li>
+                    <li>bei bestimmten Funktionen (setTimeout(), Promise.resolve().then(), obs$.subscribe()) muss man bei OnPush manuell CD auslösen!</li>
+                  </ul>
+              </ul>
+            </li></ul>
           </aside>
         </section>
 
@@ -338,36 +407,6 @@
         </section>
 
         <section>
-          <h3>:host-context()</h3>
-
-          <div class="flex-column">
-            <div class="fragment">
-              <img src="img/screenshot-host-context_01.png" />
-            </div>
-
-            <div class="flex fragment">
-              <div><img src="img/app-host-context-host_01.png" /></div>
-              <div><img src="img/app-host-context-inner_01.png" /></div>
-            </div>
-          </div>
-
-          <aside class="notes">
-            <ul>
-              <li>Style-Änderungen abhängig von äußerem Einfluss</li>
-              <li>Angular: Style Encapsulation</li>
-              <li>
-                Angular parsed HTML-Templates für Spezialsyntax und compiled
-                auch CSS, um die Encapsulation Tags ranzuklatschen
-              </li>
-              <li>
-                Achtung: Mehrere Selektoren in :host-context() führt zu
-                unerwarteten generierten Selektoren
-              </li>
-            </ul>
-          </aside>
-        </section>
-
-        <section>
           <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
           <div class="flex-column">
@@ -529,13 +568,6 @@
         </section>
 
         <section>
-          <h3>:host-context</h3>
-          <h4>Analog zu ng-content</h4>
-
-          <aside class="notes"></aside>
-        </section>
-
-        <section>
           <h3 style="font-size: 2rem">Injector Tree</h3>
 
           <div class="flex" style="margin-top: -40px">
@@ -606,16 +638,23 @@
 
         <section>
           <h3>trackBy</h3>
-          <span style="font-size: 0.5rem;" class="placeholder">TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es hinkommt</span>
+          <span style="font-size: 0.5rem" class="placeholder"
+            >TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es
+            hinkommt</span
+          >
 
           <div class="flex">
-            <div class="fragment"><img src="img/ng-template-wrapper-trackBy_01.png" /></div>
+            <div class="fragment">
+              <img src="img/ng-template-wrapper-trackBy_01.png" />
+            </div>
 
             <div class="flex-column fragment">
-              <div >
+              <div>
                 <img src="img/app-list-injector-default-trackBy_01.png" />
               </div>
-              <div><img src="img/no-trackBy-items-get-recreated_01_endless.gif" /></div>
+              <div>
+                <img src="img/no-trackBy-items-get-recreated_01_endless.gif" />
+              </div>
             </div>
           </div>
 
@@ -630,11 +669,13 @@
           <h3>trackBy</h3>
 
           <div class="flex-column">
-            <div class="fragment"><img src="img/app-list-injector-custom-trackBy_01.png" /></div>
-            <div class="fragment"><img src="img/custom-trackBy-items-kept_01_endless.gif" /></div>
+            <div class="fragment">
+              <img src="img/app-list-injector-custom-trackBy_01.png" />
+            </div>
+            <div class="fragment">
+              <img src="img/custom-trackBy-items-kept_01_endless.gif" />
+            </div>
           </div>
-          
-          
 
           <aside class="notes">
             <ul>
