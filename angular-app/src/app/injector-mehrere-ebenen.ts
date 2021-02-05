@@ -27,7 +27,14 @@ export class LayerTwoComponent {}
         providers: [SecondService]
     }
 )
-export class LayerThreeComponent {}
+export class LayerThreeComponent {
+    constructor(
+        @Optional() firstService: FirstService,
+        @Optional() secondService: SecondService
+    ) {
+        console.log('injected services3', {firstService, secondService});
+    }
+}
 
 @Component(
     {

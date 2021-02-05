@@ -433,12 +433,12 @@ Doku: <br>
 
           <div class="flex">
           <div class="fragment">
-          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component(
+          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
     {
         selector: 'layer1',
         template: `
             &lt;layer2&gt;
-                &lt;div [tag]="'tagged'"&gt;Cool content&lt;/div&gt;
+                &lt;div <mark>[tag]="'tagged'"</mark>&gt;Cool content&lt;/div&gt;
             &lt;/layer2&gt;
         `
     }
@@ -536,68 +536,56 @@ export class ThirdLayerComponent {
           <!-- Neuer Inhalt: Vereinfachte Code-Beispiele als Code, Rückverweis auf Dependency Injection -->
           <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
-          @Component(
-            {
-                selector: 'layer-one',
-                template: `&lt;layer-two&gt;&lt;is-injected&gt;&lt;/is-injected&gt;&lt;/layer-two&gt;`,
-            }
-        )
-        export class LayerOneComponent {}
-        
-        @Component(
-            {
-                selector: 'layer-two',
-                template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
-                providers: [FirstService]
-            }
-        )
-        export class LayerTwoComponent {}
-        
-        @Component(
-            {
-                selector: 'layer-three',
-                template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
-                providers: [SecondService]
-            }
-        )
-        export class LayerThreeComponent {}
-        
-        @Component(
-            {
-                selector: 'is-injected',
-                template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
-            }
-        )
-        export class IsInjectedComponent {
-            constructor(
-                @Optional() firstService: FirstService,
-                @Optional() secondService: SecondService
-            ) {
-                console.log('injected services', {firstService, secondService});
-            }
-        }
+          <div class="flex">
+          <div class="fragment">
+          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+    {
+        selector: 'layer-one',
+        template: `&lt;layer-two&gt;<mark>&lt;is-injected&gt;&lt;/is-injected&gt;</mark>&lt;/layer-two&gt;`,
+    }
+)
+export class LayerOneComponent {}
 
-          screenshot-injector-mehrere-ebenen_01.png
-          injector-mehrere-ebenen_01.png
+@Component(
+    {
+        selector: 'layer-two',
+        template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
+        providers: [<mark class="first">FirstService</mark>]
+    }
+)
+export class LayerTwoComponent {}
 
-          <div class="flex-column">
-            <div class="flex">
-              <div class="fragment">
-                <img src="img/ng-content-injector_01.png" />
-              </div>
-              <div class="fragment">
-                <img src="img/ng-content-injector-layer1_01.png" />
-              </div>
-            </div>
-            <div class="flex">
-              <div class="fragment">
-                <img src="img/ng-content-injector-layer2_01.png" />
-              </div>
-              <div class="fragment">
-                <img src="img/ng-content-injector-text_01.png" />
-              </div>
-            </div>
-          </div>
+@Component(
+    {
+        selector: 'layer-three',
+        template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
+        providers: [<mark class="second">SecondService</mark>]
+    }
+)
+export class LayerThreeComponent {}
+
+@Component(
+    {
+        selector: '<mark>is-injected</mark>',
+        template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
+    }
+)
+export class IsInjectedComponent {
+    constructor(
+        @Optional() firstService: <mark class="first">FirstService</mark>,
+        @Optional() secondService: <mark class="second">SecondService</mark>
+    ) {
+        console.log('injected services', {firstService, secondService});
+    }
+}          </code></pre>
+</div>
+
+<div>
+          <img class="fragment" src="img/screenshot-injector-mehrere-ebenen_01.png">
+          <img class="fragment" src="img/injector-mehrere-ebenen_01.png">
+          
+        </div>
+      </div>
 
           <aside class="notes">
             <ul>
@@ -610,14 +598,55 @@ export class ThirdLayerComponent {
 
         <section>
           <!-- Neuer Inhalt: Diagramm mit aktualisierten Komponentennamen -->
-          <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
+          <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
-          <div class="flex-column">
-            <div class="flex">
-              <img
-                class="fragment"
-                src="img/screenshot-ng-content-injector_01.png"
-              />
+          <div class="flex">
+          <div class="fragment">
+            <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.5rem;" data-trim data-noescape>@Component(
+      {
+          selector: 'layer-one',
+          template: `&lt;layer-two&gt;<mark>&lt;is-injected&gt;&lt;/is-injected&gt;</mark>&lt;/layer-two&gt;`,
+      }
+  )
+  export class LayerOneComponent {}
+  
+  @Component(
+      {
+          selector: 'layer-two',
+          template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
+          providers: [<mark class="first">FirstService</mark>]
+      }
+  )
+  export class LayerTwoComponent {}
+  
+  @Component(
+      {
+          selector: 'layer-three',
+          template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
+          providers: [<mark class="second">SecondService</mark>]
+      }
+  )
+  export class LayerThreeComponent {}
+  
+  @Component(
+      {
+          selector: '<mark>is-injected</mark>',
+          template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
+      }
+  )
+  export class IsInjectedComponent {
+      constructor(
+          @Optional() firstService: <mark class="first">FirstService</mark>,
+          @Optional() secondService: <mark class="second">SecondService</mark>
+      ) {
+          console.log('injected services', {firstService, secondService});
+      }
+  }          </code></pre>
+  </div>
+
+          <div class="flex-column align-centered">
+             
+
 
               <blockquote class="fragment" style="font-size: 0.9rem">
                 This is working as expected: <br />
@@ -625,11 +654,12 @@ export class ThirdLayerComponent {
                 everything else works relative to their source (= before
                 projection) location.
               </blockquote>
-            </div>
-            <div class="fragment" style="width: 80%">
-              <img src="img/diagram-dom-tree-vs-angular-tree_01.png" />
+            <div class="fragment" style="width: 100%">
+              <img src="img/injector-tree_01.png" />
             </div>
           </div>
+
+        </div>
 
           <aside class="notes"></aside>
         </section>
