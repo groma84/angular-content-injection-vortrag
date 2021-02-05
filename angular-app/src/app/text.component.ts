@@ -8,9 +8,9 @@ import {
 } from "@angular/core";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ModalSimpleComponent } from "./modal-simple.component";
-import { OneService } from "./one.service";
+import { FirstService } from "./first.service";
 import { TagDirective } from "./tag.directive";
-import { TwoService } from "./two.service";
+import { SecondService } from "./second.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,8 +60,8 @@ export class TextComponent
   }
 
   constructor(
-    @Optional() oneService: OneService,
-    @Optional() twoService: TwoService
+    @Optional() oneService: FirstService,
+    @Optional() twoService: SecondService
   ) {
     console.log("oneService", oneService);
     console.log("twoService", twoService);

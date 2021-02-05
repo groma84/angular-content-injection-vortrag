@@ -6,8 +6,8 @@ import {
   Optional,
 } from "@angular/core";
 import { ListInjectorComponent } from "./list-injector.component";
-import { OneService } from "./one.service";
-import { TwoService } from "./two.service";
+import { FirstService } from "./first.service";
+import { SecondService } from "./second.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,8 +28,8 @@ export class ListItemInjectorComponent<
   item: T | undefined;
 
   constructor(
-    @Optional() oneService: OneService,
-    @Optional() twoService: TwoService,
+    @Optional() oneService: FirstService,
+    @Optional() twoService: SecondService,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     console.log("oneService", oneService);

@@ -4,8 +4,8 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import { OneService } from "./one.service";
-import { TwoService } from "./two.service";
+import { FirstService } from "./first.service";
+import { SecondService } from "./second.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyComponent } from './angular-examples';
+import { OuterComponent } from './change-detection-mit-verschachtelung-ng-content';
+import { FirstLayerComponent } from './content-children-mehrere-ebenen';
+import { LayerOneComponent } from './injector-mehrere-ebenen';
 import { NgContentHostContextComponent } from './ng-content-host-context.component';
 import { NgContentInjectorTreeComponent } from './ng-content-injector-tree.component';
 import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice.component';
@@ -26,6 +29,9 @@ const routes: Routes = [
   { path: 'ng-template-injector', component: NgTemplateInjectorComponent },
 
   { path: 'angular-example', component: MyComponent },
+  { path: 'change-detection-mit-verschachtelung-ng-content', component: OuterComponent },
+  { path: 'content-children-mehrere-ebenen', component: FirstLayerComponent },
+  { path: 'injector-mehrere-ebenen', component: LayerOneComponent },
 
 ];
 

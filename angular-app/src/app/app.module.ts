@@ -4,9 +4,12 @@ import { SomeDirective, SimpleService, MyComponent } from './angular-examples';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InnerComponent, MiddleComponent, OuterComponent } from './change-detection-mit-verschachtelung-ng-content';
+import { FirstLayerComponent, SecondLayerComponent, ThirdLayerComponent } from './content-children-mehrere-ebenen';
 import { ContentTwiceComponent } from './content-twice.component';
 import { FruitListItemComponent } from './fruit-list-item.component';
 import { HeaderComponent } from './header.component';
+import { LayerOneComponent, LayerTwoComponent, LayerThreeComponent, IsInjectedComponent } from './injector-mehrere-ebenen';
 import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
 import { ListContextComponent } from './list-context.component';
@@ -27,6 +30,7 @@ import { NgTemplateContextComponent } from './ng-template-context.component';
 import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { FancyModal, OuterSimpleComponent } from './simple-ng-content';
 import { SweetsListItemComponent } from './sweets-list-item.component';
 import { TagDirective } from './tag.directive';
 import { TemplateTypeDirective } from './template-type.directive';
@@ -72,7 +76,22 @@ import { TextComponent } from './text.component';
     NgTemplateContextComponent,
     NgTemplateMultipleTemplatesComponent,
     NgTemplateInjectorComponent,
+
+    OuterSimpleComponent,
+    FancyModal,
+
+    OuterComponent,
+    MiddleComponent,
+    InnerComponent,
+
+    FirstLayerComponent,
+    SecondLayerComponent,
+    ThirdLayerComponent,
     
+    LayerOneComponent,
+    LayerTwoComponent,
+    LayerThreeComponent,
+    IsInjectedComponent,
   ],
   imports: [
     BrowserModule,

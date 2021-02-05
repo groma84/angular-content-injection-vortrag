@@ -6,12 +6,12 @@ import {
   Input,
   TemplateRef,
 } from "@angular/core";
-import { TwoService } from "./two.service";
+import { SecondService } from "./second.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-list-injector",
-  providers: [TwoService],
+  providers: [SecondService],
   template: `
     <ul>
     <!-- don't use ngFor without a reasonable trackBy in lists! -->

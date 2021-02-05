@@ -1,11 +1,11 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ElementRef } from "@angular/core";
-import { OneService } from "./one.service";
+import { FirstService } from "./first.service";
 import { TagDirective } from "./tag.directive";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-layer1",
-  providers: [OneService],
+  providers: [FirstService],
   template: `
     <style>
       :host {
