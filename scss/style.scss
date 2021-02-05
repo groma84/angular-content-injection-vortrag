@@ -38,6 +38,14 @@ mark > .hljs-string {
   color: darkblue;
 }
 
+mark.first {
+  background-color: hotpink;
+}
+
+mark.second {
+  background-color: yellowgreen;
+}
+
 .reveal code {
   font-size: 0.7rem;
 }
@@ -79,4 +87,8 @@ div.code {
 
 .reveal pre code.unlimited-height {
   max-height: unset;
+}
+
+.reveal pre code.smaller-font {
+  font-size: 0.6rem;
 }
