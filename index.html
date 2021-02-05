@@ -188,6 +188,64 @@ export class MyComponent {
 
         <section>
           <h3>ng-content</h3>
+
+          <div class="flex centered">
+            <div class="code fragment">
+            <pre><code class="typescript" data-trim data-noescape>@Component(
+    {
+        selector: 'outer-component',
+        template: `
+        &lt;h1&gt;...&lt;/h1&gt;
+        &lt;fancy-modal&gt;
+            &lt;p&gt;
+                Lorem ipsum dolor sit amet. 
+                Duis a ornare massa.
+            &lt;/p&gt;
+        &lt;/fancy-modal&gt;
+        `
+    }
+)
+export class OuterComponent {/* ... */}
+              </code></pre>
+            </div>
+            <div class="code fragment">
+              <pre><code class="typescript" data-trim data-noescape>@Component(
+    {
+        selector: 'fancy-modal',
+        template: `
+        &lt;header&gt;...&lt;/header&gt;
+        &lt;ng-content&gt;
+        
+        &lt;/ng-content&gt;
+        &lt;footer&gt;...&lt;/footer&gt;
+        `
+    }
+)
+export class FancyModal {/* ... */}
+              </code></pre>
+            </div>
+
+            <svg class="fragment" style="position: absolute;" height="100%" width="100%">
+              <defs>
+                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
+                         orient="auto">
+                      <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #ffff00;" />
+                  </marker>
+              </defs>
+              
+              <line x1="495" y1="170" x2="650" y2="145" class="arrow" />
+
+              <rect x="225" y="130" width="270" height="70"
+  style="fill:transparent;stroke:yellow;stroke-width:2;fill-opacity:0.1;stroke-opacity:1" />
+            </svg>
+          </div>
+
+          <aside class="notes">
+            <ul>
+             
+            </ul>
+          </aside>
+
           <aside class="notes">
             <ul>
               <li>Statische Projektion</li>
@@ -208,59 +266,30 @@ export class MyComponent {
         </section>
 
         <section>
-<!-- Neuer Inhalt: Vereinfachte Komponenten mit ng-content + Bilder mit Vorher Nachher Ausgeschnitten (oder sogar animiert?) -->
-
-          <div class="flex">
-            <div>
-              <img src="img/app-modal-simple_01.png" />
-            </div>
-            <div class="flex-column">
-              <img class="fragment" src="img/app-ng-content-simple_01.png" />
-              <img class="fragment" src="img/screenshot-simple-modal.png" />
-            </div>
-          </div>
-          <aside class="notes">
-            <ul>
-              <li>
-                Inhalt zwischen den Tags wird ausgeschnitten und an der Stelle
-                mit ng-content im Modalen Dialog eingefügt
-              </li>
-              <li>Der eingefügte Inhalt kann beliebig sein</li>
-            </ul>
-          </aside>
-        </section>
-
-        <section>
           <h3 style="font-size: 2rem">
-            &lt;ng-content select="..."&gt;&lt;/ng-content&gt;
+            ng-content mit select
           </h3>
 
           <!-- Neuer Inhalt: Auflistung Selektoren ohne Code-Beispiele -->
-
-          <div class="flex-column">
-            <div class="flex">
-              <div class="fragment" style="width: 60%">
-                <img src="img/app-ng-content-selectors_01.png" />
-              </div>
-              <div class="fragment" style="width: 50%">
-                <img src="img/app-modal-selectors_01.png" />
-              </div>
-            </div>
-
-            <div class="fragment" style="width: 65%">
-              <img src="img/screenshot-modal-selectors_01.png" />
-            </div>
-          </div>
-
+          <div class="code fragment">
+            <pre class="fit-content"><code class="typescript" data-trim data-noescape>@Component(
+    {
+        /* ... */
+        template: `
+            &lt;ng-content select=&quot;p&quot;&gt;&lt;/ng-content&gt;
+            &lt;ng-content select=&quot;.my-class&quot;&gt;&lt;/ng-content&gt;
+            &lt;ng-content select=&quot;[attr]&quot;&gt;&lt;/ng-content&gt;
+            &lt;ng-content&gt;&lt;/ng-content&gt;
+        `
+    }
+)
+export class WithSelectors {/* ... */}
+      </code></pre>
+    </div>
+          
           <aside class="notes">
             <ul>
-              <li>
-                Verschiedene Komponenten, die jeweils wieder irgendwas enthalten
-              </li>
-              <li>
-                app-text-wrapper enthält nochmal eine Unterkompomente app-text
-                mit einem Paragraph drin
-              </li>
+            
               <li>
                 In ng-content kann mit select ein CSS-Selektor angegeben werden,
                 der dann nur passende Inhalte in diesem ng-content anzeigt
@@ -273,46 +302,90 @@ export class MyComponent {
           </aside>
         </section>
 
+
+        <section>
+          <h3>
+            Angular Lifecycle Hooks
+          </h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Hook</th>
+                <th>Was passiert</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="fragment">
+                <td>ngOnInit</td>
+                <td>Inputs initialisiert, Komponente initialisieren</td>
+              </tr>
+              <tr class="fragment">
+                <td>ngAfterContentInit</td>
+                <td>Externer Content wurde projiziert und initialisiert</td>
+              </tr>
+              <tr class="fragment">
+                <td>ngAfterViewInit</td>
+                <td>Eigenes Template und Kindkomponenten initialisiert</td>
+              </tr>
+              <tr class="fragment">
+                <td>ngOnDestroy</td>
+                <td>Komponente wird gleich abgebaut</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <aside class="notes">
+            <ul>
+              <li>[Input] zum Übergeben von Daten an Komponenten/Direktiven</li>
+            </ul>
+          </aside>
+        </section>
         <section>
           <h3>Lifecycle Reihenfolge</h3>
 
-          <!-- Neuer Inhalt: Hooks erklären und relevante auflisten -->
           <!-- Zusätzliche Folie: Einfache Verschachtelung Komponenten, console.log, und vielleicht Diagramm? -->
 
-          <div class="flex">
-            <div class="fragment">
-              <img src="img/ng-content-lifecycle-elements_01.png" />
+          <div class="flex centered align-centered">
+              
+              <div class="code fragment">
+                <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+    {
+        selector: 'outer',
+        template: `
+            &lt;middle&gt;
+                &lt;inner&gt;&lt;/inner&gt;
+            &lt;/middle&gt;
+        `
+    }
+)
+export class OuterComponent {/* ... */}
+
+@Component(
+    {
+        selector: 'middle',
+        template: `&lt;ng-content&gt;&lt;/ng-content&gt;`
+    }
+)
+export class MiddleComponent {/* ... */}
+
+@Component(
+    {
+        selector: 'inner',
+        template: `&lt;p&gt;...&lt;/p&gt;`
+    }
+)
+export class InnerComponent {/* ... */}
+              </code></pre>
             </div>
             <div class="fragment">
-              <img src="img/ng-content-lifecycle_01.png" />
+              <img src="img/screenshot-content-lifecycle-simple_01.png" />
             </div>
           </div>
 
           <aside class="notes">
             <ul>
-              <li>
-                Angular Lifecycle Hooks:
-                <ol>
-                  <li>ngOnInit: Inputs</li>
-                  <li>ngAfterContentInit: statischer Content</li>
-                  <li>
-                    ngAfterContentChecked: Change Detection im statischen
-                    Content
-                  </li>
-                  <li>ngAfterViewInit: dynamischer Content</li>
-                  <li>
-                    ngAfterViewChecked: Change Detection im dynamischen Content
-                  </li>
-                </ol>
-              </li>
-              <li>
-                Mit ng-content muss beachtet werden, dass jede Lifecycle-Phase
-                "depth first" initialisiert wird
-              </li>
-              <li>
-                Bei mehrfacher Verschachtelung wird es unübersichtlich (siehe
-                text in text-wrapper, und list-item in text)
-              </li>
               <li>
                 Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges
                 erzwingen: Elternkomponenten sind noch nicht fertig
@@ -325,59 +398,100 @@ export class MyComponent {
 
 <!-- Neue Folie: ContentChild/ContentChildren/QueryList erklären -->
 
-
         <section>
-          <!-- Neuer Inhalt: Vereinfachter Code, zeigen dass mit ng-content nur eine Ebene tief was gefunden wird (descendants von ebene1 auf 2 möglich?) -->
-          <h3 style="font-size: 2rem">Projektion über mehrere Ebenen</h3>
+          <h3>ContentChildren</h3>
 
-          <div class="flex" style="margin-top: -40px">
-            <div class="flex-column">
-              <div><img src="img/screenshot-two-layers_01.png" /></div>
-              <div class="fragment">
-                <img src="img/ng-content-two-layers_01.png" />
-              </div>
-            </div>
-            <div>
-              <div class="fragment"><img src="img/app-layer1_01.png" /></div>
-            </div>
-          </div>
+          <blockquote style="width:90%; font-size: 1.2rem;">Use to get the QueryList of elements or directives from the content DOM. Any time a child element is added, removed, or moved, the query list will be updated, and the changes observable of the query list will emit a new value.
+<br><br>
+            Content queries are set before the ngAfterContentInit callback is called.
+<br><br>
+            
+            Does not retrieve elements or directives that are in other components' templates, since a component's template is always a black box to its ancestors.</blockquote>
 
-          <div class="fragment" style="width: 65%; margin-top: -40px">
-            <img src="img/app-layer2_01.png" />
-          </div>
+            <div class="code fragment">
+              <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 1rem;" data-trim data-noescape>@ContentChild(TagDirective) tagDirective: TagDirective;
 
+@ContentChildren(TagDirective) tagDirectives: QueryList&lt;TagDirective&gt;;
+</code></pre></div>
+      
+<p style="font-size: 1.2rem;">
+Doku: <br>
+<a href="https://angular.io/api/core/ContentChild">https://angular.io/api/core/ContentChild</a><br>
+<a href="https://angular.io/api/core/ContentChildren">https://angular.io/api/core/ContentChildren</a>
+</p>
           <aside class="notes">
             <ul>
-              <li>
-                'Tag' als Direktive, die Funktionalität beeinflussen könnte oder
-                Konfiguration der Komponente beinhaltet, ...
-              </li>
-              <li>
-                'content' als Attribut, das wir anschließend selecten können
-              </li>
-              <li>
-                'content' als Selektor und gleichzeitig als Attribut in Layer1
-                kein Problem
-              </li>
-              <li>
-                ContentChild ist erst nach AfterContentInit befüllt, falls
-                vorhanden
-              </li>
-              <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
-              <li>
-                'descendants' soll alle Elemente durchsuchen, konnte es aber
-                noch nie erfolgreich anwenden. Standard: Nur direkte Kinder
-              </li>
-              <li>
-                Weitere Mögliche Option bei ContentChild: 'static' - falls true,
-                muss Element ohne Change Detection da sein. Gegenbeispiel: *ngIf
-              </li>
+              <li>Variante, um genau ein Element (das erste gefundene!) zu selektieren: ContentChild</li>
+              <li>ContentChild ist erst nach AfterContentInit befüllt, falls
+                vorhanden</li>
             </ul>
           </aside>
         </section>
 
         <section>
-          <!-- Neuer Inhalt: Screenshots gegen echten Code austauschen, Beispiel an sich kann bleiben -->
+          <h3>Projektion über mehrere Ebenen</h3>
+
+          <div class="flex">
+          <div class="fragment">
+          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component(
+    {
+        selector: 'layer1',
+        template: `
+            &lt;layer2&gt;
+                &lt;div [tag]="'tagged'"&gt;Cool content&lt;/div&gt;
+            &lt;/layer2&gt;
+        `
+    }
+)
+export class FirstLayerComponent {}
+
+@Component(
+    {
+        selector: 'layer2',
+        template: `
+        &lt;layer3&gt;
+            &lt;ng-content&gt;&lt;/ng-content&gt;
+        &lt;/layer3&gt;`
+    }
+)
+export class SecondLayerComponent {
+    @ContentChild(TagDirective) tagDirective!: TagDirective;
+
+    ngAfterContentInit(): void {
+        console.log('SecondLayerComponent', this.tagDirective);
+    }
+}
+
+@Component(
+    {
+        selector: 'layer3',
+        template: `&lt;ng-content&gt;&lt;/ng-content&gt;`
+    }
+)
+export class ThirdLayerComponent {
+    @ContentChild(TagDirective) tagDirective!: TagDirective;
+
+    ngAfterContentInit(): void {
+        console.log('ThirdLayerComponent', this.tagDirective);
+    }
+}
+          </code></pre>
+        </div>
+
+<div>
+  <img class="fragment" src="img/screenshot-content-children-mehrere-ebenen-browser_01.png" />
+  <img class="fragment" src="img/screenshot-content-children-mehrere-ebenen_01.png" />
+</div>
+</div>
+
+          <aside class="notes">
+            <ul>
+              <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
           <h3 style="font-size: 2rem">
             2x ng-content mit gleichem Selektor = 💥
           </h3>
@@ -420,7 +534,51 @@ export class MyComponent {
 
         <section>
           <!-- Neuer Inhalt: Vereinfachte Code-Beispiele als Code, Rückverweis auf Dependency Injection -->
-          <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
+          <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
+
+          @Component(
+            {
+                selector: 'layer-one',
+                template: `&lt;layer-two&gt;&lt;is-injected&gt;&lt;/is-injected&gt;&lt;/layer-two&gt;`,
+            }
+        )
+        export class LayerOneComponent {}
+        
+        @Component(
+            {
+                selector: 'layer-two',
+                template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
+                providers: [FirstService]
+            }
+        )
+        export class LayerTwoComponent {}
+        
+        @Component(
+            {
+                selector: 'layer-three',
+                template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
+                providers: [SecondService]
+            }
+        )
+        export class LayerThreeComponent {}
+        
+        @Component(
+            {
+                selector: 'is-injected',
+                template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
+            }
+        )
+        export class IsInjectedComponent {
+            constructor(
+                @Optional() firstService: FirstService,
+                @Optional() secondService: SecondService
+            ) {
+                console.log('injected services', {firstService, secondService});
+            }
+        }
+
+          screenshot-injector-mehrere-ebenen_01.png
+          injector-mehrere-ebenen_01.png
 
           <div class="flex-column">
             <div class="flex">
@@ -451,7 +609,7 @@ export class MyComponent {
         </section>
 
         <section>
-          <!-- Neuer Inhalt: Bild mit "Zusammenfassung" von vorheriger Folie + bestehendes Diagramm -->
+          <!-- Neuer Inhalt: Diagramm mit aktualisierten Komponentennamen -->
           <h3 style="font-size: 2rem">Injector & Change Detection Tree</h3>
 
           <div class="flex-column">
@@ -679,6 +837,7 @@ export class MyComponent {
         </section>
 
         <section>
+          <!-- Bisschen weniger hässliches Layout -->
           <h3>Doku-Links</h3>
 
           <a

@@ -21,6 +21,11 @@ $primary-color: #eb811b;
 
 .reveal pre {
   line-height: 1.1;
+  width: 100%;
+}
+
+.reveal h3 {
+  font-size: 2rem;
 }
 
 mark {
@@ -48,4 +53,30 @@ mark > .hljs-string {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.centered {
+  justify-content: center;
+}
+
+.align-centered {
+  align-items: center;
+}
+
+div.code {
+  margin: 1rem 0.5rem;
+}
+
+.arrow{
+  stroke:rgb(255,255,0);
+  stroke-width:2; 
+  marker-end:url(#markerArrow)
+}
+
+.reveal pre.fit-content {
+  width: fit-content;
+}
+
+.reveal pre code.unlimited-height {
+  max-height: unset;
 }
