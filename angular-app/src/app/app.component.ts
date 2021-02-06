@@ -18,10 +18,9 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 
       <span>ng-content</span>
       <ul>
-      <li><a routerLink="/change-detection-mit-verschachtelung-ng-content" routerLinkActive="active">change-detection-mit-verschachtelung-ng-content</a></li>
-      <li><a routerLink="/content-children-mehrere-ebenen" routerLinkActive="active">content-children-mehrere-ebenen</a></li>
-      <li><a routerLink="/injector-mehrere-ebenen" routerLinkActive="active">injector-mehrere-ebenen</a></li>
-      
+        <li><a routerLink="/change-detection-mit-verschachtelung-ng-content" routerLinkActive="active">change-detection-mit-verschachtelung-ng-content</a></li>
+        <li><a routerLink="/content-children-mehrere-ebenen" routerLinkActive="active">content-children-mehrere-ebenen</a></li>
+        <li><a routerLink="/injector-mehrere-ebenen" routerLinkActive="active">injector-mehrere-ebenen</a></li>
       
         <li><a routerLink="/ng-content-simple" routerLinkActive="active">simple</a></li>
         <li><a routerLink="/ng-content-selectors" routerLinkActive="active">selectors and lifecycle</a></li>
@@ -33,6 +32,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 
       <span>ng-template</span>
       <ul>
+        <li><a routerLink="/ngif-else" routerLinkActive="active">ngif-else</a></li>
+        <li><a routerLink="/template-outlet" routerLinkActive="active">template-outlet</a></li>
+        <li><a routerLink="/template-select" routerLinkActive="active">template-select</a></li>
+
         <li><a routerLink="/ng-template-simple" routerLinkActive="active">simple</a></li>
         <li><a routerLink="/ng-template-context" routerLinkActive="active">context and lifecycle</a></li>
         <li><a routerLink="/ng-template-multiple-templates" routerLinkActive="active">multiple templates and QueryList</a></li>

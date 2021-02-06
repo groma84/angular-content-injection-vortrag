@@ -1,6 +1,6 @@
 import { Input, Directive, TemplateRef } from "@angular/core";
 
-@Directive({ selector: "[templateType]" })
+@Directive({ selector: "ng-template[templateType]" })
 export class TemplateTypeDirective {
   @Input() templateType: string = "";
 

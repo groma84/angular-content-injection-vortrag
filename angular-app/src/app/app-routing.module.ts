@@ -10,10 +10,13 @@ import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice
 import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
+import { ShoppingListComponent } from './ng-template-contentchildren';
 import { NgTemplateContextComponent } from './ng-template-context.component';
 import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
+import { TemplateOutletComponent } from './ng-template-outlet';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { NgIfElseComponent } from './ngif-else';
 
 const routes: Routes = [
   { path: 'ng-content-simple', component: NgContentSimpleComponent },
@@ -32,7 +35,9 @@ const routes: Routes = [
   { path: 'change-detection-mit-verschachtelung-ng-content', component: OuterComponent },
   { path: 'content-children-mehrere-ebenen', component: FirstLayerComponent },
   { path: 'injector-mehrere-ebenen', component: LayerOneComponent },
-
+  { path: 'ngif-else', component: NgIfElseComponent },
+  { path: 'template-outlet', component: TemplateOutletComponent },
+  { path: 'template-select', component: ShoppingListComponent },
 ];
 
 @NgModule({

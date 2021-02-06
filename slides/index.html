@@ -645,9 +645,6 @@ export class IsInjectedComponent {
   </div>
 
           <div class="flex-column align-centered">
-             
-
-
               <blockquote class="fragment" style="font-size: 0.9rem">
                 This is working as expected: <br />
                 nodes are only "projected" (moved to a different location) but
@@ -668,6 +665,7 @@ export class IsInjectedComponent {
           <h3>ng-template</h3>
           <aside class="notes">
             <ul>
+              <li>Große Schwester von ng-content</li>
               <li>
                 Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus
                 Vorlagen
@@ -676,7 +674,7 @@ export class IsInjectedComponent {
                 Alles, was mit ng-content geht, geht auch mit ng-template, aber
                 ggf. mehr Code
               </li>
-              <li>Mehr Möglichkeiten als ng-content</li>
+              <li>Mehr Möglichkeiten als ng-content: Zum Beispiel löst es das Problem mit "kann nicht 2x eingefügt werden"</li>
             </ul>
           </aside>
         </section>
@@ -684,75 +682,148 @@ export class IsInjectedComponent {
           <!-- Beispiel mit *ngIf und template als else -->
 
         <section>
-          <!-- Neuer Inhalt: Vereinfachtes Codebeispiel, ngTemplateOutlet ohne first und index, nur mit $implicit, und nicht alles item nennen? -->
-          <h3>ngTemplateOutlet</h3>
+          <h3>*ngIf; else</h3>
 
-          <div class="flex">
-            <div class="flex-column" style="align-items: center">
-              <div class="fragment" data-fragment-index="1">
-                <img src="img/ng-template-context_01.png" />
-              </div>
-              <div class="fragment" data-fragment-index="3" style="width: 50%">
-                <img src="img/screenshot-list-different-ng-template_01.png" />
-              </div>
-            </div>
+          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+    {
+        selector: 'ngif-else',
+        template: `
+            &lt;ng-container <mark>*ngIf</mark>=&quot;!!name; else <mark class="first">noNameGiven</mark>&quot;&gt;
+                &lt;p&gt;Hallo, {{name}}!&lt;/p&gt;
+            &lt;/ng-container&gt;
 
-            <div class="fragment" data-fragment-index="2">
-              <img src="img/list-different-ng-template_01.png" />
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h3>Lifecycle</h3>
-
-          <!-- Die Folie kann glaub ich so bleiben? Vielleicht Code im neuen Stil -->
-
-          <div class="flex">
-            <div class="fragment" style="width: 80%">
-              <img src="img/list-different-ng-template_01.png" />
-            </div>
-            <div class="fragment">
-              <img src="img/list-different-ng-template-lifecycle_01.png" />
-            </div>
-          </div>
+            &lt;ng-template <mark class="first">#noNameGiven</mark>&gt;
+                &lt;p&gt;Leider wei&szlig; ich deinen Namen noch nicht. Trotzdem: Hallo!&lt;/p&gt;
+            &lt;/ng-template&gt;
+        `
+    }
+)
+export class NgIfElseComponent {
+    @Input() name: string | undefined;
+}
+</code></pre>
 
           <aside class="notes">
             <ul>
-              <li>Gleiche Komponente wie gerade eben</li>
-              <li>
-                Nur der dynamische Teil mit reingegebenem Template interessant
-              </li>
-              <li>
-                Direkt vor "ngAfterViewInit" wird der dynamische Teil komplett
-                erzeugt und initialisiert
-              </li>
+              <li></li>
+              </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>ngTemplateOutlet</h3>
+
+          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+    {
+        selector: 'template-outlet',
+        template: `
+            &lt;ng-template #listItem let-item&gt;
+                &lt;li&gt;{{item}}&lt;/li&gt;
+            &lt;/ng-template&gt;
+
+            &lt;ul&gt;
+                &lt;ng-template *ngFor=&quot;let item of ['Apple', 'Banana', 'Cookie'];&quot; 
+                    [ngTemplateOutlet]=&quot;listItem&quot; 
+                    [ngTemplateOutletContext]=&quot;{$implicit: item}&quot;&gt;
+                &lt;/ng-template&gt;
+            &lt;/ul&gt;
+        `
+    }
+)
+export class TemplateOutletComponent {}</code></pre>
+        </section>
+
+        <section>
+          <h3>Mehrere Templates</h3>
+
+          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Directive({ selector: &quot;ng-template[templateType]&quot; })
+export class TemplateTypeDirective {
+  @Input() templateType: string = &quot;&quot;;
+
+  constructor(public readonly template: TemplateRef&lt;any&gt;) {}
+}
+          </code></pre>
+
+          <aside class="notes">
+            <ul>
+              <li>Bestimmte Sachen werden von Angular automatisch provided und können überall im Konstruktor angefordert werden</li>
+              <li>ng-template -> TemplateRef injection</li>
             </ul>
           </aside>
         </section>
 
         <section>
-          <!-- Eigene Folie für TemplateTypeDirective und Beispiel-Templates mit Screenshots der beiden! -->
-          <h3 style="font-size: 2rem">Verschiedene Templates mit Auswahl</h3>
+          <h3>Mehrere Templates</h3>
 
-          <!-- Zweite Folie: Selektion via QueryList und Templates in Map speichern -->
-          <!-- Dritte Folie: Template und Endergebnis -->
-          <div class="flex">
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/ng-template-multiple-types_01.png" />
-              </div>
-              <div class="fragment">
-                <img src="img/template-type-directive_01.png" />
-              </div>
-            </div>
-            <div class="fragment">
-              <img src="img/list-multiple-templates_01.png" />
-            </div>
-          </div>
+          <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
+    selector: &quot;shopping-list&quot;,
+    template: `
+        &lt;list-with-templates [items]=&quot;shoppingListEntries&quot;&gt;
+            <span class="fragment"><span class="hotpink">&lt;ng-template <mark>[templateType]=&quot;'fruit'&quot;</mark> let-cartEntry&gt;
+              &lt;li&gt;🍉🍋🍍 {{ cartEntry.name }}&lt;/li&gt;
+            &lt;/ng-template&gt;</span>
+          
+            <span class="yellow">&lt;ng-template <mark>[templateType]=&quot;'sweets'&quot;</mark> let-cartEntry&gt;
+                &lt;li&gt;🍩🍪🍬 {{ cartEntry.name }}&lt;/li&gt;
+            &lt;/ng-template&gt;</span></span>
+        &lt;/list-with-templates&gt;
+    `
+})
+export class ShoppingListComponent {
+    shoppingListEntries = [
+        { name: &quot;Apple&quot;, type: &quot;fruit&quot; },
+        { name: &quot;Banana&quot;, type: &quot;fruit&quot; },
+        { name: &quot;Cookie&quot;, type: &quot;sweets&quot; },
+        { name: &quot;Pork&quot;, type: &quot;meat&quot; },
+      ];
+}
+          </code></pre>
+
+          <div class="fragment"><img src="img/screenshot-two-list-item-types_01.png"></div>
 
           <aside class="notes">
             <ul>
+              <li></li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Mehrere Templates</h3>
+
+          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
+  selector: &quot;list-with-templates&quot;,
+  template: `
+    &lt;ul&gt;
+      &lt;ng-template
+      <span class="fragment" data-fragment-index="1">    *ngFor=&quot;let item of <span class="hotpink">items</span>&quot;</span>
+      <span class="fragment" data-fragment-index="5">    [ngTemplateOutlet]=&quot;<span class="yellow">templates</span>.get(item.type) || null&quot;
+          [ngTemplateOutletContext]=&quot;{ $implicit: item }&quot;</span>
+      &gt;
+      &lt;/ng-template&gt;
+    &lt;/ul&gt;
+  `,
+})
+export class ListWithTemplatesComponent {
+  <span class="fragment" data-fragment-index="1">@Input() <span class="hotpink">items</span>: any[] = [];</span>
+
+  <span class="fragment" data-fragment-index="3"><span class="yellow">templates</span> = new Map&lt;string, TemplateRef&lt;any&gt;&gt;();</span>
+
+  <span class="fragment" data-fragment-index="2">@ContentChildren(TemplateTypeDirective) <span class="lightblue">templateTypes</span>!: QueryList&lt;TemplateTypeDirective&gt;;</span>
+
+  <span class="fragment" data-fragment-index="4">ngAfterContentInit(): void {
+    this.<span class="lightblue">templateTypes</span>.forEach((templateTypeDirective: TemplateTypeDirective) =&gt; {
+        this.<span class="yellow">templates</span>.set(templateTypeDirective.templateType, templateTypeDirective.template);
+      }
+    );
+  }</span>
+}
+        </code></pre>
+
+          <aside class="notes">
+            <ul>
+              <li>Generische Listenkomponente: Weiß nichts von Einkaufslisten oder Früchten oder Süßigkeiten</li>
+              <li>Im Automotive-Projekt: Sehr viel Funktionalität, was drin steckt (Alben in Media, Suchergebnisse in Navi, ...) ist egal</li>
               <li>
                 Gibt es kein passendes Template, wird stillschweigend einfach
                 nichts angezeigt
@@ -768,27 +839,9 @@ export class IsInjectedComponent {
         </section>
 
         <section>
-          <!-- Neuer Code-Stil, zweite Folie: Bild DOM-Tree&Angular-Tree: Alles wie es sein soll -->
-          <h3 style="font-size: 2rem">Injector Tree</h3>
+          <h3>Injector Tree</h3>
 
-          <div class="flex" style="margin-top: -40px">
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/ng-template-injector_01.png" />
-              </div>
-              <div class="fragment" style="margin-top: -40px">
-                <img src="img/list-injector_01.png" />
-              </div>
-            </div>
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/list-item-injector_01.png" />
-              </div>
-              <div class="fragment">
-                <img src="img/screenshot-list-item-injector_01.png" />
-              </div>
-            </div>
-          </div>
+          <div><img src="img/ng-template-injector-tree_01.png"></div>
 
           <aside class="notes">
             <ul>
@@ -800,7 +853,7 @@ export class IsInjectedComponent {
 
         <section>
           <!-- *ngFor zeigen/erklären und default trackBy mit GIF -->
-          <h3>trackBy</h3>
+          <h3>Performance: trackBy</h3>
           <span style="font-size: 0.5rem" class="placeholder"
             >TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es
             hinkommt</span
@@ -830,7 +883,7 @@ export class IsInjectedComponent {
 
         <section>
           <!-- angepasstes trackBy zeigen, GIF mit Jetzt funktioniert's -->
-          <h3>trackBy</h3>
+          <h3>Performance: trackBy</h3>
 
           <div class="flex-column">
             <div class="fragment">

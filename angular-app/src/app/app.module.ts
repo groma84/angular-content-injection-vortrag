@@ -26,10 +26,13 @@ import { NgContentProjectingTwiceComponent } from './ng-content-projecting-twice
 import { NgContentSelectorsComponent } from './ng-content-selectors.component';
 import { NgContentSimpleComponent } from './ng-content-simple.component';
 import { NgContentTwoLayersComponent } from './ng-content-two-layers.component';
+import { ListWithTemplatesComponent, ShoppingListComponent } from './ng-template-contentchildren';
 import { NgTemplateContextComponent } from './ng-template-context.component';
 import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
+import { TemplateOutletComponent } from './ng-template-outlet';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { NgIfElseComponent } from './ngif-else';
 import { FancyModal, OuterSimpleComponent } from './simple-ng-content';
 import { SweetsListItemComponent } from './sweets-list-item.component';
 import { TagDirective } from './tag.directive';
@@ -92,6 +95,10 @@ import { TextComponent } from './text.component';
     LayerTwoComponent,
     LayerThreeComponent,
     IsInjectedComponent,
+    NgIfElseComponent,
+    TemplateOutletComponent,
+    ListWithTemplatesComponent,
+    ShoppingListComponent,
   ],
   imports: [
     BrowserModule,
