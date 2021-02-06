@@ -38,12 +38,36 @@ mark > .hljs-string {
   color: darkblue;
 }
 
-mark.first {
+mark.first > .hljs-string {
   background-color: hotpink;
 }
 
-mark.second {
+mark.second > .hljs-string {
   background-color: yellowgreen;
+}
+
+span.hotpink > .hljs-string {
+  color: hotpink;
+}
+
+span.yellow > .hljs-string {
+  color: yellow;
+}
+
+span.lightblue > .hljs-string {
+  color: lightblue;
+}
+
+span.hotpink {
+  color: hotpink;
+}
+
+span.yellow {
+  color: yellow;
+}
+
+span.lightblue {
+  color: lightblue;
 }
 
 .reveal code {
