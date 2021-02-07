@@ -17,6 +17,9 @@ $primary-color: #eb811b;
   bottom: 1em;
   left: 1em;
   font-size: 0.5em;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .reveal pre {
@@ -26,6 +29,10 @@ $primary-color: #eb811b;
 
 .reveal h3 {
   font-size: 2rem;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 mark {
@@ -54,7 +61,8 @@ span.yellow > .hljs-string {
   color: yellow;
 }
 
-span.lightblue > .hljs-string {
+span.lightblue > .hljs-string,
+span.lightblue > .hljs-meta {
   color: lightblue;
 }
 

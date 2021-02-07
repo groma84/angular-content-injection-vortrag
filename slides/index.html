@@ -26,30 +26,49 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="footer">FOOTER Use left and right arrows to navigate</div>
+      <div class="footer">
+        <span>CodeDaysDigital 2021</span>
+        <span>Martin Grotz - martin.grotz@mathema.de - @mobilgroma</span>
+        <span>MATHEMA GmbH</span>
+      </div>
 
       <div class="slides">
         <section>
-          <h2>DRY in Angular Templates: Content Projection im Praxiseinsatz</h2>
-          <h3>Martin Grotz</h3>
-          <div>TODO: MATHEMA Logo, Code Days Logo</div>
+          <div class="flex-column align-centered">
+            <h2 style="font-size: 2.75rem;">DRY in <span style="color:red;">Angular</span> Templates</h2>
+            <h3 style="font-size: 2.25rem; margin-top: 2rem;"><span style="color:red;">Content Projection</span> im Praxiseinsatz</h3>
+            <h3 style="font-size: 1.5rem; margin-top: 4rem;">Martin Grotz</h3>
+            
+              <div style="width: 50%;">
+              <div class="flex align-centered centered bg-white" style="margin: 1rem;">
+                <img src="img/mathema-logo.svg" alt="Mathema Logo">
+                <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
+              </div>
+            </div>
+          </div>
+
           <aside class="notes"></aside>
         </section>
 
         <section>
-          <div class="placeholder">
-            <!-- TODO: Logo von Angular -->
-            <img src="img/100px_placeholder.png" style="" />
-          </div>
+          
           <div>
             <h3>Angular</h3>
-            <ul>
-              <li>Framework</li>
-              <li>Webtechnologien & TypeScript</li>
-              <li>Komponentenorientiert</li>
-              <li>Dependency Injection</li>
-              <li>Automatische Change Detection</li>
-            </ul>
+
+            <div class="flex">
+              <div>
+                <img src="img/angular.png" />
+              </div>
+
+              <ul>
+                <li class="fragment">Open-source Framework</li>
+                <li class="fragment">Webtechnologien & TypeScript</li>
+                <li class="fragment">Multi-target: WebApps, MobileApps, SSR</li>
+                <li class="fragment">Komponentenorientiert</li>
+                <li class="fragment">Dependency Injection</li>
+                <li class="fragment">Automatische Change Detection</li>
+              </ul>
+            </div>
           </div>
           <aside class="notes">
             <ul>
@@ -57,36 +76,33 @@
                 Multi-target: Webapps, Server-side rendering, Mobile Apps via
                 Ionic
               </li>
-
-              
+              <li>Besteht hauptsächlich aus drei Bausteinen (siehe nächste Folie)</li>
             </ul>
           </aside>
         </section>
 
         <section>
           <h3>Angular Bausteine</h3>
-          <pre><code class="typescript" data-trim data-noescape>@Directive({selector: '[bold]'})
+          <pre  class="fragment" data-fragment-index="1"><code class="typescript" data-trim data-noescape><span class="fragment" data-fragment-index="1">@Directive({selector: '[bold]'})
 export class SomeDirective {
-    @Input() 
-    @HostBinding('class.bold')
     bold: boolean = false;
-}
+}</span>
 
-@Injectable()
+<span class="fragment" data-fragment-index="2">@Injectable()
 export class SimpleService {
     public shouldBeBold = true;
-}
+}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="3">@Component(
     {
         selector: 'app-my-component',
         template: `
         &lt;h1&gt;My Component&lt;/h1&gt;
-        &lt;p [bold]=&quot;true&quot;&gt;This text can be bold (or not)?&lt;/p&gt;
+        &lt;p&gt;This text can be bold (or not)?&lt;/p&gt;
         `
     }
 )
-export class MyComponent {}
+export class MyComponent {}</span>
           </code></pre>
 
           <aside class="notes">
@@ -114,31 +130,31 @@ export class MyComponent {}
         </section>
 
         <section>
-          <h3>Dependency Injection</h3>
+          <h3>Dependency Injection & Input</h3>
           <pre><code class="typescript" data-trim data-noescape>@Directive({selector: '[bold]'})
 export class SomeDirective {
-    @Input() 
-    @HostBinding('class.bold')
-    bold: boolean = false;
+    <span class="fragment" data-fragment-index="3">@HostBinding('class.bold')</span>
+    <span class="lightblue fragment" data-fragment-index="3">@Input()</span>
+    <span class="lightblue fragment" data-fragment-index="3">bold: boolean = false;</span>
 }
 
 @Injectable()
-export class SimpleService {
+export class <span class="hotpink">SimpleService</span> {
     public shouldBeBold = true;
 }
 
 @Component(
     {
         selector: 'app-my-component',
-        <mark>providers: [SimpleService]</mark>,
+        <span class="fragment" data-fragment-index="1" ><span class="yellow">providers: [<span class="hotpink">SimpleService</span>]</span>,</span>
         template: `
         &lt;style&gt;.bold { font-weight: bold}&lt;/style&gt;
         &lt;h1&gt;My Component&lt;/h1&gt;
-        &lt;p <mark>[bold]=&quot;simpleService.shouldBeBold&quot;</mark>&gt;This text can be bold (or not)?&lt;/p&gt;`
+        &lt;p <span class="lightblue fragment" data-fragment-index="4">[bold]=&quot;simpleService.shouldBeBold&quot;</span>&gt;This text can be bold (or not)?&lt;/p&gt;`
     }
 )
 export class MyComponent {
-    <mark>constructor(public readonly simpleService: SimpleService)</mark> {}
+    <span class="yellow">constructor(<span class="fragment" data-fragment-index="2">public readonly simpleService: SimpleService</span>)</span> {}
   }</code></pre>
 
           <aside class="notes">
@@ -431,50 +447,52 @@ Doku: <br>
         <section>
           <h3>Projektion über mehrere Ebenen</h3>
 
+          <!-- TODO: Fragment Index zum Aufbauen der Ebenen nutzen -->
+
           <div class="flex">
-          <div class="fragment">
-          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+          <div class="fragment" data-fragment-index="10">
+          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape><span class="fragment" data-fragment-index="10">@Component(
     {
         selector: 'layer1',
         template: `
-            &lt;layer2&gt;
-                &lt;div <mark>[tag]="'tagged'"</mark>&gt;Cool content&lt;/div&gt;
-            &lt;/layer2&gt;
+        <span class="yellow">&lt;layer2&gt;</span>
+            &lt;div <span class="hotpink">[tag]</span>="'tagged'"&gt;Cool content&lt;/div&gt;
+        <span class="yellow">&lt;/layer2&gt;</span>
         `
     }
 )
-export class FirstLayerComponent {}
+export class FirstLayerComponent {}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="20">@Component(
     {
-        selector: 'layer2',
+        selector: '<span class="yellow">layer2</span>',
         template: `
-        &lt;layer3&gt;
+        <span class="lightblue">&lt;layer3&gt;</span>
             &lt;ng-content&gt;&lt;/ng-content&gt;
-        &lt;/layer3&gt;`
+        <span class="lightblue">&lt;/layer3&gt;`</span>
     }
 )
 export class SecondLayerComponent {
-    @ContentChild(TagDirective) tagDirective!: TagDirective;
+    <span class="fragment" data-fragment-index="40">@ContentChild(<span class="hotpink">TagDirective</span>) tagDirective!: TagDirective;
 
     ngAfterContentInit(): void {
         console.log('SecondLayerComponent', this.tagDirective);
-    }
-}
+    }</span>
+}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="30">@Component(
     {
-        selector: 'layer3',
+        selector: '<span class="lightblue">layer3</span>',
         template: `&lt;ng-content&gt;&lt;/ng-content&gt;`
     }
 )
 export class ThirdLayerComponent {
-    @ContentChild(TagDirective) tagDirective!: TagDirective;
+    <span class="fragment" data-fragment-index="40">@ContentChild(<span class="hotpink">TagDirective</span>) tagDirective!: TagDirective;
 
     ngAfterContentInit(): void {
         console.log('ThirdLayerComponent', this.tagDirective);
-    }
-}
+    }</span>
+}</span>
           </code></pre>
         </div>
 
@@ -713,6 +731,7 @@ export class NgIfElseComponent {
         <section>
           <h3>ngTemplateOutlet</h3>
 
+          <!-- TODO: Highlighting + Fragments der verschiedenen Dingens -->
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         selector: 'template-outlet',
@@ -791,6 +810,7 @@ export class ShoppingListComponent {
         <section>
           <h3>Mehrere Templates</h3>
 
+ 
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
   selector: &quot;list-with-templates&quot;,
   template: `
@@ -819,6 +839,8 @@ export class ListWithTemplatesComponent {
   }</span>
 }
         </code></pre>
+
+        <div class="fragment" data-fragment-index="50" style="position: absolute; right: 10%; top: 20%;" ><img src="img/screenshot-template-selection-works_01.png"></div>
 
           <aside class="notes">
             <ul>
@@ -1012,33 +1034,64 @@ export class ListWithTemplatesTrackByComponent {
         </section>
 
         <section>
-          <!-- Bisschen weniger hässliches Layout -->
           <h3>Doku-Links</h3>
 
-          <a
-            href="https://angular.io/guide/structural-directives#the-ng-template"
-            >Offizielle Doku zu ng-template</a
-          >
-          <br />
-          <br />
-          <a
+          <ul>
+            <li> <a
+              href="https://angular.io/guide/structural-directives#the-ng-template"
+              >Offizielle Doku zu ng-template</a
+            ></li>
+          <li> <a
             href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b"
             >ng-content: The hidden docs</a
-          >
-          <br />
-          <br />
-          <a
+          ></li>
+          <li> <a
             href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/"
             >Angular ng-template, ng-container and ngTemplateOutlet - The
             Complete Guide To Angular Templates</a
-          >
-          <br />
-          <br />
-        </section>
+          ></li>
+        </ul>
+         </section>
 
         <section>
-          <h3 class="placeholder">Fragen/Danke</h3>
-          TODO: Kontaktdaten & Bild
+          <h3>Danke</h3>
+
+          <div class="flex">
+            <div><img style="width: 70%;" src="img/mailbox_small_mikaela-wiedenhoff-AwmCuTXL97Q-unsplash.jpg" alt="Mailbox im Grünen"></div>
+            <div class="flex-column" style="justify-content: space-between;">
+              <table style="font-size: 1.2rem; margin: 1rem;">
+                <tbody>
+                  <tr>
+                    <td>E-Mail</td>
+                    <td><a href="mailto:martin.grotz@mathema.de">martin.grotz@mathema.de</a></td>
+                  </tr>
+                  <tr>
+                    <td>Twitter</td>
+                    <td><a href="https://twitter.com/mobilgroma">@mobilgroma</a></td>
+                  </tr>
+                  <tr>
+                    <td>github</td>
+                    <td><a href="https://github.com/groma84/">groma84</a></td>
+                  </tr>
+                  <tr>
+                    <td>Slides</td>
+                    <td><a href="https://github.com/groma84/angular-content-injection-vortrag">auf github</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            <div class="flex align-centered centered bg-white" style="margin: 1rem;">
+              <img src="img/mathema-logo.svg" alt="Mathema Logo">
+              <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
+            </div>
+          </div>
+
+            <!-- TODO: auf den Briefkasten schieben und Klebstreifen reinmalen?
+            <div>
+              <img src="img/grotz-profile.jpg" alt="Bild von Martin Grotz im Anzug">
+            </div>
+            -->
+          </div>
         </section>
       </div>
     </div>
