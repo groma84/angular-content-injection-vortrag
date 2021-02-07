@@ -854,56 +854,148 @@ export class ListWithTemplatesComponent {
         <section>
           <!-- *ngFor zeigen/erklären und default trackBy mit GIF -->
           <h3>Performance: trackBy</h3>
-          <span style="font-size: 0.5rem" class="placeholder"
-            >TODO: trackBy mit in Bild übernehmen, damit man weiß, wo es
-            hinkommt</span
-          >
-
+          
           <div class="flex">
-            <div class="fragment">
-              <img src="img/ng-template-wrapper-trackBy_01.png" />
-            </div>
+          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component({
+    selector: &quot;shopping-list&quot;,
+    template: `
+        &lt;list-with-templates-trackBy 
+          [items]=&quot;shoppingListEntries&quot;&gt;
+            ...
+        &lt;/list-with-templates-trackBy&gt;
+    `
+})
+export class ShoppingLisWithTrackByComponent {
+    <span class="fragment" data-fragment-index="2">constructor(<span class="fragment" data-fragment-index="4">changeDetectorRef: ChangeDetectorRef</span>) {
+      timer(2_000, 2_000)
+      .subscribe(() =&gt; {
+        <span class="fragment" data-fragment-index="3">this.shoppingListEntries = this.shoppingListEntries
+                                    .map(x =&gt; Object.assign({}, x));</span>
+        <span class="fragment" data-fragment-index="4">changeDetectorRef.markForCheck();</span>
+      });
+    }</span>
+}
 
-            <div class="flex-column fragment">
-              <div>
-                <img src="img/app-list-injector-default-trackBy_01.png" />
-              </div>
-              <div>
-                <img src="img/no-trackBy-items-get-recreated_01_endless.gif" />
-              </div>
-            </div>
-          </div>
+@Component({
+  selector: &quot;list-with-templates-trackBy&quot;,
+  template: `
+    &lt;ul&gt;
+      &lt;ng-template
+        *ngFor=&quot;let item of items; <mark class="fragment" data-fragment-index="1">trackBy: trackByFn</mark>&quot;
+        [ngTemplateOutlet]=&quot;templates.get(item.type) || null&quot;
+        [ngTemplateOutletContext]=&quot;{ $implicit: item }&quot;
+      &gt;
+      &lt;/ng-template&gt;
+    &lt;/ul&gt;
+  `,
+})
+export class ListWithTemplatesTrackByComponent {
+  <span class="fragment" data-fragment-index="1">@Input() <mark>trackByFn</mark>: (index: number, item: any) =&gt; any = (_, item) =&gt; item;</span>
+  ...
+        </code></pre>
+
+        <div class="fragment" data-fragment-index="10">
+          <div><img src="img/screenshot_default-trackBy_01_endless.gif"></div>
+          <div><img src="img/screenshot_default-trackBy_debug-tools_01_endless.gif"></div>
+        </div>
+
+      </div>
 
           <aside class="notes">
             <ul>
-              <li>Angepasstes trackBy, z.B. auf eine id</li>
+              <li>trackBy gibt dem ngFor Komparator eine Funktion, mit der dieser rausfinden kann, was sich geändert hat</li>
+              <li>Standard trackBy: Objektreferenz</li>
+              <li>RxJS + ChangeDetectorRef - notwendiges Drumherum, für Beispiel nicht direkt relevant</li>
+              <li>Herkunft ständig neuer Objekte: 
+                <ul>
+                  <li>Parsed JSON vom Server (z.B. wenn Eintrag dazu kommt wird mit default alles neu gemacht!)</li>
+                  <li>Immutable.js</li>
+                </ul>
+              </li>
             </ul>
           </aside>
         </section>
 
         <section>
-          <!-- angepasstes trackBy zeigen, GIF mit Jetzt funktioniert's -->
           <h3>Performance: trackBy</h3>
 
-          <div class="flex-column">
-            <div class="fragment">
-              <img src="img/app-list-injector-custom-trackBy_01.png" />
-            </div>
-            <div class="fragment">
-              <img src="img/custom-trackBy-items-kept_01_endless.gif" />
+          <div class="flex">
+
+          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component({
+    selector: &quot;shopping-list&quot;,
+    template: `
+        &lt;list-with-templates-trackBy 
+          <mark class="fragment" data-fragment-index="1">[trackByFn]=&quot;trackByName&quot;</mark>
+          [items]=&quot;shoppingListEntries&quot;&gt;
+            ...
+        &lt;/list-with-templates-trackBy&gt;
+    `
+})
+export class ShoppingLisWithTrackByComponent {
+    <mark class="fragment" data-fragment-index="1">trackByName = (index: number, item: any) =&gt; item.name;</mark>
+
+    constructor(changeDetectorRef: ChangeDetectorRef) {
+      timer(2_000, 2_000)
+      .subscribe(() =&gt; {
+        this.shoppingListEntries = this.shoppingListEntries
+                                    .map(x =&gt; Object.assign({}, x));
+        changeDetectorRef.markForCheck();
+      });
+    }
+}
+
+@Component({
+  selector: &quot;list-with-templates-trackBy&quot;,
+  template: `
+    &lt;ul&gt;
+      &lt;ng-template
+        *ngFor=&quot;let item of items; trackBy: trackByFn&quot;
+        [ngTemplateOutlet]=&quot;templates.get(item.type) || null&quot;
+        [ngTemplateOutletContext]=&quot;{ $implicit: item }&quot;
+      &gt;
+      &lt;/ng-template&gt;
+    &lt;/ul&gt;
+  `,
+})
+export class ListWithTemplatesTrackByComponent {
+  @Input() trackByFn: (index: number, item: any) =&gt; any = (_, item) =&gt; item;
+        </code></pre>
+
+            <div class="fragment" data-fragment-index="10">
+              <div><img src="img/screenshot_custom-trackBy_01_endless.gif"></div>
+              <div><img src="img/screenshot_custom-trackBy_debug-tools_01_endless.gif"></div>
             </div>
           </div>
 
           <aside class="notes">
             <ul>
-              <li>Angepasstes trackBy, z.B. auf eine id</li>
+              <li>Angepasstes trackBy, z.B. auf eine id, oder hier den Namen</li>
+              <li>ngFor vergleicht, und nur, wenn sich die Rückgabe der trackBy-Funktion ändert wird die Komponente neu erzeugt</li>
+              <li>Änderungen innerhalb der Daten werden trotzdem erkannt (Einschränkung mit OnPush, Objektreferenzen, ChangeDetection beachten)</li>
             </ul>
           </aside>
         </section>
 
         <section>
-          <!-- Neue Folie: Kurze Einführung Google Performance Tab, Screenshot wo zu finden, Flamecharts Makroansicht zeigen -->
-          <!-- Dann erst Beispiel aus Projekt rangezoomed -->
+          <h3>Performance</h3>
+
+          <img class="fragment" src="img/screenshot_opera_flamechart_code-days-programm_01.png" />
+
+          <aside class="notes">
+            <ul>
+              <li>Browser-Debug-Tools, hier Chromium-basiert abgebildet</li>
+              <li>Flame Chart: Horizontal die Zeit, vertikal der Callstack</li>
+              <li>Falls Zeit ist: 
+                <ul>
+                Echte Aufnahme zeigen von https://www.code-days.de/codedays-2021/programm/programm.html reload?</li>
+                <li></li>
+                  <li>Analyse: Ranzoomen an rechten Block mit den ganzen Forced Reflows: CSS lesen/schreiben nur in requestAnimationFrame und gruppieren gegen Layout Thrashing</li>
+                </ul>
+              <li>Interaktiv</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
           <h3>Performance</h3>
 
           <img src="img/performance-creating-items_01.png" />

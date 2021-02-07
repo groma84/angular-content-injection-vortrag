@@ -35,7 +35,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
         <li><a routerLink="/ngif-else" routerLinkActive="active">ngif-else</a></li>
         <li><a routerLink="/template-outlet" routerLinkActive="active">template-outlet</a></li>
         <li><a routerLink="/template-select" routerLinkActive="active">template-select</a></li>
-
+        <li><a routerLink="/track-by" routerLinkActive="active">track-by</a></li>
+        
         <li><a routerLink="/ng-template-simple" routerLinkActive="active">simple</a></li>
         <li><a routerLink="/ng-template-context" routerLinkActive="active">context and lifecycle</a></li>
         <li><a routerLink="/ng-template-multiple-templates" routerLinkActive="active">multiple templates and QueryList</a></li>

@@ -32,6 +32,7 @@ import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { TemplateOutletComponent } from './ng-template-outlet';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { ShoppingLisWithTrackByComponent, ListWithTemplatesTrackByComponent } from './ng-template-trackBy';
 import { NgIfElseComponent } from './ngif-else';
 import { FancyModal, OuterSimpleComponent } from './simple-ng-content';
 import { SweetsListItemComponent } from './sweets-list-item.component';
@@ -99,6 +100,8 @@ import { TextComponent } from './text.component';
     TemplateOutletComponent,
     ListWithTemplatesComponent,
     ShoppingListComponent,
+    ShoppingLisWithTrackByComponent,
+    ListWithTemplatesTrackByComponent,
   ],
   imports: [
     BrowserModule,

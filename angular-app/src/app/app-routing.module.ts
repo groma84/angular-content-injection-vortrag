@@ -16,6 +16,7 @@ import { NgTemplateInjectorComponent } from './ng-template-injector.component';
 import { NgTemplateMultipleTemplatesComponent } from './ng-template-multiple-templates.component';
 import { TemplateOutletComponent } from './ng-template-outlet';
 import { NgTemplateSimpleComponent } from './ng-template-simple.component';
+import { ShoppingLisWithTrackByComponent } from './ng-template-trackBy';
 import { NgIfElseComponent } from './ngif-else';
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'ngif-else', component: NgIfElseComponent },
   { path: 'template-outlet', component: TemplateOutletComponent },
   { path: 'template-select', component: ShoppingListComponent },
+  { path: 'track-by', component: ShoppingLisWithTrackByComponent },
 ];
 
 @NgModule({
