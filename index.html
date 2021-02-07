@@ -704,7 +704,6 @@ export class IsInjectedComponent {
 
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
-        selector: 'ngif-else',
         template: `
             &lt;ng-container <mark>*ngIf</mark>=&quot;!!name; else <mark class="first">noNameGiven</mark>&quot;&gt;
                 &lt;p&gt;Hallo, {{name}}!&lt;/p&gt;
@@ -734,16 +733,15 @@ export class NgIfElseComponent {
           <!-- TODO: Highlighting + Fragments der verschiedenen Dingens -->
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
-        selector: 'template-outlet',
         template: `
-            &lt;ng-template #listItem let-item&gt;
-                &lt;li&gt;{{item}}&lt;/li&gt;
+            &lt;ng-template <span class="lightblue fragment" data-fragment-index="10">#listItem</span> <span class="hotpink fragment" data-fragment-index="20">let-item</span>&gt;
+                &lt;li&gt;{{<span class="hotpink">item</span>}}&lt;/li&gt;
             &lt;/ng-template&gt;
 
             &lt;ul&gt;
-                &lt;ng-template *ngFor=&quot;let item of ['Apple', 'Banana', 'Cookie'];&quot; 
-                    [ngTemplateOutlet]=&quot;listItem&quot; 
-                    [ngTemplateOutletContext]=&quot;{$implicit: item}&quot;&gt;
+                &lt;ng-template *ngFor=&quot;let <span class="hotpink">item</span> of ['Apple', 'Banana', 'Cookie'];&quot; 
+                    <span class="fragment" data-fragment-index="10">[ngTemplateOutlet]=&quot;<span class="lightblue">listItem</span>&quot; </span>
+                    <span class="fragment" data-fragment-index="20">[ngTemplateOutletContext]=&quot;{<span class="hotpink">$implicit: item</span>}&quot;&gt;</span>
                 &lt;/ng-template&gt;
             &lt;/ul&gt;
         `
@@ -755,7 +753,7 @@ export class TemplateOutletComponent {}</code></pre>
         <section>
           <h3>Mehrere Templates</h3>
 
-          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Directive({ selector: &quot;ng-template[templateType]&quot; })
+          <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Directive({ selector: &quot;ng-template[templateType]&quot; })
 export class TemplateTypeDirective {
   @Input() templateType: string = &quot;&quot;;
 
