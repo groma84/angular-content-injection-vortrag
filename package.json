@@ -1,0 +1,17 @@
+{
+  "name": "angular-content-projection-vortrag",
+  "version": "1.0.0",
+  "scripts": {
+    "gh-pages": "gh-pages -d slides"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groma84/angular-content-projection-vortrag.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/groma84/angular-content-projection-vortrag",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}
