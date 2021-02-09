@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MyComponent } from './angular-examples';
 import { OuterComponent } from './change-detection-mit-verschachtelung-ng-content';
 import { FirstLayerComponent } from './content-children-mehrere-ebenen';
+import { OuterLayerComponent } from './content-zweimal-geht-nicht';
 import { LayerOneComponent } from './injector-mehrere-ebenen';
 import { NgContentHostContextComponent } from './ng-content-host-context.component';
 import { NgContentInjectorTreeComponent } from './ng-content-injector-tree.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'template-outlet', component: TemplateOutletComponent },
   { path: 'template-select', component: ShoppingListComponent },
   { path: 'track-by', component: ShoppingLisWithTrackByComponent },
+  { path: 'content-zweimal-geht-nicht', component: OuterLayerComponent },
 ];
 
 @NgModule({

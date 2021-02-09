@@ -41,7 +41,7 @@
             
               <div style="width: 50%;">
               <div class="flex align-centered centered bg-white" style="margin: 1rem;">
-                <img src="img/mathema-logo.svg" alt="Mathema Logo">
+                <img src="img/mathema-logo.svg" style="margin-right: 2rem;" alt="Mathema Logo">
                 <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
               </div>
             </div>
@@ -283,19 +283,18 @@ export class FancyModal {/* ... */}
 
         <section>
           <h3 style="font-size: 2rem">
-            ng-content mit select
+            ng-content Selektoren (Beispiele)
           </h3>
 
-          <!-- Neuer Inhalt: Auflistung Selektoren ohne Code-Beispiele -->
-          <div class="code fragment">
+          <div class="code fragment" data-fragment-index="10">
             <pre class="fit-content"><code class="typescript" data-trim data-noescape>@Component(
     {
         /* ... */
         template: `
-            &lt;ng-content select=&quot;p&quot;&gt;&lt;/ng-content&gt;
-            &lt;ng-content select=&quot;.my-class&quot;&gt;&lt;/ng-content&gt;
-            &lt;ng-content select=&quot;[attr]&quot;&gt;&lt;/ng-content&gt;
-            &lt;ng-content&gt;&lt;/ng-content&gt;
+            <span class="fragment" data-fragment-index="20">&lt;ng-content <mark>select=&quot;p&quot;</mark>&gt;&lt;/ng-content&gt;</span> 
+            <span class="fragment" data-fragment-index="30">&lt;ng-content <mark>select=&quot;.my-class&quot;</mark>&gt;&lt;/ng-content&gt;</span> 
+            <span class="fragment" data-fragment-index="40">&lt;ng-content <mark>select=&quot;[attr]&quot;</mark>&gt;&lt;/ng-content&gt;</span> 
+            <span class="fragment" data-fragment-index="50">&lt;ng-content&gt;&lt;/ng-content&gt;</span> 
         `
     }
 )
@@ -354,18 +353,16 @@ export class WithSelectors {/* ... */}
 
           <aside class="notes">
             <ul>
-              <li>[Input] zum Übergeben von Daten an Komponenten/Direktiven</li>
+              <li></li>
             </ul>
           </aside>
         </section>
         <section>
           <h3>Lifecycle Reihenfolge</h3>
 
-          <!-- Zusätzliche Folie: Einfache Verschachtelung Komponenten, console.log, und vielleicht Diagramm? -->
-
           <div class="flex centered align-centered">
               
-              <div class="code fragment">
+              <div class="code fragment" data-fragment-index="10">
                 <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         selector: 'outer',
@@ -378,30 +375,61 @@ export class WithSelectors {/* ... */}
 )
 export class OuterComponent {/* ... */}
 
-@Component(
+<span class="fragment" data-fragment-index="20">@Component(
     {
         selector: 'middle',
         template: `&lt;ng-content&gt;&lt;/ng-content&gt;`
     }
 )
-export class MiddleComponent {/* ... */}
+export class MiddleComponent {/* ... */}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="30">@Component(
     {
         selector: 'inner',
         template: `&lt;p&gt;...&lt;/p&gt;`
     }
 )
-export class InnerComponent {/* ... */}
+export class InnerComponent {/* ... */}</span>
               </code></pre>
             </div>
-            <div class="fragment">
-              <img src="img/screenshot-content-lifecycle-simple_01.png" />
-            </div>
+
+              <div class="flex-column">
+                <div class="fragment" data-fragment-index="40">
+                  <table style="font-size: 0.6rem;">
+                    <tbody>
+                      <tr>
+                        <td>ngOnInit</td>
+                        <td>Inputs setzen, Komponente initialisieren</td>
+                      </tr>
+                      <tr>
+                        <td>ngAfterContentInit</td>
+                        <td>ng-content initialisiert</td>
+                      </tr>
+                      <tr>
+                        <td>ngAfterViewInit</td>
+                        <td>Restliche (Kind-)Elemente initialisiert</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="fragment" data-fragment-index="50">
+                  <img src="img/screenshot-content-lifecycle-simple_01.png" />
+                </div>
+              </div>
           </div>
 
           <aside class="notes">
             <ul>
+              <li>
+                Outer wird initialisiert, dann ng-content aus Outer -> gibt es nicht, also sofort fertig
+              </li>
+              <li>Dann "lesen von unten nach oben": Kindelemente von Outer machen: Middle</li>
+              <li>Middle ngOnInit, dann ng-content Inhalte -> Inner</li>
+              <li>Inner macht content durch</li>
+              <li>Middle fertig mit ngContent, danach kommt Inner mit View, dann ist Middle fertig mit allem</li>
+              <li>Am Schluss ist dann auch Outer fertig</li>
+
               <li>
                 Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges
                 erzwingen: Elternkomponenten sind noch nicht fertig
@@ -412,29 +440,30 @@ export class InnerComponent {/* ... */}
           </aside>
         </section>
 
-<!-- Neue Folie: ContentChild/ContentChildren/QueryList erklären -->
-
         <section>
           <h3>ContentChildren</h3>
 
-          <blockquote style="width:90%; font-size: 1.2rem;">Use to get the QueryList of elements or directives from the content DOM. Any time a child element is added, removed, or moved, the query list will be updated, and the changes observable of the query list will emit a new value.
-<br><br>
+          <div class="code">
+            <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 1rem;" data-trim data-noescape><span class="hotpink">@ContentChild</span>(TagDirective) tagDirective: TagDirective;
+
+<span class="hotpink">@ContentChildren</span>(TagDirective) tagDirectives: QueryList&lt;TagDirective&gt;;
+            </code></pre>
+          </div>
+
+          <blockquote class="fragment" data-fragment-index="20"  style="margin-top: 3rem; width:70%; font-size: 0.8rem;">
+            Use to get the QueryList of elements or directives from the content DOM. Any time a child element is added, removed, or moved, the query list will be updated, and the changes observable of the query list will emit a new value.
+            <br><br>
             Content queries are set before the ngAfterContentInit callback is called.
-<br><br>
+            <br><br>
+            Does not retrieve elements or directives that are in other components' templates, since a component's template is always a black box to its ancestors.
+          </blockquote>
             
-            Does not retrieve elements or directives that are in other components' templates, since a component's template is always a black box to its ancestors.</blockquote>
+          <p style="font-size: 1.2rem;" class="fragment" data-fragment-index="20">
+            Doku: <br>
+            <a href="https://angular.io/api/core/ContentChild">https://angular.io/api/core/ContentChild</a><br>
+            <a href="https://angular.io/api/core/ContentChildren">https://angular.io/api/core/ContentChildren</a>
+          </p>
 
-            <div class="code fragment">
-              <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 1rem;" data-trim data-noescape>@ContentChild(TagDirective) tagDirective: TagDirective;
-
-@ContentChildren(TagDirective) tagDirectives: QueryList&lt;TagDirective&gt;;
-</code></pre></div>
-      
-<p style="font-size: 1.2rem;">
-Doku: <br>
-<a href="https://angular.io/api/core/ContentChild">https://angular.io/api/core/ContentChild</a><br>
-<a href="https://angular.io/api/core/ContentChildren">https://angular.io/api/core/ContentChildren</a>
-</p>
           <aside class="notes">
             <ul>
               <li>Variante, um genau ein Element (das erste gefundene!) zu selektieren: ContentChild</li>
@@ -446,8 +475,6 @@ Doku: <br>
 
         <section>
           <h3>Projektion über mehrere Ebenen</h3>
-
-          <!-- TODO: Fragment Index zum Aufbauen der Ebenen nutzen -->
 
           <div class="flex">
           <div class="fragment" data-fragment-index="10">
@@ -496,11 +523,11 @@ export class ThirdLayerComponent {
           </code></pre>
         </div>
 
-<div>
-  <img class="fragment" src="img/screenshot-content-children-mehrere-ebenen-browser_01.png" />
-  <img class="fragment" src="img/screenshot-content-children-mehrere-ebenen_01.png" />
-</div>
-</div>
+        <div>
+          <img class="fragment" data-fragment-index="35" src="img/screenshot-content-children-mehrere-ebenen-browser_01.png" />
+          <img class="fragment" data-fragment-index="50" src="img/screenshot-content-children-mehrere-ebenen_01.png" />
+        </div>
+    </div>
 
           <aside class="notes">
             <ul>
@@ -514,33 +541,55 @@ export class ThirdLayerComponent {
             2x ng-content mit gleichem Selektor = 💥
           </h3>
 
-          <div class="flex">
-            <div><img src="img/ng-content-projecting-twice_01.png" /></div>
+          <div class="flex" style="justify-content: center;">
+              <div>
+                  <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+      {
+          selector: 'outer-layer',
+          template: `
+              &lt;inner-layer&gt;
+                  <span class="yellow">&lt;p&gt;💰💰💰&lt;/p&gt;</span>
+              &lt;/inner-layer&gt;
+        `
+      }
+  )
+  export class OuterLayerComponent {}
 
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/app-content-twice-both-true_01.png" />
+  @Component(
+      {
+          selector: 'inner-layer',
+          template: `
+          &lt;div&gt;
+              &lt;h3&gt;Money&lt;/h3&gt;
+              <span class="yellow">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+          &lt;/div&gt;
+          &lt;div <span class="hotpink fragment" data-fragment-index="40">*ngIf="false"</span>&gt;
+              &lt;h3&gt;More money&lt;/h3&gt;
+              <span class="yellow">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+          &lt;/div&gt;
+          `
+      }
+  )
+  export class InnerLayerComponent {}</code></pre>
               </div>
-              <div class="fragment">
-                <img src="img/screenshot-projecting-twice-both-true_01.png" />
-              </div>
-            </div>
 
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/app-content-twice-second-false_01.png" />
+              <div class="flex-column">
+                <div class="fragment" data-fragment-index="20">
+                  <img src="img/screenshot-ng-content-zweimal-geht-nicht-ohne-ngIf_01.png" />
+                </div>
+
+                <div class="fragment" data-fragment-index="50">
+                  <img
+                    src="img/screenshot-ng-content-zweimal-geht-nicht-mit-ngIf_01.png"
+                  />
+                </div>
               </div>
-              <div class="fragment">
-                <img
-                  src="img/screenshot-projecting-twice-second-false_01.png"
-                />
-              </div>
-            </div>
+
           </div>
 
           <aside class="notes">
             <ul>
-              <li>Ausschneiden aus dem DOM, nur 1x möglich</li>
+              <li>Verschieben im DOM, nur 1x möglich</li>
               <li>Letztes ng-content gewinnt</li>
               <li>
                 Egal, ob das ng-content zur Laufzeit überhaupt da ist oder
@@ -551,57 +600,63 @@ export class ThirdLayerComponent {
         </section>
 
         <section>
-          <!-- Neuer Inhalt: Vereinfachte Code-Beispiele als Code, Rückverweis auf Dependency Injection -->
           <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
           <div class="flex">
-          <div class="fragment">
-          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+            <div class="fragment" data-fragment-index="10">
+              <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
     {
         selector: 'layer-one',
-        template: `&lt;layer-two&gt;<mark>&lt;is-injected&gt;&lt;/is-injected&gt;</mark>&lt;/layer-two&gt;`,
+        template: `
+        <span class="lightblue">&lt;layer-two&gt;</span>
+            &lt;inner-text&gt;&lt;/inner-text&gt;
+        <span class="lightblue">&lt;/layer-two&gt;`</span>,
     }
 )
 export class LayerOneComponent {}
 
-@Component(
+<span class="fragment" data-fragment-index="20">@Component(
     {
-        selector: 'layer-two',
-        template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
-        providers: [<mark class="first">FirstService</mark>]
+        selector: '<span class="lightblue">layer-two</span>',
+        template: `
+        <span class="yellowgreen">&lt;layer-three&gt;</span>
+            <span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+        <span class="yellowgreen">&lt;/layer-three&gt;`</span>,
+        <span class="yellow fragment" data-fragment-index="43">providers: [LayerTwoService]</span>
     }
 )
-export class LayerTwoComponent {}
+export class LayerTwoComponent {}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="30">@Component(
     {
-        selector: 'layer-three',
-        template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
-        providers: [<mark class="second">SecondService</mark>]
+        selector: '<span class="yellowgreen">layer-three</span>',
+        template: `<span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>`,
+        <span class="yellow fragment" data-fragment-index="46">providers: [LayerThreeService]</span>
     }
 )
-export class LayerThreeComponent {}
+export class LayerThreeComponent {}</span>
 
-@Component(
+<span class="fragment" data-fragment-index="20">@Component(
     {
-        selector: '<mark>is-injected</mark>',
+        selector: 'inner-text',
         template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
     }
 )
-export class IsInjectedComponent {
-    constructor(
-        @Optional() firstService: <mark class="first">FirstService</mark>,
-        @Optional() secondService: <mark class="second">SecondService</mark>
+export class InnerTextComponent {
+  <span class="fragment" data-fragment-index="50">constructor(
+        @Optional() layerTwoService: <span class="yellow">LayerTwoService</span>,
+        @Optional() layerThreeService: <span class="yellow">LayerThreeService</span>
     ) {
-        console.log('injected services', {firstService, secondService});
-    }
-}          </code></pre>
-</div>
+        console.log('injected services', {
+            layer2Service: layerTwoService, 
+            layer3Service: layerThreeService});
+    }</span>
+}</span></code></pre>
+          </div>
 
-<div>
-          <img class="fragment" src="img/screenshot-injector-mehrere-ebenen_01.png">
-          <img class="fragment" src="img/injector-mehrere-ebenen_01.png">
-          
+        <div>
+          <img class="fragment" data-fragment-index="40" src="img/screenshot-injector-mehrere-ebenen_01.png">
+          <img class="fragment" data-fragment-index="60" src="img/injector-mehrere-ebenen_01.png">
         </div>
       </div>
 
@@ -615,51 +670,58 @@ export class IsInjectedComponent {
         </section>
 
         <section>
-          <!-- Neuer Inhalt: Diagramm mit aktualisierten Komponentennamen -->
           <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
           <div class="flex">
-          <div class="fragment">
-            <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.5rem;" data-trim data-noescape>@Component(
-      {
-          selector: 'layer-one',
-          template: `&lt;layer-two&gt;<mark>&lt;is-injected&gt;&lt;/is-injected&gt;</mark>&lt;/layer-two&gt;`,
-      }
-  )
-  export class LayerOneComponent {}
-  
-  @Component(
-      {
-          selector: 'layer-two',
-          template: `&lt;layer-three&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&lt;/layer-three&gt;`,
-          providers: [<mark class="first">FirstService</mark>]
-      }
-  )
-  export class LayerTwoComponent {}
-  
-  @Component(
-      {
-          selector: 'layer-three',
-          template: `&lt;ng-content&gt;&lt;/ng-content&gt;`,
-          providers: [<mark class="second">SecondService</mark>]
-      }
-  )
-  export class LayerThreeComponent {}
-  
-  @Component(
-      {
-          selector: '<mark>is-injected</mark>',
-          template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
-      }
-  )
-  export class IsInjectedComponent {
-      constructor(
-          @Optional() firstService: <mark class="first">FirstService</mark>,
-          @Optional() secondService: <mark class="second">SecondService</mark>
-      ) {
-          console.log('injected services', {firstService, secondService});
-      }
-  }          </code></pre>
+          <div class="">
+            <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+    {
+        selector: 'layer-one',
+        template: `
+        <span class="lightblue">&lt;layer-two&gt;</span>
+            &lt;inner-text&gt;&lt;/inner-text&gt;
+        <span class="lightblue">&lt;/layer-two&gt;`</span>,
+    }
+)
+export class LayerOneComponent {}
+
+<span>@Component(
+    {
+        selector: '<span class="lightblue">layer-two</span>',
+        template: `
+        <span class="yellowgreen">&lt;layer-three&gt;</span>
+            <span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+        <span class="yellowgreen">&lt;/layer-three&gt;`</span>,
+        <span class="yellow">providers: [LayerTwoService]</span>
+    }
+)
+export class LayerTwoComponent {}</span>
+
+<span>@Component(
+    {
+        selector: '<span class="yellowgreen">layer-three</span>',
+        template: `<span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>`,
+        <span class="yellow">providers: [LayerThreeService]</span>
+    }
+)
+export class LayerThreeComponent {}</span>
+
+<span>@Component(
+    {
+        selector: 'inner-text',
+        template: `&lt;p&gt;Are both services injected here?&lt;/p&gt;`
+    }
+)
+export class InnerTextComponent {
+  <span>constructor(
+        @Optional() layerTwoService: <span class="yellow">LayerTwoService</span>,
+        @Optional() layerThreeService: <span class="yellow">LayerThreeService</span>
+    ) {
+        console.log('injected services', {
+            layer2Service: layerTwoService, 
+            layer3Service: layerThreeService});
+    }</span>
+}</span></code></pre>
   </div>
 
           <div class="flex-column align-centered">
@@ -676,7 +738,13 @@ export class IsInjectedComponent {
 
         </div>
 
-          <aside class="notes"></aside>
+          <aside class="notes">
+            <ul>
+              <li>Angular wertet das Original-DOM aus und baut damit seinen internen Baum</li>
+              <li>Erst danach werden die DOM-Knoten verschoben</li>
+              <li>ng-content tag entfällt im DOM</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
@@ -697,27 +765,23 @@ export class IsInjectedComponent {
           </aside>
         </section>
 
-          <!-- Beispiel mit *ngIf und template als else -->
-
         <section>
           <h3>*ngIf; else</h3>
 
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         template: `
-            &lt;ng-container <mark>*ngIf</mark>=&quot;!!name; else <mark class="first">noNameGiven</mark>&quot;&gt;
+            &lt;ng-container <span class="fragment" data-fragment-index="10"><mark>*ngIf</mark>=&quot;!!name<span class="fragment" data-fragment-index="50">; else <mark class="first">noNameGiven</mark></span>&quot;</span>&gt;
                 &lt;p&gt;Hallo, {{name}}!&lt;/p&gt;
             &lt;/ng-container&gt;
 
-            &lt;ng-template <mark class="first">#noNameGiven</mark>&gt;
+            &lt;ng-template <mark class="first fragment" data-fragment-index="30">#noNameGiven</mark>&gt;
                 &lt;p&gt;Leider wei&szlig; ich deinen Namen noch nicht. Trotzdem: Hallo!&lt;/p&gt;
             &lt;/ng-template&gt;
         `
     }
 )
-export class NgIfElseComponent {
-    @Input() name: string | undefined;
-}
+export class Component { ... }
 </code></pre>
 
           <aside class="notes">
@@ -730,12 +794,11 @@ export class NgIfElseComponent {
         <section>
           <h3>ngTemplateOutlet</h3>
 
-          <!-- TODO: Highlighting + Fragments der verschiedenen Dingens -->
           <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         template: `
-            &lt;ng-template <span class="lightblue fragment" data-fragment-index="10">#listItem</span> <span class="hotpink fragment" data-fragment-index="20">let-item</span>&gt;
-                &lt;li&gt;{{<span class="hotpink">item</span>}}&lt;/li&gt;
+            &lt;ng-template <span class="lightblue fragment" data-fragment-index="10">#listItem</span> <span class="hotpink fragment" data-fragment-index="20">let-itemText</span>&gt;
+                &lt;li&gt;{{<span class="hotpink">itemText</span>}}&lt;/li&gt;
             &lt;/ng-template&gt;
 
             &lt;ul&gt;
@@ -800,7 +863,10 @@ export class ShoppingListComponent {
 
           <aside class="notes">
             <ul>
-              <li></li>
+              <li>Die Templates werden zwischen die Tags der "list-with-templates" geschrieben -> so wie auch für ng-content</li>
+              <li>Dadurch kann später mit @ContentChildren drauf zugegriffen werden</li>
+              <li>templateType "meat" hat kein passendes Template -> muss später irgendwie behandelt werden (oder auch nicht)</li>
+              <li>Beispiele: stillschweigend nicht anzeigen ODER Fehler werfen ODER rot blinkendes default template</li>
             </ul>
           </aside>
         </section>
@@ -824,10 +890,10 @@ export class ShoppingListComponent {
 })
 export class ListWithTemplatesComponent {
   <span class="fragment" data-fragment-index="1">@Input() <span class="hotpink">items</span>: any[] = [];</span>
-
-  <span class="fragment" data-fragment-index="3"><span class="yellow">templates</span> = new Map&lt;string, TemplateRef&lt;any&gt;&gt;();</span>
-
+  
   <span class="fragment" data-fragment-index="2">@ContentChildren(TemplateTypeDirective) <span class="lightblue">templateTypes</span>!: QueryList&lt;TemplateTypeDirective&gt;;</span>
+  
+  <span class="fragment" data-fragment-index="3"><span class="yellow">templates</span> = new Map&lt;string, TemplateRef&lt;any&gt;&gt;();</span>
 
   <span class="fragment" data-fragment-index="4">ngAfterContentInit(): void {
     this.<span class="lightblue">templateTypes</span>.forEach((templateTypeDirective: TemplateTypeDirective) =&gt; {
@@ -872,7 +938,18 @@ export class ListWithTemplatesComponent {
         </section>
 
         <section>
-          <!-- *ngFor zeigen/erklären und default trackBy mit GIF -->
+          <h2>Performance</h2>
+
+          <aside class="notes">
+            <ul>
+              <li>Erfahrung aus der Praxis: Angular-Magie kann zu Performance-Problemen führen, wenn unbedacht benutzt</li>
+              <li>Nicht direkt content projection, aber auch wichtig</li>
+              <li>Besonders Problem, wenn man viele Elemente hat, Beispiel: Liste mit ng-template, viele Einträge im Input-Array</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
           <h3>Performance: trackBy</h3>
           
           <div class="flex">
@@ -880,16 +957,16 @@ export class ListWithTemplatesComponent {
     selector: &quot;shopping-list&quot;,
     template: `
         &lt;list-with-templates-trackBy 
-          [items]=&quot;shoppingListEntries&quot;&gt;
+          [items]=&quot;<span class="lightblue">shoppingListEntries</span>&quot;&gt;
             ...
         &lt;/list-with-templates-trackBy&gt;
     `
 })
-export class ShoppingLisWithTrackByComponent {
+export class ShoppingListWithTrackByComponent {
     <span class="fragment" data-fragment-index="2">constructor(<span class="fragment" data-fragment-index="4">changeDetectorRef: ChangeDetectorRef</span>) {
       timer(2_000, 2_000)
       .subscribe(() =&gt; {
-        <span class="fragment" data-fragment-index="3">this.shoppingListEntries = this.shoppingListEntries
+        <span class="fragment" data-fragment-index="3"><span class="lightblue">this.shoppingListEntries</span> = this.shoppingListEntries
                                     .map(x =&gt; Object.assign({}, x));</span>
         <span class="fragment" data-fragment-index="4">changeDetectorRef.markForCheck();</span>
       });
@@ -901,7 +978,7 @@ export class ShoppingLisWithTrackByComponent {
   template: `
     &lt;ul&gt;
       &lt;ng-template
-        *ngFor=&quot;let item of items; <mark class="fragment" data-fragment-index="1">trackBy: trackByFn</mark>&quot;
+        *ngFor=&quot;let item of items; <span class="fragment yellow" data-fragment-index="1">trackBy: trackByFn</span>&quot;
         [ngTemplateOutlet]=&quot;templates.get(item.type) || null&quot;
         [ngTemplateOutletContext]=&quot;{ $implicit: item }&quot;
       &gt;
@@ -910,7 +987,7 @@ export class ShoppingLisWithTrackByComponent {
   `,
 })
 export class ListWithTemplatesTrackByComponent {
-  <span class="fragment" data-fragment-index="1">@Input() <mark>trackByFn</mark>: (index: number, item: any) =&gt; any = (_, item) =&gt; item;</span>
+  <span class="fragment" data-fragment-index="1">@Input() <span class="yellow">trackByFn</span>: (index: number, item: any) =&gt; any = <span class="red">(_, item) =&gt; item</span>;</span>
   ...
         </code></pre>
 
@@ -918,7 +995,6 @@ export class ListWithTemplatesTrackByComponent {
           <div><img src="img/screenshot_default-trackBy_01_endless.gif"></div>
           <div><img src="img/screenshot_default-trackBy_debug-tools_01_endless.gif"></div>
         </div>
-
       </div>
 
           <aside class="notes">
@@ -945,19 +1021,19 @@ export class ListWithTemplatesTrackByComponent {
     selector: &quot;shopping-list&quot;,
     template: `
         &lt;list-with-templates-trackBy 
-          <mark class="fragment" data-fragment-index="1">[trackByFn]=&quot;trackByName&quot;</mark>
-          [items]=&quot;shoppingListEntries&quot;&gt;
+          <span class="fragment hotpink" data-fragment-index="1">[trackByFn]=&quot;trackByName&quot;</span>
+          [items]=&quot;<span class="lightblue">shoppingListEntries</span>&quot;&gt;
             ...
         &lt;/list-with-templates-trackBy&gt;
     `
 })
-export class ShoppingLisWithTrackByComponent {
-    <mark class="fragment" data-fragment-index="1">trackByName = (index: number, item: any) =&gt; item.name;</mark>
+export class ShoppingListWithTrackByComponent {
+    <span class="fragment hotpink" data-fragment-index="1">trackByName = (_index: number, item: any) =&gt; item.name;</span>
 
     constructor(changeDetectorRef: ChangeDetectorRef) {
       timer(2_000, 2_000)
       .subscribe(() =&gt; {
-        this.shoppingListEntries = this.shoppingListEntries
+        this.<span class="lightblue">shoppingListEntries</span> = this.shoppingListEntries
                                     .map(x =&gt; Object.assign({}, x));
         changeDetectorRef.markForCheck();
       });
@@ -969,7 +1045,7 @@ export class ShoppingLisWithTrackByComponent {
   template: `
     &lt;ul&gt;
       &lt;ng-template
-        *ngFor=&quot;let item of items; trackBy: trackByFn&quot;
+        *ngFor=&quot;let item of items; <span class="yellow">trackBy: trackByFn</span>&quot;
         [ngTemplateOutlet]=&quot;templates.get(item.type) || null&quot;
         [ngTemplateOutletContext]=&quot;{ $implicit: item }&quot;
       &gt;
@@ -978,7 +1054,7 @@ export class ShoppingLisWithTrackByComponent {
   `,
 })
 export class ListWithTemplatesTrackByComponent {
-  @Input() trackByFn: (index: number, item: any) =&gt; any = (_, item) =&gt; item;
+  @Input() <span class="yellow">trackByFn</span>;
         </code></pre>
 
             <div class="fragment" data-fragment-index="10">
@@ -997,7 +1073,7 @@ export class ListWithTemplatesTrackByComponent {
         </section>
 
         <section>
-          <h3>Performance</h3>
+          <h3>Performance Analyse</h3>
 
           <img class="fragment" src="img/screenshot_opera_flamechart_code-days-programm_01.png" />
 
@@ -1016,7 +1092,7 @@ export class ListWithTemplatesTrackByComponent {
           </aside>
         </section>
         <section>
-          <h3>Performance</h3>
+          <h3>Performance Analyse</h3>
 
           <img src="img/performance-creating-items_01.png" />
 
@@ -1055,7 +1131,7 @@ export class ListWithTemplatesTrackByComponent {
           <h3>Danke</h3>
 
           <div class="flex">
-            <div><img style="width: 70%;" src="img/mailbox_small_mikaela-wiedenhoff-AwmCuTXL97Q-unsplash.jpg" alt="Mailbox im Grünen"></div>
+            <div><img style="width: 90%;" src="img/mailbox_small_mikaela-wiedenhoff-AwmCuTXL97Q-unsplash.jpg" alt="Mailbox im Grünen"></div>
             <div class="flex-column" style="justify-content: space-between;">
               <table style="font-size: 1.2rem; margin: 1rem;">
                 <tbody>
@@ -1073,22 +1149,26 @@ export class ListWithTemplatesTrackByComponent {
                   </tr>
                   <tr>
                     <td>Slides</td>
-                    <td><a href="https://github.com/groma84/angular-content-injection-vortrag">auf github</a></td>
+                    <td><a href="https://groma84.github.io/angular-content-projection-vortrag/">https://groma84.github.io/angular-content-projection-vortrag/</a>
+                    <div style="width: 30%;"><img  src="img/qr-code-zu-github-vortrag.png"></div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
 
             <div class="flex align-centered centered bg-white" style="margin: 1rem;">
-              <img src="img/mathema-logo.svg" alt="Mathema Logo">
+              <img src="img/mathema-logo.svg" style="margin-right: 2rem;" alt="Mathema Logo">
               <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
             </div>
           </div>
 
-            <!-- TODO: auf den Briefkasten schieben und Klebstreifen reinmalen?
-            <div>
+            <div style="position: absolute;
+            width: 10%;
+            left: 8%;
+            top: 35%;
+            transform: skew(3deg, -5deg);">
               <img src="img/grotz-profile.jpg" alt="Bild von Martin Grotz im Anzug">
             </div>
-            -->
           </div>
         </section>
       </div>

@@ -4,8 +4,8 @@ import { Component } from "@angular/core";
     {
         selector: 'template-outlet',
         template: `
-            <ng-template #listItem let-item>
-                <li>{{item}}</li>
+            <ng-template #listItem let-itemText>
+                <li>{{itemText}}</li>
             </ng-template>
 
             <ul>
