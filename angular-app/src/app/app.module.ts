@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SomeDirective, SimpleService, MyComponent } from './angular-examples';
+import { SomeDirective, MyComponent } from './angular-examples';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,7 @@ import { FirstLayerComponent, SecondLayerComponent, ThirdLayerComponent } from '
 import { ContentTwiceComponent } from './content-twice.component';
 import { FruitListItemComponent } from './fruit-list-item.component';
 import { HeaderComponent } from './header.component';
-import { LayerOneComponent, LayerTwoComponent, LayerThreeComponent, IsInjectedComponent } from './injector-mehrere-ebenen';
+import { LayerOneComponent, LayerTwoComponent, LayerThreeComponent, InnerTextComponent } from './injector-mehrere-ebenen';
 import { Layer1Component } from './layer1.component';
 import { Layer2Component } from './layer2.component';
 import { ListContextComponent } from './list-context.component';
@@ -95,7 +95,7 @@ import { TextComponent } from './text.component';
     LayerOneComponent,
     LayerTwoComponent,
     LayerThreeComponent,
-    IsInjectedComponent,
+    InnerTextComponent,
     NgIfElseComponent,
     TemplateOutletComponent,
     ListWithTemplatesComponent,

@@ -14,7 +14,7 @@
   position: absolute;
   bottom: 1em;
   left: 1em;
-  font-size: 0.5em;
+  font-size: 0.7rem;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -51,29 +51,34 @@ mark.second > .hljs-string {
   background-color: yellowgreen;
 }
 
-span.hotpink > .hljs-string {
+span.hotpink,
+span.hotpink > .hljs-string,
+span.hotpink > .hljs-meta {
   color: hotpink;
 }
 
-span.yellow > .hljs-string {
+span.yellow,
+span.yellow > .hljs-string,
+span.yellow > .hljs-meta {
   color: yellow;
 }
 
+span.lightblue,
 span.lightblue > .hljs-string,
 span.lightblue > .hljs-meta {
   color: lightblue;
 }
 
-span.hotpink {
-  color: hotpink;
+span.yellowgreen,
+span.yellowgreen > .hljs-string,
+span.yellowgreen > .hljs-meta {
+  color: yellowgreen;
 }
 
-span.yellow {
-  color: yellow;
-}
-
-span.lightblue {
-  color: lightblue;
+span.red,
+span.red > .hljs-string,
+span.red > .hljs-meta {
+  color: red;
 }
 
 .reveal code {

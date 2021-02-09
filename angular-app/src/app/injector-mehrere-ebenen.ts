@@ -1,12 +1,14 @@
-import { Component, ContentChild, Optional } from "@angular/core";
-import { FirstService } from "./first.service";
-import { TagDirective } from "./tag.directive";
-import { SecondService } from "./second.service";
+import { Component, Optional } from "@angular/core";
+import { LayerThreeService } from "./layer-three.service";
+import { LayerTwoService } from "./layer-two.service";
 
 @Component(
     {
         selector: 'layer-one',
-        template: `<layer-two><is-injected></is-injected></layer-two>`,
+        template: `
+        <layer-two>
+            <inner-text></inner-text>
+        </layer-two>`,
     }
 )
 export class LayerOneComponent {}
@@ -14,8 +16,11 @@ export class LayerOneComponent {}
 @Component(
     {
         selector: 'layer-two',
-        template: `<layer-three><ng-content></ng-content></layer-three>`,
-        providers: [FirstService]
+        template: `
+        <layer-three>
+            <ng-content></ng-content>
+        </layer-three>`,
+        providers: [LayerTwoService]
     }
 )
 export class LayerTwoComponent {}
@@ -24,29 +29,24 @@ export class LayerTwoComponent {}
     {
         selector: 'layer-three',
         template: `<ng-content></ng-content>`,
-        providers: [SecondService]
+        providers: [LayerThreeService]
     }
 )
-export class LayerThreeComponent {
-    constructor(
-        @Optional() firstService: FirstService,
-        @Optional() secondService: SecondService
-    ) {
-        console.log('injected services3', {firstService, secondService});
-    }
-}
+export class LayerThreeComponent {}
 
 @Component(
     {
-        selector: 'is-injected',
+        selector: 'inner-text',
         template: `<p>Are both services injected here?</p>`
     }
 )
-export class IsInjectedComponent {
+export class InnerTextComponent {
     constructor(
-        @Optional() firstService: FirstService,
-        @Optional() secondService: SecondService
+        @Optional() layerTwoService: LayerTwoService,
+        @Optional() layerThreeService: LayerThreeService
     ) {
-        console.log('injected services', {firstService, secondService});
+        console.log('injected services', {
+            layer2Service: layerTwoService, 
+            layer3Service: layerThreeService});
     }
 }
