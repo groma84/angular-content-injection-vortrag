@@ -21,7 +21,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
         <li><a routerLink="/change-detection-mit-verschachtelung-ng-content" routerLinkActive="active">change-detection-mit-verschachtelung-ng-content</a></li>
         <li><a routerLink="/content-children-mehrere-ebenen" routerLinkActive="active">content-children-mehrere-ebenen</a></li>
         <li><a routerLink="/injector-mehrere-ebenen" routerLinkActive="active">injector-mehrere-ebenen</a></li>
-      
+        <li><a routerLink="/content-zweimal-geht-nicht" routerLinkActive="active">content-zweimal-geht-nicht</a></li>
+
         <li><a routerLink="/ng-content-simple" routerLinkActive="active">simple</a></li>
         <li><a routerLink="/ng-content-selectors" routerLinkActive="active">selectors and lifecycle</a></li>
         <li><a routerLink="/ng-content-two-layers" routerLinkActive="active">multiple layers/checkifsomethingexists/contentchild</a></li>

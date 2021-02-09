@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { InnerComponent, MiddleComponent, OuterComponent } from './change-detection-mit-verschachtelung-ng-content';
 import { FirstLayerComponent, SecondLayerComponent, ThirdLayerComponent } from './content-children-mehrere-ebenen';
 import { ContentTwiceComponent } from './content-twice.component';
+import { OuterLayerComponent, InnerLayerComponent } from './content-zweimal-geht-nicht';
 import { FruitListItemComponent } from './fruit-list-item.component';
 import { HeaderComponent } from './header.component';
 import { LayerOneComponent, LayerTwoComponent, LayerThreeComponent, InnerTextComponent } from './injector-mehrere-ebenen';
@@ -102,6 +103,9 @@ import { TextComponent } from './text.component';
     ShoppingListComponent,
     ShoppingLisWithTrackByComponent,
     ListWithTemplatesTrackByComponent,
+
+    OuterLayerComponent,
+    InnerLayerComponent,
   ],
   imports: [
     BrowserModule,

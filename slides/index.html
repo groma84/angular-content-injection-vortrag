@@ -541,30 +541,50 @@ export class ThirdLayerComponent {
             2x ng-content mit gleichem Selektor = 💥
           </h3>
 
-          <!-- TODO: Code neu machen, vereinfachen -->
+          <div class="flex" style="justify-content: center;">
+              <div>
+                  <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+      {
+          selector: 'outer-layer',
+          template: `
+              &lt;inner-layer&gt;
+                  <span class="yellow">&lt;p&gt;💰💰💰&lt;/p&gt;</span>
+              &lt;/inner-layer&gt;
+        `
+      }
+  )
+  export class OuterLayerComponent {}
 
-          <div class="flex">
-            <div><img src="img/ng-content-projecting-twice_01.png" /></div>
+  @Component(
+      {
+          selector: 'inner-layer',
+          template: `
+          &lt;div&gt;
+              &lt;h3&gt;Money&lt;/h3&gt;
+              <span class="yellow">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+          &lt;/div&gt;
+          &lt;div <span class="hotpink fragment" data-fragment-index="40">*ngIf="false"</span>&gt;
+              &lt;h3&gt;More money&lt;/h3&gt;
+              <span class="yellow">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
+          &lt;/div&gt;
+          `
+      }
+  )
+  export class InnerLayerComponent {}</code></pre>
+              </div>
 
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/app-content-twice-both-true_01.png" />
-              </div>
-              <div class="fragment">
-                <img src="img/screenshot-projecting-twice-both-true_01.png" />
-              </div>
-            </div>
+              <div class="flex-column">
+                <div class="fragment" data-fragment-index="20">
+                  <img src="img/screenshot-ng-content-zweimal-geht-nicht-ohne-ngIf_01.png" />
+                </div>
 
-            <div class="flex-column">
-              <div class="fragment">
-                <img src="img/app-content-twice-second-false_01.png" />
+                <div class="fragment" data-fragment-index="50">
+                  <img
+                    src="img/screenshot-ng-content-zweimal-geht-nicht-mit-ngIf_01.png"
+                  />
+                </div>
               </div>
-              <div class="fragment">
-                <img
-                  src="img/screenshot-projecting-twice-second-false_01.png"
-                />
-              </div>
-            </div>
+
           </div>
 
           <aside class="notes">
@@ -653,7 +673,7 @@ export class InnerTextComponent {
           <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
           <div class="flex">
-          <div class="fragment">
+          <div class="">
             <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
     {
         selector: 'layer-one',
@@ -1144,8 +1164,8 @@ export class ListWithTemplatesTrackByComponent {
 
             <div style="position: absolute;
             width: 10%;
-            left: 7%;
-            top: 33%;
+            left: 8%;
+            top: 35%;
             transform: skew(3deg, -5deg);">
               <img src="img/grotz-profile.jpg" alt="Bild von Martin Grotz im Anzug">
             </div>
