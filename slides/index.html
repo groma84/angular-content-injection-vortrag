@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
 
-    <title>DRY in Angular Templates: Content Projection im Praxiseinsatz</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/night.css" />
+  <title>DRY in Angular Templates: Content Projection im Praxiseinsatz</title>
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/reveal.css" />
+  <link rel="stylesheet" href="css/theme/white.css" />
 
-    <!-- Custom styling and tweaks -->
-    <link rel="stylesheet" href="css/style.min.css" />
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
 
-    <!-- Plugins -->
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="footer">
-        <span>CodeDaysDigital 2021</span>
-        <span>Martin Grotz - martin.grotz@mathema.de - @mobilgroma</span>
-        <span>MATHEMA GmbH</span>
-      </div>
+  <!-- Custom styling and tweaks -->
+  <link rel="stylesheet" href="css/style.min.css" />
 
-      <div class="slides">
-        <section>
-          <div class="flex-column align-centered">
-            <h2 style="font-size: 2.75rem;">DRY in <span style="color:red;">Angular</span> Templates</h2>
-            <h3 style="font-size: 2.25rem; margin-top: 2rem;"><span style="color:red;">Content Projection</span> im Praxiseinsatz</h3>
-            <h3 style="font-size: 1.5rem; margin-top: 4rem;">Martin Grotz</h3>
-            
-              <div style="width: 50%;">
-              <div class="flex align-centered centered bg-white" style="margin: 1rem;">
-                <img src="img/mathema-logo.svg" style="margin-right: 2rem;" alt="Mathema Logo">
-                <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
-              </div>
+  <!-- Plugins -->
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="footer">
+      <span>enterJS 2021</span>
+      <span>Martin Grotz - martin.grotz@mathema.de - @mobilgroma</span>
+      <span>MATHEMA GmbH</span>
+    </div>
+
+    <div class="slides">
+      <section>
+        <div class="flex-column align-centered">
+          <h2 style="font-size: 2.75rem;">DRY in <span style="color:red;">Angular</span> Templates</h2>
+          <h3 style="font-size: 2.25rem; margin-top: 2rem;"><span style="color:red;">Content Projection</span> im
+            Praxiseinsatz</h3>
+          <h3 style="font-size: 1.5rem; margin-top: 4rem;">Martin Grotz</h3>
+
+          <div style="width: 50%;">
+            <div class="flex align-centered centered bg-white" style="margin: 1rem;">
+              <img src="img/mathema-logo.svg" style="margin-right: 2rem;" alt="Mathema Logo">
+              <img src="img/enterjs.svg" style="height: 7rem;" alt="enterJS 2021 Logo">
             </div>
           </div>
+        </div>
 
-          <aside class="notes"></aside>
-        </section>
+        <aside class="notes"></aside>
+      </section>
 
-        <section>
-          
-          <div>
-            <h3>Angular</h3>
+      <section>
 
-            <div class="flex">
-              <div>
-                <img src="img/angular.png" />
-              </div>
+        <div>
+          <h3>Angular</h3>
 
-              <ul>
-                <li class="fragment">Open-source Framework</li>
-                <li class="fragment">Webtechnologien & TypeScript</li>
-                <li class="fragment">Multi-target: WebApps, MobileApps, SSR</li>
-                <li class="fragment">Komponentenorientiert</li>
-                <li class="fragment">Dependency Injection</li>
-                <li class="fragment">Automatische Change Detection</li>
-              </ul>
+          <div class="flex">
+            <div>
+              <img src="img/angular.png" />
             </div>
-          </div>
-          <aside class="notes">
+
             <ul>
-              <li>
-                Multi-target: Webapps, Server-side rendering, Mobile Apps via
-                Ionic
-              </li>
-              <li>Besteht hauptsächlich aus drei Bausteinen (siehe nächste Folie)</li>
+              <li class="fragment">Open-source Framework</li>
+              <li class="fragment">Webtechnologien & TypeScript</li>
+              <li class="fragment">Multi-target: WebApps, MobileApps, SSR</li>
+              <li class="fragment">Komponentenorientiert</li>
+              <li class="fragment">Dependency Injection</li>
+              <li class="fragment">Automatische Change Detection</li>
             </ul>
-          </aside>
-        </section>
+          </div>
+        </div>
+        <aside class="notes">
+          <ul>
+            <li>
+              Multi-target: Webapps, Server-side rendering, Mobile Apps via
+              Ionic
+            </li>
+            <li>Besteht hauptsächlich aus drei Bausteinen (siehe nächste Folie)</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Angular Bausteine</h3>
-          <pre  class="fragment" data-fragment-index="1"><code class="typescript" data-trim data-noescape><span class="fragment" data-fragment-index="1">@Directive({selector: '[bold]'})
+      <section>
+        <h3>Angular Bausteine</h3>
+        <pre class="fragment" data-fragment-index="1"><code class="typescript" data-trim data-noescape><span class="fragment" data-fragment-index="1">@Directive({selector: '[bold]'})
 export class SomeDirective {
     bold: boolean = false;
 }</span>
@@ -105,35 +105,35 @@ export class SimpleService {
 export class MyComponent {}</span>
           </code></pre>
 
-          <aside class="notes">
-            <ul>
-              <li>
-                Angular-Anwendung besteht aus drei Sachen:
-                <ul>
-                  <li>
-                    Komponenten, die als View für die Darstellung zuständig sind
-                  </li>
-                  <li>
-                    Direktiven, die das Verhalten von Komponenten beeinflussen
-                  </li>
-                  <li>
-                    Services, die für Datenhaltung und -austausch zuständig sind
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Angular macht viel über Decorators: Aspektorientierte
-                Programmierung
-              </li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>
+              Angular-Anwendung besteht aus drei Sachen:
+              <ul>
+                <li>
+                  Komponenten, die als View für die Darstellung zuständig sind
+                </li>
+                <li>
+                  Direktiven, die das Verhalten von Komponenten beeinflussen
+                </li>
+                <li>
+                  Services, die für Datenhaltung und -austausch zuständig sind
+                </li>
+              </ul>
+            </li>
+            <li>
+              Angular macht viel über Decorators: Aspektorientierte
+              Programmierung
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Dependency Injection & Input</h3>
-          <pre><code class="typescript" data-trim data-noescape>@Directive({selector: '[bold]'})
+      <section>
+        <h3>Dependency Injection & Input</h3>
+        <pre><code class="typescript unlimited-height" data-trim data-noescape>@Directive({selector: '[bold]'})
 export class SomeDirective {
-    <span class="fragment" data-fragment-index="3">@HostBinding('class.bold')</span>
+    <span class="fragment" data-fragment-index="3">@HostBinding('class.bold');</span>
     <span class="lightblue fragment" data-fragment-index="3">@Input()</span>
     <span class="lightblue fragment" data-fragment-index="3">bold: boolean = false;</span>
 }
@@ -157,34 +157,39 @@ export class MyComponent {
     <span class="yellow">constructor(<span class="fragment" data-fragment-index="2">public readonly simpleService: SimpleService</span>)</span> {}
   }</code></pre>
 
-          <aside class="notes">
-            <ul>
-              <li>
-                Dependency injection: Provider und automatische Injection in den
-                Konstruktor
-              </li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>
+              Dependency injection: Provider und automatische Injection in den
+              Konstruktor
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section><h3>Change Detection - Default</h3>
-          
-          <div class="fragment"><img src="img/Angular_ChangeDetection_default.gif"></div>
+      <section>
+        <h3>Change Detection - Default</h3>
 
-          <aside class="notes">
-            <ul><li>
+        <div class="fragment"><img src="img/Angular_ChangeDetection_default.gif"></div>
+
+        <aside class="notes">
+          <ul>
+            <li>
               <ul>
                 <li>Probleme und Vorteile mit Default</li>
               </ul>
-            </li></ul>
-          </aside>
-        </section>
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section><h3>Change Detection - OnPush</h3>
-          <div class="fragment"><img src="img/Angular_ChangeDetection_OnPush.gif"></div>
-          
-          <aside class="notes">
-            <ul><li>
+      <section>
+        <h3>Change Detection - OnPush</h3>
+        <div class="fragment"><img src="img/Angular_ChangeDetection_OnPush.gif"></div>
+
+        <aside class="notes">
+          <ul>
+            <li>
               <ul>
                 <li>Probleme</li>
                 <li>Default vs OnPush</li>
@@ -192,21 +197,26 @@ export class MyComponent {
                 <li>Mit OnPush:
                   <ul>
                     <li>Änderung an Input: Nur wo sich Objektreferenzen geändert haben, wird der Baum geprüft</li>
-                    <li>Vergleich von Objektreferenzen, z.B. Änderung von Daten IM Array oder Objekt fällt nicht auf -> ggf. sowas wie Immutable.js oder Object.assign verwenden</li></li>
-                    <li>Input ändert sich: Teilbaum wird geprüft</li>
-                    <li>Event: Alles wird geprüft -> manchmal wird was nicht aktualisiert, bis man klickt -> OnPush Problem</li>
-                    <li>bei bestimmten Funktionen (setTimeout(), Promise.resolve().then(), obs$.subscribe()) muss man bei OnPush manuell CD auslösen!</li>
-                  </ul>
+                    <li>Vergleich von Objektreferenzen, z.B. Änderung von Daten IM Array oder Objekt fällt nicht auf ->
+                      ggf. sowas wie Immutable.js oder Object.assign verwenden</li>
+                </li>
+                <li>Input ändert sich: Teilbaum wird geprüft</li>
+                <li>Event: Alles wird geprüft -> manchmal wird was nicht aktualisiert, bis man klickt -> OnPush Problem
+                </li>
+                <li>bei bestimmten Funktionen (setTimeout(), Promise.resolve().then(), obs$.subscribe()) muss man bei
+                  OnPush manuell CD auslösen!</li>
               </ul>
-            </li></ul>
-          </aside>
-        </section>
+          </ul>
+          </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>ng-content</h3>
+      <section>
+        <h3>ng-content</h3>
 
-          <div class="flex centered">
-            <div class="code fragment">
+        <div class="flex centered">
+          <div class="code fragment">
             <pre><code class="typescript" data-trim data-noescape>@Component(
     {
         selector: 'outer-component',
@@ -223,9 +233,9 @@ export class MyComponent {
 )
 export class OuterComponent {/* ... */}
               </code></pre>
-            </div>
-            <div class="code fragment">
-              <pre><code class="typescript" data-trim data-noescape>@Component(
+          </div>
+          <div class="code fragment">
+            <pre><code class="typescript" data-trim data-noescape>@Component(
     {
         selector: 'fancy-modal',
         template: `
@@ -239,55 +249,54 @@ export class OuterComponent {/* ... */}
 )
 export class FancyModal {/* ... */}
               </code></pre>
-            </div>
-
-            <svg class="fragment" style="position: absolute;" height="100%" width="100%">
-              <defs>
-                  <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
-                         orient="auto">
-                      <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #ffff00;" />
-                  </marker>
-              </defs>
-              
-              <line x1="495" y1="170" x2="650" y2="145" class="arrow" />
-
-              <rect x="225" y="130" width="270" height="70"
-  style="fill:transparent;stroke:yellow;stroke-width:2;fill-opacity:0.1;stroke-opacity:1" />
-            </svg>
           </div>
 
-          <aside class="notes">
-            <ul>
-             
-            </ul>
-          </aside>
+          <svg class="fragment" style="position: absolute;" height="100%" width="100%">
+            <defs>
+              <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6" orient="auto">
+                <path d="M2,2 L2,11 L10,6 L2,2" style="fill: #ffff00;" />
+              </marker>
+            </defs>
 
-          <aside class="notes">
-            <ul>
-              <li>Statische Projektion</li>
-              <li>
-                Zu projizierender Inhalt wird einfach zwischen die Tags des
-                Wrapper-Elements geschrieben
-              </li>
-              <li>
-                Element wird an einer Stelle ausgeschnitten und an anderer
-                wieder eingefügt
-              </li>
-              <li>
-                Beispiel: Wrapper-Komponente mit Funktionalität, wechselnder
-                Inhalt
-              </li>
-            </ul>
-          </aside>
-        </section>
+            <line x1="495" y1="170" x2="650" y2="145" class="arrow" />
 
-        <section>
-          <h3 style="font-size: 2rem">
-            ng-content Selektoren (Beispiele)
-          </h3>
+            <rect x="225" y="130" width="270" height="70"
+              style="fill:transparent;stroke:yellow;stroke-width:2;fill-opacity:0.1;stroke-opacity:1" />
+          </svg>
+        </div>
 
-          <div class="code fragment" data-fragment-index="10">
-            <pre class="fit-content"><code class="typescript" data-trim data-noescape>@Component(
+        <aside class="notes">
+          <ul>
+
+          </ul>
+        </aside>
+
+        <aside class="notes">
+          <ul>
+            <li>Statische Projektion</li>
+            <li>
+              Zu projizierender Inhalt wird einfach zwischen die Tags des
+              Wrapper-Elements geschrieben
+            </li>
+            <li>
+              Element wird an einer Stelle ausgeschnitten und an anderer
+              wieder eingefügt
+            </li>
+            <li>
+              Beispiel: Wrapper-Komponente mit Funktionalität, wechselnder
+              Inhalt
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h3 style="font-size: 2rem">
+          ng-content Selektoren (Beispiele)
+        </h3>
+
+        <div class="code fragment" data-fragment-index="10">
+          <pre class="fit-content"><code class="typescript" data-trim data-noescape>@Component(
     {
         /* ... */
         template: `
@@ -300,70 +309,70 @@ export class FancyModal {/* ... */}
 )
 export class WithSelectors {/* ... */}
       </code></pre>
-    </div>
-          
-          <aside class="notes">
-            <ul>
-            
-              <li>
-                In ng-content kann mit select ein CSS-Selektor angegeben werden,
-                der dann nur passende Inhalte in diesem ng-content anzeigt
-              </li>
-              <li>
-                Wenn man keinen "Lumpensammler" ohne select hat, werden ggf.
-                nirgends passende Inhalte dann auch nirgends angezeigt
-              </li>
-            </ul>
-          </aside>
-        </section>
+        </div>
+
+        <aside class="notes">
+          <ul>
+
+            <li>
+              In ng-content kann mit select ein CSS-Selektor angegeben werden,
+              der dann nur passende Inhalte in diesem ng-content anzeigt
+            </li>
+            <li>
+              Wenn man keinen "Lumpensammler" ohne select hat, werden ggf.
+              nirgends passende Inhalte dann auch nirgends angezeigt
+            </li>
+          </ul>
+        </aside>
+      </section>
 
 
-        <section>
-          <h3>
-            Angular Lifecycle Hooks
-          </h3>
+      <section>
+        <h3>
+          Angular Lifecycle Hooks
+        </h3>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Hook</th>
-                <th>Was passiert</th>
-              </tr>
-            </thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Hook</th>
+              <th>Was passiert</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr class="fragment">
-                <td>ngOnInit</td>
-                <td>Inputs initialisiert, Komponente initialisieren</td>
-              </tr>
-              <tr class="fragment">
-                <td>ngAfterContentInit</td>
-                <td>Externer Content wurde projiziert und initialisiert</td>
-              </tr>
-              <tr class="fragment">
-                <td>ngAfterViewInit</td>
-                <td>Eigenes Template und Kindkomponenten initialisiert</td>
-              </tr>
-              <tr class="fragment">
-                <td>ngOnDestroy</td>
-                <td>Komponente wird gleich abgebaut</td>
-              </tr>
-            </tbody>
-          </table>
+          <tbody>
+            <tr class="fragment">
+              <td>ngOnInit</td>
+              <td>Inputs initialisiert, Komponente initialisieren</td>
+            </tr>
+            <tr class="fragment">
+              <td>ngAfterContentInit</td>
+              <td>Externer Content wurde projiziert und initialisiert</td>
+            </tr>
+            <tr class="fragment">
+              <td>ngAfterViewInit</td>
+              <td>Eigenes Template und Kindkomponenten initialisiert</td>
+            </tr>
+            <tr class="fragment">
+              <td>ngOnDestroy</td>
+              <td>Komponente wird gleich abgebaut</td>
+            </tr>
+          </tbody>
+        </table>
 
-          <aside class="notes">
-            <ul>
-              <li></li>
-            </ul>
-          </aside>
-        </section>
-        <section>
-          <h3>Lifecycle Reihenfolge</h3>
+        <aside class="notes">
+          <ul>
+            <li></li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h3>Lifecycle Reihenfolge</h3>
 
-          <div class="flex centered align-centered">
-              
-              <div class="code fragment" data-fragment-index="10">
-                <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+        <div class="flex centered align-centered">
+
+          <div class="code fragment" data-fragment-index="10">
+            <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         selector: 'outer',
         template: `
@@ -391,94 +400,97 @@ export class MiddleComponent {/* ... */}</span>
 )
 export class InnerComponent {/* ... */}</span>
               </code></pre>
-            </div>
-
-              <div class="flex-column">
-                <div class="fragment" data-fragment-index="40">
-                  <table style="font-size: 0.6rem;">
-                    <tbody>
-                      <tr>
-                        <td>ngOnInit</td>
-                        <td>Inputs setzen, Komponente initialisieren</td>
-                      </tr>
-                      <tr>
-                        <td>ngAfterContentInit</td>
-                        <td>ng-content initialisiert</td>
-                      </tr>
-                      <tr>
-                        <td>ngAfterViewInit</td>
-                        <td>Restliche (Kind-)Elemente initialisiert</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div class="fragment" data-fragment-index="50">
-                  <img src="img/screenshot-content-lifecycle-simple_01.png" />
-                </div>
-              </div>
           </div>
 
-          <aside class="notes">
-            <ul>
-              <li>
-                Outer wird initialisiert, dann ng-content aus Outer -> gibt es nicht, also sofort fertig
-              </li>
-              <li>Dann "lesen von unten nach oben": Kindelemente von Outer machen: Middle</li>
-              <li>Middle ngOnInit, dann ng-content Inhalte -> Inner</li>
-              <li>Inner macht content durch</li>
-              <li>Middle fertig mit ngContent, danach kommt Inner mit View, dann ist Middle fertig mit allem</li>
-              <li>Am Schluss ist dann auch Outer fertig</li>
+          <div class="flex-column">
+            <div class="fragment" data-fragment-index="40">
+              <table style="font-size: 0.6rem;">
+                <tbody>
+                  <tr>
+                    <td>ngOnInit</td>
+                    <td>Inputs setzen, Komponente initialisieren</td>
+                  </tr>
+                  <tr>
+                    <td>ngAfterContentInit</td>
+                    <td>ng-content initialisiert</td>
+                  </tr>
+                  <tr>
+                    <td>ngAfterViewInit</td>
+                    <td>Restliche (Kind-)Elemente initialisiert</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-              <li>
-                Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges
-                erzwingen: Elternkomponenten sind noch nicht fertig
-                initialisiert, ggf. unerwartete undefined Werte bei Inputs,
-                ViewChild, ContentChild
-              </li>
-            </ul>
-          </aside>
-        </section>
+            <div class="fragment" data-fragment-index="50">
+              <img src="img/screenshot-content-lifecycle-simple_01.png" />
+            </div>
+          </div>
+        </div>
 
-        <section>
-          <h3>ContentChildren</h3>
+        <aside class="notes">
+          <ul>
+            <li>
+              Outer wird initialisiert, dann ng-content aus Outer -> gibt es nicht, also sofort fertig
+            </li>
+            <li>Dann "lesen von unten nach oben": Kindelemente von Outer machen: Middle</li>
+            <li>Middle ngOnInit, dann ng-content Inhalte -> Inner</li>
+            <li>Inner macht content durch</li>
+            <li>Middle fertig mit ngContent, danach kommt Inner mit View, dann ist Middle fertig mit allem</li>
+            <li>Am Schluss ist dann auch Outer fertig</li>
 
-          <div class="code">
-            <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 1rem;" data-trim data-noescape><span class="hotpink">@ContentChild</span>(TagDirective) tagDirective: TagDirective;
+            <li>
+              Gefährlich: In Lifecycle-Hooks ChangeDetection mit detectChanges
+              erzwingen: Elternkomponenten sind noch nicht fertig
+              initialisiert, ggf. unerwartete undefined Werte bei Inputs,
+              ViewChild, ContentChild
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h3>ContentChildren</h3>
+
+        <div class="code">
+          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 1rem;" data-trim data-noescape><span class="hotpink">@ContentChild</span>(TagDirective) tagDirective: TagDirective;
 
 <span class="hotpink">@ContentChildren</span>(TagDirective) tagDirectives: QueryList&lt;TagDirective&gt;;
             </code></pre>
-          </div>
+        </div>
 
-          <blockquote class="fragment" data-fragment-index="20"  style="margin-top: 3rem; width:70%; font-size: 0.8rem;">
-            Use to get the QueryList of elements or directives from the content DOM. Any time a child element is added, removed, or moved, the query list will be updated, and the changes observable of the query list will emit a new value.
-            <br><br>
-            Content queries are set before the ngAfterContentInit callback is called.
-            <br><br>
-            Does not retrieve elements or directives that are in other components' templates, since a component's template is always a black box to its ancestors.
-          </blockquote>
-            
-          <p style="font-size: 1.2rem;" class="fragment" data-fragment-index="20">
-            Doku: <br>
-            <a href="https://angular.io/api/core/ContentChild">https://angular.io/api/core/ContentChild</a><br>
-            <a href="https://angular.io/api/core/ContentChildren">https://angular.io/api/core/ContentChildren</a>
-          </p>
+        <blockquote class="fragment" data-fragment-index="20" style="margin-top: 3rem; width:70%; font-size: 0.8rem;">
+          Use to get the QueryList of elements or directives from the content DOM. Any time a child element is added,
+          removed, or moved, the query list will be updated, and the changes observable of the query list will emit a
+          new value.
+          <br><br>
+          Content queries are set before the ngAfterContentInit callback is called.
+          <br><br>
+          Does not retrieve elements or directives that are in other components' templates, since a component's template
+          is always a black box to its ancestors.
+        </blockquote>
 
-          <aside class="notes">
-            <ul>
-              <li>Variante, um genau ein Element (das erste gefundene!) zu selektieren: ContentChild</li>
-              <li>ContentChild ist erst nach AfterContentInit befüllt, falls
-                vorhanden</li>
-            </ul>
-          </aside>
-        </section>
+        <p style="font-size: 1.2rem;" class="fragment" data-fragment-index="20">
+          Doku: <br>
+          <a href="https://angular.io/api/core/ContentChild">https://angular.io/api/core/ContentChild</a><br>
+          <a href="https://angular.io/api/core/ContentChildren">https://angular.io/api/core/ContentChildren</a>
+        </p>
 
-        <section>
-          <h3>Projektion über mehrere Ebenen</h3>
+        <aside class="notes">
+          <ul>
+            <li>Variante, um genau ein Element (das erste gefundene!) zu selektieren: ContentChild</li>
+            <li>ContentChild ist erst nach AfterContentInit befüllt, falls
+              vorhanden</li>
+          </ul>
+        </aside>
+      </section>
 
-          <div class="flex">
+      <section>
+        <h3>Projektion über mehrere Ebenen</h3>
+
+        <div class="flex">
           <div class="fragment" data-fragment-index="10">
-          <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape><span class="fragment" data-fragment-index="10">@Component(
+            <pre class="fit-content"><code class="typescript unlimited-height code--smaller-font" data-trim data-noescape><span class="fragment" data-fragment-index="10">@Component(
     {
         selector: 'layer1',
         template: `
@@ -521,29 +533,31 @@ export class ThirdLayerComponent {
     }</span>
 }</span>
           </code></pre>
+          </div>
+
+          <div>
+            <img class="fragment" data-fragment-index="35"
+              src="img/screenshot-content-children-mehrere-ebenen-browser_01.png" />
+            <img class="fragment" data-fragment-index="50"
+              src="img/screenshot-content-children-mehrere-ebenen_01.png" />
+          </div>
         </div>
 
-        <div>
-          <img class="fragment" data-fragment-index="35" src="img/screenshot-content-children-mehrere-ebenen-browser_01.png" />
-          <img class="fragment" data-fragment-index="50" src="img/screenshot-content-children-mehrere-ebenen_01.png" />
-        </div>
-    </div>
+        <aside class="notes">
+          <ul>
+            <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
+          </ul>
+        </aside>
+      </section>
 
-          <aside class="notes">
-            <ul>
-              <li>Klappt nur bei Weitergabe #1, danach ist es undefined.</li>
-            </ul>
-          </aside>
-        </section>
+      <section>
+        <h3 style="font-size: 2rem">
+          2x ng-content mit gleichem Selektor = 💥
+        </h3>
 
-        <section>
-          <h3 style="font-size: 2rem">
-            2x ng-content mit gleichem Selektor = 💥
-          </h3>
-
-          <div class="flex" style="justify-content: center;">
-              <div>
-                  <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+        <div class="flex" style="justify-content: center;">
+          <div>
+            <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
       {
           selector: 'outer-layer',
           template: `
@@ -571,46 +585,42 @@ export class ThirdLayerComponent {
       }
   )
   export class InnerLayerComponent {}</code></pre>
-              </div>
-
-              <div class="flex-column">
-                <div class="fragment" data-fragment-index="20">
-                  <img src="img/screenshot-ng-content-zweimal-geht-nicht-ohne-ngIf_01.png" />
-                </div>
-
-                <div class="fragment" data-fragment-index="50">
-                  <img
-                    src="img/screenshot-ng-content-zweimal-geht-nicht-mit-ngIf_01.png"
-                  />
-                </div>
-              </div>
-
           </div>
 
-          <aside class="notes">
-            <ul>
-              <li>Verschieben im DOM, nur 1x möglich</li>
-              <li>Letztes ng-content gewinnt</li>
-              <li>
-                Egal, ob das ng-content zur Laufzeit überhaupt da ist oder
-                nicht!
-              </li>
-            </ul>
-          </aside>
-        </section>
+          <div class="flex-column">
+            <div class="fragment" data-fragment-index="20">
+              <img src="img/screenshot-ng-content-zweimal-geht-nicht-ohne-ngIf_01.png" />
+            </div>
 
-        <section>
-          <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
+            <div class="fragment" data-fragment-index="50">
+              <img src="img/screenshot-ng-content-zweimal-geht-nicht-mit-ngIf_01.png" />
+            </div>
+          </div>
 
-          <div class="flex">
-            <div class="fragment" data-fragment-index="10">
-              <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+        </div>
+
+        <aside class="notes">
+          <ul>
+            <li>Verschieben im DOM, nur 1x möglich</li>
+            <li>Letztes ng-content gewinnt</li>
+            <li>
+              Egal, ob das ng-content zur Laufzeit überhaupt da ist oder
+              nicht!
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
+
+        <div class="flex">
+          <div class="fragment" data-fragment-index="10">
+            <pre class="fit-content"><code class="typescript unlimited-height code--smaller-font" data-trim data-noescape>@Component(
     {
         selector: 'layer-one',
         template: `
-        <span class="lightblue">&lt;layer-two&gt;</span>
-            &lt;inner-text&gt;&lt;/inner-text&gt;
-        <span class="lightblue">&lt;/layer-two&gt;`</span>,
+        <span class="lightblue">&lt;layer-two&gt;</span>&lt;inner-text&gt;&lt;/inner-text&gt;<span class="lightblue">&lt;/layer-two&gt;`</span>,
     }
 )
 export class LayerOneComponent {}
@@ -619,9 +629,7 @@ export class LayerOneComponent {}
     {
         selector: '<span class="lightblue">layer-two</span>',
         template: `
-        <span class="yellowgreen">&lt;layer-three&gt;</span>
-            <span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
-        <span class="yellowgreen">&lt;/layer-three&gt;`</span>,
+        <span class="yellowgreen">&lt;layer-three&gt;</span><span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span><span class="yellowgreen">&lt;/layer-three&gt;`</span>,
         <span class="yellow fragment" data-fragment-index="43">providers: [LayerTwoService]</span>
     }
 )
@@ -654,33 +662,31 @@ export class InnerTextComponent {
 }</span></code></pre>
           </div>
 
-        <div>
-          <img class="fragment" data-fragment-index="40" src="img/screenshot-injector-mehrere-ebenen_01.png">
-          <img class="fragment" data-fragment-index="60" src="img/injector-mehrere-ebenen_01.png">
+          <div>
+            <img class="fragment" data-fragment-index="40" src="img/screenshot-injector-mehrere-ebenen_01.png">
+            <img class="fragment" data-fragment-index="60" src="img/injector-mehrere-ebenen_01.png">
+          </div>
         </div>
-      </div>
 
-          <aside class="notes">
-            <ul>
-              <li>
-                DOM mit ng-content ist nicht gleich Angular Injector/CD Tree
-              </li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>
+              DOM mit ng-content ist nicht gleich Angular Injector/CD Tree
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
+      <section>
+        <h3 style="font-size: 2rem">Injector (& Change Detection)</h3>
 
-          <div class="flex">
+        <div class="flex">
           <div class="">
-            <pre class="fit-content"><code class="typescript unlimited-height smaller-font" data-trim data-noescape>@Component(
+            <pre class="fit-content"><code class="typescript unlimited-height code--smaller-font" data-trim data-noescape>@Component(
     {
         selector: 'layer-one',
         template: `
-        <span class="lightblue">&lt;layer-two&gt;</span>
-            &lt;inner-text&gt;&lt;/inner-text&gt;
-        <span class="lightblue">&lt;/layer-two&gt;`</span>,
+        <span class="lightblue">&lt;layer-two&gt;</span>&lt;inner-text&gt;&lt;/inner-text&gt;<span class="lightblue">&lt;/layer-two&gt;`</span>,
     }
 )
 export class LayerOneComponent {}
@@ -689,9 +695,7 @@ export class LayerOneComponent {}
     {
         selector: '<span class="lightblue">layer-two</span>',
         template: `
-        <span class="yellowgreen">&lt;layer-three&gt;</span>
-            <span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span>
-        <span class="yellowgreen">&lt;/layer-three&gt;`</span>,
+        <span class="yellowgreen">&lt;layer-three&gt;</span><span class="red">&lt;ng-content&gt;&lt;/ng-content&gt;</span><span class="yellowgreen">&lt;/layer-three&gt;`</span>,
         <span class="yellow">providers: [LayerTwoService]</span>
     }
 )
@@ -722,15 +726,15 @@ export class InnerTextComponent {
             layer3Service: layerThreeService});
     }</span>
 }</span></code></pre>
-  </div>
+          </div>
 
           <div class="flex-column align-centered">
-              <blockquote class="fragment" style="font-size: 0.9rem">
-                This is working as expected: <br />
-                nodes are only "projected" (moved to a different location) but
-                everything else works relative to their source (= before
-                projection) location.
-              </blockquote>
+            <blockquote class="fragment" style="font-size: 0.9rem">
+              This is working as expected: <br />
+              nodes are only "projected" (moved to a different location) but
+              everything else works relative to their source (= before
+              projection) location.
+            </blockquote>
             <div class="fragment" style="width: 100%">
               <img src="img/injector-tree_01.png" />
             </div>
@@ -738,37 +742,38 @@ export class InnerTextComponent {
 
         </div>
 
-          <aside class="notes">
-            <ul>
-              <li>Angular wertet das Original-DOM aus und baut damit seinen internen Baum</li>
-              <li>Erst danach werden die DOM-Knoten verschoben</li>
-              <li>ng-content tag entfällt im DOM</li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Angular wertet das Original-DOM aus und baut damit seinen internen Baum</li>
+            <li>Erst danach werden die DOM-Knoten verschoben</li>
+            <li>ng-content tag entfällt im DOM</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>ng-template</h3>
-          <aside class="notes">
-            <ul>
-              <li>Große Schwester von ng-content</li>
-              <li>
-                Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus
-                Vorlagen
-              </li>
-              <li>
-                Alles, was mit ng-content geht, geht auch mit ng-template, aber
-                ggf. mehr Code
-              </li>
-              <li>Mehr Möglichkeiten als ng-content: Zum Beispiel löst es das Problem mit "kann nicht 2x eingefügt werden"</li>
-            </ul>
-          </aside>
-        </section>
+      <section>
+        <h3>ng-template</h3>
+        <aside class="notes">
+          <ul>
+            <li>Große Schwester von ng-content</li>
+            <li>
+              Kein Ausschneiden und Einfügen, sondern dynamisches Erzeugen aus
+              Vorlagen
+            </li>
+            <li>
+              Alles, was mit ng-content geht, geht auch mit ng-template, aber
+              ggf. mehr Code
+            </li>
+            <li>Mehr Möglichkeiten als ng-content: Zum Beispiel löst es das Problem mit "kann nicht 2x eingefügt werden"
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>*ngIf; else</h3>
+      <section>
+        <h3>*ngIf; else</h3>
 
-          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+        <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         template: `
             &lt;ng-container <span class="fragment" data-fragment-index="10"><mark>*ngIf</mark>=&quot;!!name<span class="fragment" data-fragment-index="50">; else <mark class="first">noNameGiven</mark></span>&quot;</span>&gt;
@@ -784,17 +789,17 @@ export class InnerTextComponent {
 export class Component { ... }
 </code></pre>
 
-          <aside class="notes">
-            <ul>
-              <li></li>
-              </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li></li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>ngTemplateOutlet</h3>
+      <section>
+        <h3>ngTemplateOutlet</h3>
 
-          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
+        <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component(
     {
         template: `
             &lt;ng-template <span class="lightblue fragment" data-fragment-index="10">#listItem</span> <span class="hotpink fragment" data-fragment-index="20">let-itemText</span>&gt;
@@ -811,12 +816,12 @@ export class Component { ... }
     }
 )
 export class TemplateOutletComponent {}</code></pre>
-        </section>
+      </section>
 
-        <section>
-          <h3>Mehrere Templates</h3>
+      <section>
+        <h3>Mehrere Templates</h3>
 
-          <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Directive({ selector: &quot;ng-template[templateType]&quot; })
+        <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Directive({ selector: &quot;ng-template[templateType]&quot; })
 export class TemplateTypeDirective {
   @Input() templateType: string = &quot;&quot;;
 
@@ -824,18 +829,19 @@ export class TemplateTypeDirective {
 }
           </code></pre>
 
-          <aside class="notes">
-            <ul>
-              <li>Bestimmte Sachen werden von Angular automatisch provided und können überall im Konstruktor angefordert werden</li>
-              <li>ng-template -> TemplateRef injection</li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Bestimmte Sachen werden von Angular automatisch provided und können überall im Konstruktor angefordert
+              werden</li>
+            <li>ng-template -> TemplateRef injection</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Mehrere Templates</h3>
+      <section>
+        <h3>Mehrere Templates</h3>
 
-          <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
+        <pre class="fragment fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
     selector: &quot;shopping-list&quot;,
     template: `
         &lt;list-with-templates [items]=&quot;shoppingListEntries&quot;&gt;
@@ -859,23 +865,25 @@ export class ShoppingListComponent {
 }
           </code></pre>
 
-          <div class="fragment"><img src="img/screenshot-two-list-item-types_01.png"></div>
+        <div class="fragment"><img src="img/screenshot-two-list-item-types_01.png"></div>
 
-          <aside class="notes">
-            <ul>
-              <li>Die Templates werden zwischen die Tags der "list-with-templates" geschrieben -> so wie auch für ng-content</li>
-              <li>Dadurch kann später mit @ContentChildren drauf zugegriffen werden</li>
-              <li>templateType "meat" hat kein passendes Template -> muss später irgendwie behandelt werden (oder auch nicht)</li>
-              <li>Beispiele: stillschweigend nicht anzeigen ODER Fehler werfen ODER rot blinkendes default template</li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Die Templates werden zwischen die Tags der "list-with-templates" geschrieben -> so wie auch für
+              ng-content</li>
+            <li>Dadurch kann später mit @ContentChildren drauf zugegriffen werden</li>
+            <li>templateType "meat" hat kein passendes Template -> muss später irgendwie behandelt werden (oder auch
+              nicht)</li>
+            <li>Beispiele: stillschweigend nicht anzeigen ODER Fehler werfen ODER rot blinkendes default template</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Mehrere Templates</h3>
+      <section>
+        <h3>Mehrere Templates</h3>
 
- 
-          <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
+
+        <pre class="fit-content"><code class="typescript unlimited-height" data-trim data-noescape>@Component({
   selector: &quot;list-with-templates&quot;,
   template: `
     &lt;ul&gt;
@@ -904,56 +912,60 @@ export class ListWithTemplatesComponent {
 }
         </code></pre>
 
-        <div class="fragment" data-fragment-index="50" style="position: absolute; right: 10%; top: 20%;" ><img src="img/screenshot-template-selection-works_01.png"></div>
+        <div class="fragment" data-fragment-index="50" style="position: absolute; right: 10%; top: 20%;"><img
+            src="img/screenshot-template-selection-works_01.png"></div>
 
-          <aside class="notes">
-            <ul>
-              <li>Generische Listenkomponente: Weiß nichts von Einkaufslisten oder Früchten oder Süßigkeiten</li>
-              <li>Im Automotive-Projekt: Sehr viel Funktionalität, was drin steckt (Alben in Media, Suchergebnisse in Navi, ...) ist egal</li>
-              <li>
-                Gibt es kein passendes Template, wird stillschweigend einfach
-                nichts angezeigt
-              </li>
-              <li>
-                If you are listening to QueryList's observable updates things
-                are not as clear cut: updates are often late, and already
-                removed things are still showing up - and the order is never
-                guaranteed!
-              </li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Generische Listenkomponente: Weiß nichts von Einkaufslisten oder Früchten oder Süßigkeiten</li>
+            <li>Im Automotive-Projekt: Sehr viel Funktionalität, was drin steckt (Alben in Media, Suchergebnisse in
+              Navi, ...) ist egal</li>
+            <li>
+              Gibt es kein passendes Template, wird stillschweigend einfach
+              nichts angezeigt
+            </li>
+            <li>
+              If you are listening to QueryList's observable updates things
+              are not as clear cut: updates are often late, and already
+              removed things are still showing up - and the order is never
+              guaranteed!
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Injector Tree</h3>
+      <section>
+        <h3>Injector Tree</h3>
 
-          <div><img src="img/ng-template-injector-tree_01.png"></div>
+        <div><img src="img/ng-template-injector-tree_01.png"></div>
 
-          <aside class="notes">
-            <ul>
-              <li>Hier wird nichts ausgeschnitten und verschoben</li>
-              <li>Injector verhält sich so, wie erwartet</li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Hier wird nichts ausgeschnitten und verschoben</li>
+            <li>Injector verhält sich so, wie erwartet</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h2>Performance</h2>
+      <section>
+        <h2>Performance</h2>
 
-          <aside class="notes">
-            <ul>
-              <li>Erfahrung aus der Praxis: Angular-Magie kann zu Performance-Problemen führen, wenn unbedacht benutzt</li>
-              <li>Nicht direkt content projection, aber auch wichtig</li>
-              <li>Besonders Problem, wenn man viele Elemente hat, Beispiel: Liste mit ng-template, viele Einträge im Input-Array</li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>Erfahrung aus der Praxis: Angular-Magie kann zu Performance-Problemen führen, wenn unbedacht benutzt
+            </li>
+            <li>Nicht direkt content projection, aber auch wichtig</li>
+            <li>Besonders Problem, wenn man viele Elemente hat, Beispiel: Liste mit ng-template, viele Einträge im
+              Input-Array</li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Performance: trackBy</h3>
-          
-          <div class="flex">
-          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component({
+      <section>
+        <h3>Performance: trackBy</h3>
+
+        <div class="flex">
+          <pre class="fit-content"><code class="typescript unlimited-height code--smaller-font" data-trim data-noescape>@Component({
     selector: &quot;shopping-list&quot;,
     template: `
         &lt;list-with-templates-trackBy 
@@ -991,33 +1003,34 @@ export class ListWithTemplatesTrackByComponent {
   ...
         </code></pre>
 
-        <div class="fragment" data-fragment-index="10">
-          <div><img src="img/screenshot_default-trackBy_01_endless.gif"></div>
-          <div><img src="img/screenshot_default-trackBy_debug-tools_01_endless.gif"></div>
+          <div class="fragment" data-fragment-index="10">
+            <div><img src="img/screenshot_default-trackBy_01_endless.gif"></div>
+            <div><img src="img/screenshot_default-trackBy_debug-tools_01_endless.gif"></div>
+          </div>
         </div>
-      </div>
 
-          <aside class="notes">
-            <ul>
-              <li>trackBy gibt dem ngFor Komparator eine Funktion, mit der dieser rausfinden kann, was sich geändert hat</li>
-              <li>Standard trackBy: Objektreferenz</li>
-              <li>RxJS + ChangeDetectorRef - notwendiges Drumherum, für Beispiel nicht direkt relevant</li>
-              <li>Herkunft ständig neuer Objekte: 
-                <ul>
-                  <li>Parsed JSON vom Server (z.B. wenn Eintrag dazu kommt wird mit default alles neu gemacht!)</li>
-                  <li>Immutable.js</li>
-                </ul>
-              </li>
-            </ul>
-          </aside>
-        </section>
+        <aside class="notes">
+          <ul>
+            <li>trackBy gibt dem ngFor Komparator eine Funktion, mit der dieser rausfinden kann, was sich geändert hat
+            </li>
+            <li>Standard trackBy: Objektreferenz</li>
+            <li>RxJS + ChangeDetectorRef - notwendiges Drumherum, für Beispiel nicht direkt relevant</li>
+            <li>Herkunft ständig neuer Objekte:
+              <ul>
+                <li>Parsed JSON vom Server (z.B. wenn Eintrag dazu kommt wird mit default alles neu gemacht!)</li>
+                <li>Immutable.js</li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+      </section>
 
-        <section>
-          <h3>Performance: trackBy</h3>
+      <section>
+        <h3>Performance: trackBy</h3>
 
-          <div class="flex">
+        <div class="flex">
 
-          <pre class="fit-content"><code class="typescript unlimited-height" style="font-size: 0.6rem;" data-trim data-noescape>@Component({
+          <pre class="fit-content"><code class="typescript unlimited-height code--smaller-font" data-trim data-noescape>@Component({
     selector: &quot;shopping-list&quot;,
     template: `
         &lt;list-with-templates-trackBy 
@@ -1055,141 +1068,143 @@ export class ShoppingListWithTrackByComponent {
 })
 export class ListWithTemplatesTrackByComponent {
   @Input() <span class="yellow">trackByFn</span>;
+  ...
         </code></pre>
 
-            <div class="fragment" data-fragment-index="10">
-              <div><img src="img/screenshot_custom-trackBy_01_endless.gif"></div>
-              <div><img src="img/screenshot_custom-trackBy_debug-tools_01_endless.gif"></div>
-            </div>
+          <div class="fragment" data-fragment-index="10">
+            <div><img src="img/screenshot_custom-trackBy_01_endless.gif"></div>
+            <div><img src="img/screenshot_custom-trackBy_debug-tools_01_endless.gif"></div>
           </div>
+        </div>
 
-          <aside class="notes">
-            <ul>
-              <li>Angepasstes trackBy, z.B. auf eine id, oder hier den Namen</li>
-              <li>ngFor vergleicht, und nur, wenn sich die Rückgabe der trackBy-Funktion ändert wird die Komponente neu erzeugt</li>
-              <li>Änderungen innerhalb der Daten werden trotzdem erkannt (Einschränkung mit OnPush, Objektreferenzen, ChangeDetection beachten)</li>
-            </ul>
-          </aside>
-        </section>
-
-        <section>
-          <h3>Performance Analyse</h3>
-
-          <img class="fragment" src="img/screenshot_opera_flamechart_code-days-programm_01.png" />
-
-          <aside class="notes">
-            <ul>
-              <li>Browser-Debug-Tools, hier Chromium-basiert abgebildet</li>
-              <li>Flame Chart: Horizontal die Zeit, vertikal der Callstack</li>
-              <li>Falls Zeit ist: 
-                <ul>
-                Echte Aufnahme zeigen von https://www.code-days.de/codedays-2021/programm/programm.html reload?</li>
-                <li></li>
-                  <li>Analyse: Ranzoomen an rechten Block mit den ganzen Forced Reflows: CSS lesen/schreiben nur in requestAnimationFrame und gruppieren gegen Layout Thrashing</li>
-                </ul>
-              <li>Interaktiv</li>
-            </ul>
-          </aside>
-        </section>
-        <section>
-          <h3>Performance Analyse</h3>
-
-          <img src="img/performance-creating-items_01.png" />
-
-          <aside class="notes">
-            <ul>
-              <li>Niemals ohne OnPush arbeiten</li>
-              <li>Zerstören/Aufbauen teuer: custom trackBy</li>
-              <li>Komponenten/Direktiven möglichst schlank halten</li>
-              <li>Jede Direktive, jeder Input, jedes ngIf kostet</li>
-              <li>rx-angular</li>
-            </ul>
-          </aside>
-        </section>
-
-        <section>
-          <h3>Doku-Links</h3>
-
+        <aside class="notes">
           <ul>
-            <li> <a
-              href="https://angular.io/guide/structural-directives#the-ng-template"
-              >Offizielle Doku zu ng-template</a
-            ></li>
-          <li> <a
-            href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b"
-            >ng-content: The hidden docs</a
-          ></li>
-          <li> <a
-            href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/"
-            >Angular ng-template, ng-container and ngTemplateOutlet - The
-            Complete Guide To Angular Templates</a
-          ></li>
+            <li>Angepasstes trackBy, z.B. auf eine id, oder hier den Namen</li>
+            <li>ngFor vergleicht, und nur, wenn sich die Rückgabe der trackBy-Funktion ändert wird die Komponente neu
+              erzeugt</li>
+            <li>Änderungen innerhalb der Daten werden trotzdem erkannt (Einschränkung mit OnPush, Objektreferenzen,
+              ChangeDetection beachten)</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h3>Performance Analyse</h3>
+
+        <img class="fragment" src="img/screenshot_opera_flamechart_code-days-programm_01.png" />
+
+        <aside class="notes">
+          <ul>
+            <li>Browser-Debug-Tools, hier Chromium-basiert abgebildet</li>
+            <li>Flame Chart: Horizontal die Zeit, vertikal der Callstack</li>
+            <li>Falls Zeit ist:
+              <ul>
+                Echte Aufnahme zeigen von https://www.code-days.de/codedays-2021/programm/programm.html reload?
+            </li>
+            <li></li>
+            <li>Analyse: Ranzoomen an rechten Block mit den ganzen Forced Reflows: CSS lesen/schreiben nur in
+              requestAnimationFrame und gruppieren gegen Layout Thrashing</li>
+          </ul>
+          <li>Interaktiv</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h3>Performance Analyse</h3>
+
+        <img src="img/performance-creating-items_01.png" />
+
+        <aside class="notes">
+          <ul>
+            <li>Niemals ohne OnPush arbeiten</li>
+            <li>Zerstören/Aufbauen teuer: custom trackBy</li>
+            <li>Komponenten/Direktiven möglichst schlank halten</li>
+            <li>Jede Direktive, jeder Input, jedes ngIf kostet</li>
+            <li>rx-angular</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section>
+        <h3>Doku-Links</h3>
+
+        <ul>
+          <li> <a href="https://angular.io/guide/structural-directives#the-ng-template">Offizielle Doku zu
+              ng-template</a></li>
+          <li> <a href="https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b">ng-content: The
+              hidden docs</a></li>
+          <li> <a href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/">Angular
+              ng-template, ng-container and ngTemplateOutlet - The
+              Complete Guide To Angular Templates</a></li>
         </ul>
-         </section>
+      </section>
 
-        <section>
-          <h3>Danke</h3>
+      <section>
+        <h3>Danke</h3>
 
-          <div class="flex">
-            <div><img style="width: 90%;" src="img/mailbox_small_mikaela-wiedenhoff-AwmCuTXL97Q-unsplash.jpg" alt="Mailbox im Grünen"></div>
-            <div class="flex-column" style="justify-content: space-between;">
-              <table style="font-size: 1.2rem; margin: 1rem;">
-                <tbody>
-                  <tr>
-                    <td>E-Mail</td>
-                    <td><a href="mailto:martin.grotz@mathema.de">martin.grotz@mathema.de</a></td>
-                  </tr>
-                  <tr>
-                    <td>Twitter</td>
-                    <td><a href="https://twitter.com/mobilgroma">@mobilgroma</a></td>
-                  </tr>
-                  <tr>
-                    <td>github</td>
-                    <td><a href="https://github.com/groma84/">groma84</a></td>
-                  </tr>
-                  <tr>
-                    <td>Slides</td>
-                    <td><a href="https://groma84.github.io/angular-content-projection-vortrag/">https://groma84.github.io/angular-content-projection-vortrag/</a>
-                    <div style="width: 30%;"><img  src="img/qr-code-zu-github-vortrag.png"></div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+        <div class="flex">
+          <div><img style="width: 90%;" src="img/mailbox_small_mikaela-wiedenhoff-AwmCuTXL97Q-unsplash.jpg"
+              alt="Mailbox im Grünen"></div>
+          <div class="flex-column" style="justify-content: space-between;">
+            <table style="font-size: 1.2rem; margin: 1rem;">
+              <tbody>
+                <tr>
+                  <td>E-Mail</td>
+                  <td><a href="mailto:martin.grotz@mathema.de">martin.grotz@mathema.de</a></td>
+                </tr>
+                <tr>
+                  <td>Twitter</td>
+                  <td><a href="https://twitter.com/mobilgroma">@mobilgroma</a></td>
+                </tr>
+                <tr>
+                  <td>github</td>
+                  <td><a href="https://github.com/groma84/">groma84</a></td>
+                </tr>
+                <tr>
+                  <td>Slides</td>
+                  <td><a
+                      href="https://groma84.github.io/angular-content-projection-vortrag/">https://groma84.github.io/angular-content-projection-vortrag/</a>
+                    <div style="width: 30%;"><img src="img/qr-code-zu-github-vortrag.png"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             <div class="flex align-centered centered bg-white" style="margin: 1rem;">
               <img src="img/mathema-logo.svg" style="margin-right: 2rem;" alt="Mathema Logo">
-              <img src="img/Code_Days_Digital_Logo_2021.png" alt="CodeDaysDigital 2021 Logo">
+              <img src="img/enterjs.svg" style="height: 7rem;" alt="enterJS 2021 Logo">
             </div>
           </div>
 
-            <div style="position: absolute;
+          <div style="position: absolute;
             width: 10%;
             left: 8%;
             top: 35%;
             transform: skew(3deg, -5deg);">
-              <img src="img/grotz-profile.jpg" alt="Bild von Martin Grotz im Anzug">
-            </div>
+            <img src="img/grotz-profile.jpg" alt="Bild von Martin Grotz im Anzug">
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
+  </div>
 
-    <script src="js/reveal.js"></script>
+  <script src="js/reveal.js"></script>
 
-    <script>
-      // More info about config & dependencies:
-      // - https://github.com/hakimel/reveal.js#configuration
-      // - https://github.com/hakimel/reveal.js#dependencies
-      Reveal.configure({
-        transition: "none",
-        history: "true",
-      });
-      Reveal.initialize({
-        hashOneBasedIndex: false,
-        controls: false,
-        slideNumber: "c/t",
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
-    </script>
-  </body>
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.configure({
+      transition: "none",
+      history: "true",
+    });
+    Reveal.initialize({
+      hashOneBasedIndex: false,
+      controls: false,
+      slideNumber: "c/t",
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    });
+  </script>
+</body>
+
 </html>

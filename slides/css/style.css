@@ -14,7 +14,7 @@
   position: absolute;
   bottom: 1em;
   left: 1em;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -25,8 +25,16 @@
   width: 100%;
 }
 
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  text-transform: none;
+}
+
 .reveal h3 {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .bg-white {
@@ -82,7 +90,11 @@ span.red > .hljs-meta {
 }
 
 .reveal code {
-  font-size: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.reveal code.code--smaller-font {
+  font-size: 0.75rem;
 }
 
 .placeholder {
@@ -122,8 +134,4 @@ div.code {
 
 .reveal pre code.unlimited-height {
   max-height: unset;
-}
-
-.reveal pre code.smaller-font {
-  font-size: 0.55rem;
 }
